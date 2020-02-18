@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "team-stats-angular-firebase",
+      "public": "dist/team-stats-angular-firebase",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

@@ -119,6 +119,10 @@
               "devServerTarget": "team-stats-angular-firebase:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
