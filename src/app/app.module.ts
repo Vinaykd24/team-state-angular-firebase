@@ -20,6 +20,9 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { environment } from "../environments/environment";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { PlayerService } from "./player/player.service";
+import { MatchService } from "./match/match.service";
+import { TournamentService } from "./tournament/tournament.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +47,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [],
+  providers: [PlayerService, MatchService, TournamentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
