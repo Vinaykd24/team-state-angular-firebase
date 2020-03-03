@@ -29,11 +29,25 @@
           <li>
             <a routerLink="/tournaments">Tournaments</a>
           </li>
+          <li>
+            <a routerLink="/add-player">Add Player</a>
+          </li>
+          <li>
+            <a routerLink="/add-match">Add Match</a>
+          </li>
+          <li>
+            <a routerLink="/add-match-details">Add Match Details</a>
+          </li>
+          <li>
+            <a routerLink="/add-tournament">Add Tournament</a>
+          </li>
         </ul>
       </div>
     </mat-toolbar>
     <main>
-      <router-outlet></router-outlet>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,1 +1,109 @@
-<p>add-player works!</p>
+<section>
+  <form (ngSubmit)="onSubmit(addPlayerForm)" #addPlayerForm="ngForm">
+    <mat-card>
+      <mat-card-title>Add Player Details</mat-card-title>
+      <mat-card-content>
+        <div fxLayout fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Player First Name</mat-label>
+            <input
+              matInput
+              #firstNameInput="ngModel"
+              ngModel
+              name="playerFirstName"
+              firstNameInput
+              required
+            />
+            <mat-error *ngIf="firstNameInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Player Last Name</mat-label>
+            <input
+              matInput
+              #lastNameInput="ngModel"
+              ngModel
+              name="playerLastName"
+              lastNameInput
+              required
+            />
+            <mat-error *ngIf="lastNameInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Select Role</mat-label>
+            <mat-select placeholder="Select Role" ngModel name="playerRole">
+              <mat-option *ngFor="let role of playerRoles" [value]="role.value">
+                {{ role.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Select Batting Style</mat-label>
+            <mat-select placeholder="Select Role" ngModel name="bat">
+              <mat-option
+                *ngFor="let role of playerBattingStyles"
+                [value]="role.value"
+              >
+                {{ role.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Select Bowling Style</mat-label>
+            <mat-select placeholder="Select Role" ngModel name="bowl">
+              <mat-option
+                *ngFor="let role of playerBowlingStyles"
+                [value]="role.value"
+              >
+                {{ role.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Player birthdate"
+              [matDatepicker]="picker"
+              [max]="maxDate"
+              ngModel
+              name="playerDob"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>About Player</mat-label>
+            <textarea
+              matInput
+              #bioInput="ngModel"
+              ngModel
+              name="playerBio"
+              playerBio
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="addPlayerForm.invalid"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>

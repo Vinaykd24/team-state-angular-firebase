@@ -7,10 +7,8 @@ import {
 import { Player } from "../models/player.model";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
-@Injectable({
-  providedIn: "root"
-})
+import "firebase/firestore";
+@Injectable()
 export class PlayerService {
   playersCollection: AngularFirestoreCollection<Player>;
   playerDoc: AngularFirestoreDocument<Player>;
@@ -33,5 +31,9 @@ export class PlayerService {
       )
     );
     return this.players;
+  }
+
+  newPlayer(player: Player) {
+    this.playersCollection.add(player);
   }
 }

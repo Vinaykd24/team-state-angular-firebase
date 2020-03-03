@@ -1,1 +1,35 @@
-<p>add-tournament works!</p>
+<section>
+  <form (ngSubmit)="onSubmit(addTournamentForm)" #addTournamentForm="ngForm">
+    <mat-card>
+      <mat-card-title>Add Tournament Details</mat-card-title>
+      <mat-card-content>
+        <div fxLayout fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Tournament Name</mat-label>
+            <input
+              matInput
+              #tourNameInput="ngModel"
+              ngModel
+              name="tourName"
+              tourNameInput
+              required
+            />
+            <mat-error *ngIf="tourNameInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="addTournamentForm.invalid"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>

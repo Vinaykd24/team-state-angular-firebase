@@ -6,7 +6,7 @@
         <div fxLayout fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Select Tournament</mat-label>
-            <mat-select placeholder="Select Tournament" ngModel name="tourId">
+            <mat-select placeholder="Select Role" ngModel name="tourId">
               <mat-option *ngFor="let tour of tournametList" [value]="tour.id">
                 {{ tour.tourName }}
               </mat-option>
@@ -60,14 +60,14 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Select Player of the Match</mat-label>
+            <mat-label>Select Player of The Match</mat-label>
             <mat-select
-              placeholder="Select Player of the Match"
+              placeholder="Select Player of The Match"
               ngModel
               name="playerOfTheMatch"
             >
               <mat-option *ngFor="let player of playerList" [value]="player.id">
-                {{ player.playerFirstName }} {{ player.playerLastName }}
+                {{ player.playerFristName }} {{ player.playerLastName }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -76,9 +76,9 @@
             <mat-label>Home Team Score</mat-label>
             <input
               matInput
+              type="number"
               #homeTeamScoreInput="ngModel"
               ngModel
-              type="number"
               name="homeTeamScore"
               homeTeamScoreInput
               required
@@ -87,14 +87,14 @@
               >Field must not be empty.</mat-error
             >
           </mat-form-field>
-
+          
           <mat-form-field appearance="outline">
             <mat-label>Home Team Wickets</mat-label>
             <input
               matInput
+              type="number"
               #homeTeamWicketsInput="ngModel"
               ngModel
-              type="number"
               name="homeTeamWickets"
               homeTeamWicketsInput
               required
@@ -110,7 +110,6 @@
               matInput
               #opTeamInput="ngModel"
               ngModel
-              type="text"
               name="opTeam"
               opTeamInput
               required
@@ -119,14 +118,14 @@
               >Field must not be empty.</mat-error
             >
           </mat-form-field>
-
+          
           <mat-form-field appearance="outline">
             <mat-label>Opponent Team Score</mat-label>
             <input
               matInput
+              type="number"
               #opTeamScoreInput="ngModel"
               ngModel
-              type="number"
               name="opTeamScore"
               opTeamScoreInput
               required
@@ -135,14 +134,14 @@
               >Field must not be empty.</mat-error
             >
           </mat-form-field>
-
+          
           <mat-form-field appearance="outline">
             <mat-label>Opponent Team Wickets</mat-label>
             <input
               matInput
+              type="number"
               #opTeamWicketsInput="ngModel"
               ngModel
-              type="number"
               name="opTeamWickets"
               opTeamWicketsInput
               required
@@ -151,11 +150,7 @@
               >Field must not be empty.</mat-error
             >
           </mat-form-field>
-          <mat-checkbox ngModel name="homeTeamWon"
-            >Is home team won?</mat-checkbox
-          >
-        </div>
-      </mat-card-content>
+          <mat-checkbox ngModel name="homeTeamWon">Is Home Team Won?</mat-checkbox>
       <mat-card-actions>
         <button
           type="submit"
