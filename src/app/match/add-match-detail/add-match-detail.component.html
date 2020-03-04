@@ -1,243 +1,233 @@
-<section>
-  <form (ngSubmit)="onSubmit(addPlayerMatchForm)" #addPlayerMatchForm="ngForm">
-    <mat-card>
-      <mat-card-title>Add Player Match Details</mat-card-title>
-      <mat-card-content>
-        <div fxLayout fxLayout="column">
-          <mat-form-field appearance="outline">
-            <mat-label>Select Match</mat-label>
-            <mat-select placeholder="Select Match" ngModel name="matchId">
-              <mat-option *ngFor="let match of matchtesList" [value]="match.id">
-                {{ match.matchDate | date: "mediumDate" }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+<form (ngSubmit)="onSubmit(addPlayerMatchForm)" #addPlayerMatchForm="ngForm">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel
+      [expanded]="step === 0"
+      (opened)="setStep(0)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxHide.xs>
+          Add Batting Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Batting Details
+          <mat-icon>sports_cricket</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Select Player </mat-label>
-            <mat-select placeholder="Select Player " ngModel name="playerId">
-              <mat-option *ngFor="let player of playerList" [value]="player">
-                {{ player.playerFirstName }} {{ player.playerLastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Match</mat-label>
+        <mat-select placeholder="Select Match" ngModel name="matchId">
+          <mat-option *ngFor="let match of matchtesList" [value]="match.id">
+            {{ match.matchDate | date: "mediumDate" }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Runs</mat-label>
-            <input
-              matInput
-              #runsInput="ngModel"
-              ngModel
-              type="number"
-              name="runs"
-              runsInput
-              required
-            />
-            <mat-error *ngIf="runsInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Player </mat-label>
+        <mat-select placeholder="Select Player " ngModel name="playerId">
+          <mat-option *ngFor="let player of playerList" [value]="player">
+            {{ player.playerFirstName }} {{ player.playerLastName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Balls</mat-label>
-            <input
-              matInput
-              #ballsInput="ngModel"
-              ngModel
-              type="number"
-              name="balls"
-              ballsInput
-              required
-            />
-            <mat-error *ngIf="ballsInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Runs</mat-label>
+        <input
+          matInput
+          #runsInput="ngModel"
+          ngModel
+          type="number"
+          name="runs"
+          runsInput
+          required
+        />
+        <mat-error *ngIf="runsInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Fours</mat-label>
-            <input
-              matInput
-              #foursInput="ngModel"
-              ngModel
-              type="number"
-              name="fours"
-              foursInput
-              required
-            />
-            <mat-error *ngIf="foursInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Balls</mat-label>
+        <input
+          matInput
+          #ballsInput="ngModel"
+          ngModel
+          type="number"
+          name="balls"
+          ballsInput
+          required
+        />
+        <mat-error *ngIf="ballsInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Sixes</mat-label>
-            <input
-              matInput
-              #sixesInput="ngModel"
-              ngModel
-              type="number"
-              name="sixes"
-              sixesInput
-              required
-            />
-            <mat-error *ngIf="sixesInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fours</mat-label>
+        <input
+          matInput
+          #foursInput="ngModel"
+          ngModel
+          type="number"
+          name="fours"
+          foursInput
+          required
+        />
+        <mat-error *ngIf="foursInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Overs</mat-label>
-            <input
-              matInput
-              #oversInput="ngModel"
-              ngModel
-              type="number"
-              name="overs"
-              oversInput
-              required
-            />
-            <mat-error *ngIf="oversInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sixes</mat-label>
+        <input
+          matInput
+          #sixesInput="ngModel"
+          ngModel
+          type="number"
+          name="sixes"
+          sixesInput
+          required
+        />
+        <mat-error *ngIf="sixesInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Maidens</mat-label>
-            <input
-              matInput
-              #maidensInput="ngModel"
-              ngModel
-              type="number"
-              name="maidens"
-              maidensInput
-              required
-            />
-            <mat-error *ngIf="maidensInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
+      <mat-checkbox ngModel name="isOut" class="pl-2"
+        >Is player out?</mat-checkbox
+      >
 
-          <mat-form-field appearance="outline">
-            <mat-label>Runs Given</mat-label>
-            <input
-              matInput
-              #runsGivenInput="ngModel"
-              ngModel
-              type="number"
-              name="runsGiven"
-              runsGivenInput
-              required
-            />
-            <mat-error *ngIf="runsGivenInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Wickets</mat-label>
-            <input
-              matInput
-              #wicketsInput="ngModel"
-              ngModel
-              type="number"
-              name="wickets"
-              wicketsInput
-              required
-            />
-            <mat-error *ngIf="wicketsInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-          <mat-checkbox ngModel name="isOut">Is home team won?</mat-checkbox>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      [expanded]="step === 1"
+      (opened)="setStep(1)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxHide.xs>
+          Add Bowling Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Bowling Details
+          <mat-icon>sports_handball</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Overs</mat-label>
+        <input
+          matInput
+          #oversInput="ngModel"
+          ngModel
+          type="number"
+          name="overs"
+          oversInput
+          required
+        />
+        <mat-error *ngIf="oversInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Maidens</mat-label>
+        <input
+          matInput
+          #maidensInput="ngModel"
+          ngModel
+          type="number"
+          name="maidens"
+          maidensInput
+          required
+        />
+        <mat-error *ngIf="maidensInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Runs Given</mat-label>
+        <input
+          matInput
+          #runsGivenInput="ngModel"
+          ngModel
+          type="number"
+          name="runsGiven"
+          runsGivenInput
+          required
+        />
+        <mat-error *ngIf="runsGivenInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Wickets</mat-label>
+        <input
+          matInput
+          #wicketsInput="ngModel"
+          ngModel
+          type="number"
+          name="wickets"
+          wicketsInput
+          required
+        />
+        <mat-error *ngIf="wicketsInput.hasError('required')"
+          >Field must not be empty.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      [expanded]="step === 2"
+      (opened)="setStep(2)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxHide.xs>
+          Verify Score Sheet
+        </mat-panel-title>
+        <mat-panel-description>
+          Match Score Details
+          <mat-icon>event_note</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          (focus)="picker.open()"
+          readonly
+        />
+      </mat-form-field>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+
         <button
           type="submit"
-          mat-raised-button
+          mat-button
           color="primary"
           [disabled]="addPlayerMatchForm.invalid"
         >
-          Submit
+          Submit Scoresheet
         </button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-</section>
-<mat-accordion class="example-headers-align">
-  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Personal data
-      </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-        <mat-icon>sports_cricket</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field>
-      <mat-label>First name</mat-label>
-      <input matInput />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Age</mat-label>
-      <input matInput type="number" min="1" />
-    </mat-form-field>
-
-    <mat-action-row>
-      <button mat-button color="primary" (click)="nextStep()">Next</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Destination
-      </mat-panel-title>
-      <mat-panel-description>
-        Type the country name
-        <mat-icon>sports_handball</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field>
-      <mat-label>Country</mat-label>
-      <input matInput />
-    </mat-form-field>
-
-    <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()">Previous</button>
-      <button mat-button color="primary" (click)="nextStep()">Next</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Day of the trip
-      </mat-panel-title>
-      <mat-panel-description>
-        Inform the date you wish to travel
-        <mat-icon>event_note</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field>
-      <mat-label>Date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        (focus)="picker.open()"
-        readonly
-      />
-    </mat-form-field>
-    <mat-datepicker #picker></mat-datepicker>
-
-    <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()">Previous</button>
-      <button mat-button color="primary" (click)="nextStep()">End</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>

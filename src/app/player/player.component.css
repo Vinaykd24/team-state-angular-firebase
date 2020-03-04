@@ -1,0 +1,52 @@
+.playerCard {
+  width: 15rem;
+  background: antiquewhite;
+  margin-top: 4rem;
+  border-radius: 1rem;
+}
+
+.playerCard .avatar {
+  width: 10rem;
+  height: 9rem;
+  border-radius: 50%;
+  position: relative;
+  top: -50px;
+}
+
+.playerCard .playerTitle {
+  margin-top: -3rem;
+}
+
+.playerCard .playerTitle h3 {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+  font-style: italic;
+  text-align: center;
+  font-weight: 600;
+}
+.playerCard .playerTitle h3 span {
+  font-size: 2.5rem;
+  display: block;
+  font-weight: 700;
+  color: #ff8100;
+}
+.playerCard .scoreWrapper {
+  padding-bottom: 1.5rem;
+}
+
+.scoreWrapper strong {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+.scoreWrapper span {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.scoreWrapper .divider {
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
