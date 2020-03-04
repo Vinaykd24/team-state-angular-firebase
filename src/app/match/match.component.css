@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+.matchWrapper {
+  transition: all 0.1s ease-in-out;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 1rem;
+}
+.matchWrapper:hover {
+  margin-left: -1.6rem;
+  margin-right: -1.6rem;
+  box-shadow: 0 0.4rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.1s ease-in-out;
+}
+.matchDate {
+  font-family: "Titillium Web", sans-serif;
+  padding: 1rem;
+}
+.matchDate .day {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+.matchDate .date {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+.matchDate .month {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+}
+.u-skew {
+  transform: skew(-13deg) !important;
+}
+.u-unskew {
+  transform: skew(13deg) !important;
+}
+.matchResult {
+  font-style: italic;
+  padding: 1rem;
+}
+.homeTeamScore,
+.awayTeamScore {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  font-family: "Titillium Web", sans-serif;
+  padding: 1rem;
+}
+.awayTeamScore {
+  text-align: left;
+}
+.matchDetails::before {
+  content: "";
+  width: 0.2rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fb6010;
+}
+.matchDetails .tourName {
+  padding: 0 2rem;
+  background: #fb6010;
+  color: #fff;
+}
+.matchCenter {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+.matchCenter::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 12rem;
+  top: 0;
+  right: -3rem;
+  bottom: 0;
+  background-color: #0a4199;
+  transform: skew(-13deg);
+  z-index: 0;
+}
+.matchEvent {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  display: block;
+  padding: 0 1.6rem;
+}

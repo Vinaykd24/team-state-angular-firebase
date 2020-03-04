@@ -2,20 +2,57 @@
   <div
     fxFill
     fxLayout="row"
-    fxLayoutAlign="space-between center"
+    fxLayoutAlign="none stretch"
     fxLayoutGap="10px"
+    class="matchWrapper"
   >
-    <div fxLayout="coloumn">
-      Monday, 1st, Jan, 2020
+    <div fxLayout="column" class="matchDate matchDateWrapper" fxFlex="12">
+      <span class="day">Monday</span>
+      <span class="date">22</span>
+      <span class="month">January</span>
     </div>
-    <div fxLayout="coloumn">
-      Monday, 1st, Jan, 2020
+    <div
+      fxLayout="column"
+      fxLayoutAlign="space-between start"
+      fxFlex="30"
+      class="u-skew matchDetails"
+    >
+      <div fxLayoutAlign="center center" class="tourName">
+        Tournament Name
+      </div>
+      <div
+        fxFlex
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        class="matchResult u-unskew"
+      >
+        <span>
+          <strong>
+            TCS WON BY 10 WICKETS
+          </strong>
+        </span>
+        <span>INFOSYS Pune, GROUND</span>
+      </div>
     </div>
-    <div fxLayout="coloumn">
-      Monday, 1st, Jan, 2020
+    <div fxLayout="column" fxFlex fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxFill="100%">
+        <div fxFlex class="homeTeamScore">
+          <p>TCS Pune</p>
+          <p>
+            <span>140/2</span>
+          </p>
+        </div>
+        <div>V</div>
+        <div fxFlex class="awayTeamScore">
+          <p>Infosys Pune</p>
+          <p>130/9</p>
+        </div>
+      </div>
     </div>
-    <div fxLayout="coloumn">
-      Monday, 1st, Jan, 2020
+    <div fxFlex fxLayoutAlign="end center" class="matchCenter">
+      <div class="matchEvent">
+        Score Card
+      </div>
     </div>
   </div>
 </div>
