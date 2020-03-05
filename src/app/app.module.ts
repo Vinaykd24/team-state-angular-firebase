@@ -23,6 +23,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { PlayerService } from "./player/player.service";
 import { MatchService } from "./match/match.service";
 import { TournamentService } from "./tournament/tournament.service";
+import { PlayerStatsComponent } from './player/player-stats/player-stats.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TournamentService } from "./tournament/tournament.service";
     AddMatchComponent,
     TournamentComponent,
     AddTournamentComponent,
-    AddMatchDetailComponent
+    AddMatchDetailComponent,
+    PlayerStatsComponent
   ],
   imports: [
     BrowserModule,

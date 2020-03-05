@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+
+.battingStats,
+.bowlingStats {
+  font-family: "Titillium Web", sans-serif;
+  position: relative;
+}
+
+.bowlingStats::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: auto;
+  width: 1px;
+  height: 200px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+p {
+  margin: 0;
+}
+.stats .title {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.stats .record {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.st-rate .icon::before {
+  background: url("../../../assets/images/strikert.png") center no-repeat;
+}
+.runs-scored .icon::before {
+  background: url("../../../assets/images/runscore.png") center no-repeat;
+}
+.bowl-avg .icon::before {
+  background: url("../../../assets/images/bowlstrike.png") center no-repeat;
+}
+.total-wkts .icon::before {
+  background: url("../../../assets/images/wkts.png") center no-repeat;
+}
+
+.icon::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(-5deg);
+  -moz-transform: rotate(-5deg);
+  -o-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+.icon {
+  width: 100%;
+  height: 110px;
+  margin: 10px auto;
+  display: flex;
+}
+.highestScore {
+  position: relative;
+}
+.highestScore::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 80%;
+  height: 1px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.2);
+}
