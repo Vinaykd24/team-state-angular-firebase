@@ -1,3 +1,49 @@
+<section class="matchDetails">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+    <div fxFlex fxFlexFill fxLayoutAlign="center center" class="matchResult">
+      <h4>TCS PUNE WON BY 10 WICKETS</h4>
+    </div>
+    <div
+      fxLayout="row"
+      fxFlex
+      fxFlexFill
+      fxLayoutAlign="center center"
+      class="scoreDetails"
+    >
+      <div
+        fxFlex
+        fxFlexFill
+        fxLayout="column"
+        fxLayoutAlign="center end"
+        class="mr-2"
+      >
+        <h3>TCS PUNE</h3>
+        <div class="score">147/0</div>
+      </div>
+      <p>VS</p>
+      <div
+        fxFlex
+        fxFlexFill
+        fxLayout="column"
+        fxLayoutAlign="center start"
+        class="ml-2"
+      >
+        <h3>INFOSY PUNE</h3>
+        <div class="score">140/8</div>
+      </div>
+    </div>
+    <div
+      fxFlex
+      fxFlexFill
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      class="plrOfTheMatch"
+    >
+      <div>Player of The Match</div>
+      <p>VINAY KADAM</p>
+    </div>
+  </div>
+</section>
 <div fxLayout="row wrap" fxLayoutAlign="space-between start">
   <div
     fxLayout="column"
@@ -5,14 +51,62 @@
     fxFlex.gt-sm="50%"
     fxFill
   >
-    <div fxLayout="row" fxFlex fxFill fxLayoutAlign="space-between start">
-      <div fxFlex fxFill>
-        Player Name
+    <div
+      fxLayout="column"
+      fxFlex
+      fxFill
+      fxLayoutAlign="space-between start"
+      fxLayoutGap="10px"
+    >
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        fxHide.sm="true"
+        fxHide.xs="true"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Runs</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Balls</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">4s</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">6s</div>
       </div>
-      <div fxFlex fxFill>Runs</div>
-      <div fxFlex fxFill>Balls</div>
-      <div fxFlex fxFill>4s</div>
-      <div fxFlex fxFill>6s</div>
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        fxHide.md="true"
+        fxHide.lg="true"
+        fxShow.sm="true"
+        fxShow.xs="true"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Runs</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Balls</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">4s</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">6s</div>
+      </div>
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        class="mb-2"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">42</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">53</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">3</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">5</div>
+      </div>
     </div>
   </div>
   <div
@@ -21,14 +115,62 @@
     fxFlex.gt-sm="50%"
     fxFill
   >
-    <div fxLayout="row" fxFlex fxFill fxLayoutAlign="space-between start">
-      <div fxFlex fxFill>
-        Player Name
+    <div
+      fxLayout="column"
+      fxFlex
+      fxFill
+      fxLayoutAlign="space-between start"
+      fxLayoutGap="10px"
+    >
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        fxHide.sm="true"
+        fxHide.xs="true"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Overs</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Maidens</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Runs Given</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">Wickets</div>
       </div>
-      <div fxFlex fxFill>Overs</div>
-      <div fxFlex fxFill>Maidens</div>
-      <div fxFlex fxFill>Runs Given</div>
-      <div fxFlex fxFill>Wickets</div>
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        fxHide.md="true"
+        fxHide.lg="true"
+        fxShow.sm="true"
+        fxShow.xs="true"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">O</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">M</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">RG</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">W</div>
+      </div>
+      <div
+        fxLayout="row"
+        fxFlex
+        fxFill
+        fxLayoutAlign="space-between start"
+        class="mb-2"
+      >
+        <div fxFlex fxFill>
+          Player Name
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="center center">4</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">1</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">23</div>
+        <div fxFlex fxFill fxLayoutAlign="center center">3</div>
+      </div>
     </div>
   </div>
 

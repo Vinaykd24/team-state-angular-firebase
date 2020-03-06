@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+.matchDetails {
+  font-family: "Titillium Web", sans-serif;
+}
+.matchDetails .matchResult h4,
+.matchDetails .scoreDetails h3 {
+  font-weight: 700;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.matchDetails .scoreDetails {
+  margin-bottom: 1rem;
+}
+
+.matchDetails .scoreDetails h3 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin: 0;
+}
+
+.matchDetails .scoreDetails .score {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.matchDetails .plrOfTheMatch {
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+}
