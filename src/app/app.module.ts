@@ -24,6 +24,7 @@ import { PlayerService } from "./player/player.service";
 import { MatchService } from "./match/match.service";
 import { TournamentService } from "./tournament/tournament.service";
 import { PlayerStatsComponent } from './player/player-stats/player-stats.component';
+import { MatchDetailsComponent } from './match/match-details/match-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PlayerStatsComponent } from './player/player-stats/player-stats.compone
     TournamentComponent,
     AddTournamentComponent,
     AddMatchDetailComponent,
-    PlayerStatsComponent
+    PlayerStatsComponent,
+    MatchDetailsComponent
   ],
   imports: [
     BrowserModule,
