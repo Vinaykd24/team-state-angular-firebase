@@ -1,4 +1,5 @@
 export interface Player {
+  id?: string;
   playerBio?: string;
   playerDob?: string;
   playerFirstName?: string;
