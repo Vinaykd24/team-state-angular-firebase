@@ -62,9 +62,13 @@
   fxLayout="column"
   fxLayoutAlign="space-between start"
   class="xs-matchDetails"
+  fxShow.sm="true"
+  fxShow.xs="true"
+  fxHide.md="true"
+  fxHide.lg="true"
 >
-  <div fxFlexFill class="">
-    <div class="tourName">
+  <div fxFlexFill class="matchDetails">
+    <div fxFlex="40" fxFlex.xs="70" fxFlexFill class="xs-tourName u-skew">
       Monday, 10, 2020
     </div>
   </div>
@@ -73,6 +77,7 @@
     fxLayout="row"
     fxLayoutAlign="space-between center"
     fxLayoutGap="5px"
+    class="xs-scoreDetails"
   >
     <div
       fxLayout="column"
@@ -94,6 +99,7 @@
     fxLayout="row"
     fxLayoutAlign="space-between center"
     fxLayoutGap="5px"
+    class="xs-scoreDetails"
   >
     <div
       fxLayout="column"
@@ -110,7 +116,7 @@
       190/6
     </div>
   </div>
-  <div fxFlexFill>
+  <div fxFlexFill class="xs-matchResult">
     TCS WON BY 10 WICKETS
   </div>
 </div>

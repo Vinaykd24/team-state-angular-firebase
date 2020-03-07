@@ -3,157 +3,177 @@
     <mat-card>
       <mat-card-title>Add Match Details</mat-card-title>
       <mat-card-content>
-        <div fxLayout fxLayout="column">
-          <mat-form-field appearance="outline">
-            <mat-label>Select Tournament</mat-label>
-            <mat-select placeholder="Select Tournament" ngModel name="tourId">
-              <mat-option *ngFor="let tour of tournametList" [value]="tour.id">
-                {{ tour.tourName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input
-              matInput
-              placeholder="Match Date"
-              [matDatepicker]="picker"
-              ngModel
-              name="matchDate"
-              required
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Match Venue</mat-label>
-            <input
-              matInput
-              #matchVenueInput="ngModel"
-              ngModel
-              name="matchVenue"
-              matchVenueInput
-              required
-            />
-            <mat-error *ngIf="matchVenueInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Match Result</mat-label>
-            <input
-              matInput
-              #resultInput="ngModel"
-              ngModel
-              name="result"
-              resultInput
-              required
-            />
-            <mat-error *ngIf="resultInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Select Player of the Match</mat-label>
-            <mat-select
-              placeholder="Select Player of the Match"
-              ngModel
-              name="playerOfTheMatch"
-            >
-              <mat-option *ngFor="let player of playerList" [value]="player.id">
-                {{ player.playerFirstName }} {{ player.playerLastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Home Team Score</mat-label>
-            <input
-              matInput
-              #homeTeamScoreInput="ngModel"
-              ngModel
-              type="number"
-              name="homeTeamScore"
-              homeTeamScoreInput
-              required
-            />
-            <mat-error *ngIf="homeTeamScoreInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Home Team Wickets</mat-label>
-            <input
-              matInput
-              #homeTeamWicketsInput="ngModel"
-              ngModel
-              type="number"
-              name="homeTeamWickets"
-              homeTeamWicketsInput
-              required
-            />
-            <mat-error *ngIf="homeTeamWicketsInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Opponent Team</mat-label>
-            <input
-              matInput
-              #opTeamInput="ngModel"
-              ngModel
-              type="text"
-              name="opTeam"
-              opTeamInput
-              required
-            />
-            <mat-error *ngIf="opTeamInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Opponent Team Score</mat-label>
-            <input
-              matInput
-              #opTeamScoreInput="ngModel"
-              ngModel
-              type="number"
-              name="opTeamScore"
-              opTeamScoreInput
-              required
-            />
-            <mat-error *ngIf="opTeamScoreInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Opponent Team Wickets</mat-label>
-            <input
-              matInput
-              #opTeamWicketsInput="ngModel"
-              ngModel
-              type="number"
-              name="opTeamWickets"
-              opTeamWicketsInput
-              required
-            />
-            <mat-error *ngIf="opTeamWicketsInput.hasError('required')"
-              >Field must not be empty.</mat-error
-            >
-          </mat-form-field>
-          <mat-checkbox ngModel name="homeTeamWon"
-            >Is home team won?</mat-checkbox
+        <div fxLayout="row">
+          <div
+            fxLayout="column"
+            fxFlex
+            fxFlexFill
+            fxLayoutAlign="space-between start"
+            class="pr-3"
           >
+            <mat-form-field appearance="outline">
+              <mat-label>Select Tournament</mat-label>
+              <mat-select placeholder="Select Tournament" ngModel name="tourId">
+                <mat-option
+                  *ngFor="let tour of tournametList"
+                  [value]="tour.id"
+                >
+                  {{ tour.tourName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Match Date"
+                [matDatepicker]="picker"
+                ngModel
+                name="matchDate"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Match Venue</mat-label>
+              <input
+                matInput
+                #matchVenueInput="ngModel"
+                ngModel
+                name="matchVenue"
+                matchVenueInput
+                required
+              />
+              <mat-error *ngIf="matchVenueInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Match Result</mat-label>
+              <input
+                matInput
+                #resultInput="ngModel"
+                ngModel
+                name="result"
+                resultInput
+                required
+              />
+              <mat-error *ngIf="resultInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Select Player of the Match</mat-label>
+              <mat-select
+                placeholder="Select Player of the Match"
+                ngModel
+                name="playerOfTheMatch"
+              >
+                <mat-option
+                  *ngFor="let player of playerList"
+                  [value]="player.id"
+                >
+                  {{ player.playerFirstName }} {{ player.playerLastName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div
+            fxLayout="column"
+            fxFlex
+            fxFlexFill
+            fxLayoutAlign="space-between end"
+          >
+            <mat-form-field appearance="outline">
+              <mat-label>Home Team Score</mat-label>
+              <input
+                matInput
+                #homeTeamScoreInput="ngModel"
+                ngModel
+                type="number"
+                name="homeTeamScore"
+                homeTeamScoreInput
+                required
+              />
+              <mat-error *ngIf="homeTeamScoreInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Home Team Wickets</mat-label>
+              <input
+                matInput
+                #homeTeamWicketsInput="ngModel"
+                ngModel
+                type="number"
+                name="homeTeamWickets"
+                homeTeamWicketsInput
+                required
+              />
+              <mat-error *ngIf="homeTeamWicketsInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Opponent Team</mat-label>
+              <input
+                matInput
+                #opTeamInput="ngModel"
+                ngModel
+                type="text"
+                name="opTeam"
+                opTeamInput
+                required
+              />
+              <mat-error *ngIf="opTeamInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Opponent Team Score</mat-label>
+              <input
+                matInput
+                #opTeamScoreInput="ngModel"
+                ngModel
+                type="number"
+                name="opTeamScore"
+                opTeamScoreInput
+                required
+              />
+              <mat-error *ngIf="opTeamScoreInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Opponent Team Wickets</mat-label>
+              <input
+                matInput
+                #opTeamWicketsInput="ngModel"
+                ngModel
+                type="number"
+                name="opTeamWickets"
+                opTeamWicketsInput
+                required
+              />
+              <mat-error *ngIf="opTeamWicketsInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+            <mat-checkbox ngModel name="homeTeamWon"
+              >Is home team won?</mat-checkbox
+            >
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>

@@ -30,6 +30,7 @@ p {
   line-height: 1.2rem;
   text-transform: uppercase;
   font-weight: 600;
+  text-align: center;
 }
 .stats .record {
   font-size: 2.5rem;

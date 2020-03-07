@@ -71,8 +71,7 @@
   overflow: hidden;
   color: #fff;
 }
-.matchCenter::before,
-.xs-tourName::before {
+.matchCenter::before {
   content: "";
   display: block;
   position: absolute;
@@ -85,6 +84,10 @@
   transform: skew(-13deg);
   z-index: 0;
 }
+.xs-tourName {
+  margin-right: -10px;
+}
+
 .matchEvent,
 .xs-matchDate {
   text-align: center;
@@ -97,6 +100,14 @@
 .xs-matchDetails {
   background: #fff;
   overflow: hidden;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.xs-matchDetails .matchDetails {
+  padding-bottom: 10px;
 }
 
 .xs-matchDetails .matchDetails::before {
@@ -108,12 +119,32 @@
   right: 0;
   background-color: #fb6010;
 }
+
 .xs-tourName {
-  padding: 1rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
   line-height: 1.2rem;
-  background-color: #0a4199;
   position: relative;
   overflow: hidden;
   color: #fff;
+  margin-left: -31px;
+}
+
+.xs-scoreDetails {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.xs-matchResult {
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid darkblue;
+  margin-top: 0.5rem;
 }
