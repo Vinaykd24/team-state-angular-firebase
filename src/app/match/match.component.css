@@ -46,6 +46,7 @@
   line-height: 1.2rem;
   font-family: "Titillium Web", sans-serif;
   padding: 1rem;
+  text-transform: uppercase;
 }
 .awayTeamScore {
   text-align: left;
@@ -59,7 +60,8 @@
   left: 0;
   background-color: #fb6010;
 }
-.matchDetails .tourName {
+.matchDetails .tourName,
+.xs-tourName {
   padding: 0 2rem;
   background: #fb6010;
   color: #fff;
@@ -69,7 +71,8 @@
   overflow: hidden;
   color: #fff;
 }
-.matchCenter::before {
+.matchCenter::before,
+.xs-tourName::before {
   content: "";
   display: block;
   position: absolute;
@@ -82,10 +85,35 @@
   transform: skew(-13deg);
   z-index: 0;
 }
-.matchEvent {
+.matchEvent,
+.xs-matchDate {
   text-align: center;
   position: relative;
   z-index: 10;
   display: block;
   padding: 0 1.6rem;
+}
+
+.xs-matchDetails {
+  background: #fff;
+  overflow: hidden;
+}
+
+.xs-matchDetails .matchDetails::before {
+  margin-left: -2rem;
+}
+
+.xs-tourName::before {
+  left: -3rem;
+  right: 0;
+  background-color: #fb6010;
+}
+.xs-tourName {
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  background-color: #0a4199;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
 }
