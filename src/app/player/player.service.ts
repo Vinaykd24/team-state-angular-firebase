@@ -11,6 +11,7 @@ import "firebase/firestore";
 import * as _ from "lodash";
 import { TopPlayer } from "../models/top-player.model";
 import { MatchService } from "../match/match.service";
+import { MatchDetails } from "../models/match-details.model";
 @Injectable()
 export class PlayerService {
   playersCollection: AngularFirestoreCollection<Player>;
@@ -44,6 +45,20 @@ export class PlayerService {
     this.playersCollection.add(player);
   }
 
+  getBestScore(playerList: MatchDetails[]): number {
+    return (playerList = [...playerList].sort((runs1, runs2) => {
+      if (runs1.runs > runs2.runs) return -1;
+      if (runs1.runs < runs2.runs) return 1;
+    }))[0].runs;
+  }
+
+  getBestBowling(playerList: MatchDetails[]): number {
+    return (playerList = [...playerList].sort((wickets1, wickets2) => {
+      if (wickets1.wickets > wickets2.wickets) return -1;
+      if (wickets1.wickets < wickets2.wickets) return 1;
+    }))[0].wickets;
+  }
+
   getPlayerMatchDetails(): Observable<TopPlayer[]> {
     this.playerMatchDetails$ = zip(
       this.getPlayers(),
@@ -57,8 +72,8 @@ export class PlayerService {
             fifties: objs.filter(player => player.runs >= 50).length || 0,
             centuries: objs.filter(player => player.runs >= 100).length || 0,
             isOut: objs.filter(player => player.isOut).length || 0,
-            bestScore: 0,
-            bestBowling: 0,
+            bestScore: this.getBestScore(objs) || 0,
+            bestBowling: this.getBestBowling(objs) || 0,
             totalMatches: objs.length || 0,
             totalRuns: _.sumBy(objs, "runs") || 0,
             totalBalls: _.sumBy(objs, "balls") || 0,
