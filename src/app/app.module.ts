@@ -26,6 +26,9 @@ import { TournamentService } from "./tournament/tournament.service";
 import { PlayerStatsComponent } from "./player/player-stats/player-stats.component";
 import { MatchDetailsComponent } from "./match/match-details/match-details.component";
 import { StoreModule } from "@ngrx/store";
+import { reducers } from "./app.reducer";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { UiService } from "./shared/ui.service";
 
 @NgModule({
   declarations: [
@@ -50,9 +53,14 @@ import { StoreModule } from "@ngrx/store";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
-  providers: [PlayerService, MatchService, TournamentService],
+  providers: [PlayerService, MatchService, TournamentService, UiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

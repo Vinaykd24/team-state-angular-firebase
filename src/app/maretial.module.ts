@@ -27,7 +27,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatCardModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   exports: [
     MatFormFieldModule,
@@ -42,7 +43,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatCardModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}

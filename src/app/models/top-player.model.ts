@@ -1,7 +1,9 @@
+import { Player } from "./player.model";
+
 export interface TopPlayer {
-  playerId?: string;
-  playerFirstName: string;
-  playerLastName: string;
+  player: Player;
+  bestScore: number;
+  bestBowling: number;
   totalMatches: number;
   totalRuns: number;
   totalBalls: number;

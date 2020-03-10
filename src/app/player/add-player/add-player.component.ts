@@ -3,6 +3,8 @@ import { NgForm } from "@angular/forms";
 import { Player } from "src/app/models/player.model";
 import { PlayerService } from "../player.service";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { State } from "../store/player.reducer";
 
 @Component({
   selector: "app-add-player",
@@ -32,7 +34,11 @@ export class AddPlayerComponent implements OnInit {
     { id: "10", value: "-" }
   ];
   maxDate;
-  constructor(private playerService: PlayerService, private router: Router) {}
+  constructor(
+    private playerService: PlayerService,
+    private router: Router,
+    private store: Store<State>
+  ) {}
 
   ngOnInit(): void {
     this.maxDate = new Date();

@@ -26,11 +26,11 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
         .getPlayers()
         .subscribe(players => (this.playerList = players))
     );
-    this.subcription.add(
-      this.matchService
-        .getMatches()
-        .subscribe(matches => (this.matchtesList = matches))
-    );
+    // this.subcription.add(
+    //   this.matchService
+    //     .getMatches()
+    //     .subscribe(matches => (this.matchtesList = matches))
+    // );
   }
 
   ngOnInit(): void {}
