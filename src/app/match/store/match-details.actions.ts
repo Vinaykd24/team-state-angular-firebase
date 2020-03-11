@@ -1,4 +1,4 @@
-import { Action } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 import { MatchDetails } from "src/app/models/match-details.model";
 
 export const GET_AVAILABLE_MATCH_DETAILS =
@@ -22,3 +22,12 @@ export class GetSingleMatchDetails implements Action {
 export type MatchDetailsActions =
   | GetAvailableMatchDetails
   | GetSingleMatchDetails;
+
+export const loadMatchDetails = createAction(
+  "[MatchDetails Resolver] Load All Match Details"
+);
+
+export const allMatchDetailsLoaded = createAction(
+  "[Load MatchDetails Effect] All Match Details Loaded",
+  props<{ matchDetails: MatchDetails[] }>()
+);

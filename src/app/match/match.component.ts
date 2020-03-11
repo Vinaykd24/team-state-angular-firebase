@@ -19,15 +19,16 @@ export class MatchComponent implements OnInit {
   constructor(
     private store: Store<fromMatchReducer.State>,
     private matchService: MatchService
-  ) {}
+  ) {
+    this.fetchMatches();
+    this.fetchMatchDetails();
+  }
 
   ngOnInit(): void {
     this.matches$ = this.store.select(fromMatchReducer.getAvailableMatches);
     this.matchDetails$ = this.store.select(
       fromMatchDetailsReducer.getAvailableMatchDetails
     );
-    this.fetchMatches();
-    this.fetchMatchDetails();
   }
 
   fetchMatches() {

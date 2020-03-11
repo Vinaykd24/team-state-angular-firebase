@@ -9,6 +9,8 @@ import { AddPlayerComponent } from "./player/add-player/add-player.component";
 import { AddMatchComponent } from "./match/add-match/add-match.component";
 import { AddTournamentComponent } from "./tournament/add-tournament/add-tournament.component";
 import { AddMatchDetailComponent } from "./match/add-match-detail/add-match-detail.component";
+import { MatchDetailsComponent } from "./match/match-details/match-details.component";
+import { MatchDetailsResolver } from "./match/match-details/match-details.resolver";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -16,6 +18,11 @@ const routes: Routes = [
   { path: "players", component: PlayerComponent },
   { path: "add-player", component: AddPlayerComponent },
   { path: "matches", component: MatchComponent },
+  {
+    path: "matches/:matchId",
+    component: MatchDetailsComponent,
+    resolve: { matchDetails: MatchDetailsResolver }
+  },
   { path: "add-match", component: AddMatchComponent },
   { path: "add-match-details", component: AddMatchDetailComponent },
   { path: "tournaments", component: TournamentComponent },

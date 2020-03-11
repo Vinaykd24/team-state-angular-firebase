@@ -25,7 +25,7 @@ export function matchReducer(state = initialState, action: MatchActions) {
   }
 }
 
-export const getMatchState = createFeatureSelector<State>("availableMatches");
+export const getMatchState = createFeatureSelector<State>("matches");
 
 export const getAvailableMatches = createSelector(
   getMatchState,

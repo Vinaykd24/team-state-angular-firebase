@@ -29,6 +29,7 @@ import { StoreModule } from "@ngrx/store";
 import { reducers } from "./app.reducer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { UiService } from "./shared/ui.service";
+import { MatchDetailsResolver } from "./match/match-details/match-details.resolver";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,13 @@ import { UiService } from "./shared/ui.service";
       logOnly: environment.production
     })
   ],
-  providers: [PlayerService, MatchService, TournamentService, UiService],
+  providers: [
+    PlayerService,
+    MatchService,
+    TournamentService,
+    UiService,
+    MatchDetailsResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

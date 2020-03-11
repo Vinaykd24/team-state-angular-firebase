@@ -31,7 +31,7 @@ export function matchDetailsReducer(
 }
 
 export const getMatchDetailsState = createFeatureSelector<State>(
-  "availableMatchDetails"
+  "matchDetails"
 );
 
 export const getAvailableMatchDetails = createSelector(

@@ -13,7 +13,6 @@ const initialState: State = {
 };
 
 export function playerReducer(state = initialState, action: PlayerActions) {
-  debugger;
   switch (action.type) {
     case GET_AVAILABLE_PLAYERS:
       return {
@@ -26,7 +25,7 @@ export function playerReducer(state = initialState, action: PlayerActions) {
   }
 }
 
-export const getPlayerState = createFeatureSelector<State>("availablePlayers");
+export const getPlayerState = createFeatureSelector<State>("players");
 
 export const getAvailablePlayers = createSelector(
   getPlayerState,

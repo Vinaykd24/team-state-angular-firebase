@@ -1,4 +1,10 @@
-<div fxLayout="row" fxFill fxHide.sm="true" fxHide.xs="true">
+<div
+  fxLayout="row"
+  fxFill
+  fxHide.sm="true"
+  fxHide.xs="true"
+  *ngFor="let match of matches$ | async"
+>
   <div
     fxFill
     fxFlex
@@ -8,9 +14,9 @@
     class="matchWrapper"
   >
     <div fxLayout="column" class="matchDate matchDateWrapper" fxFlex="12">
-      <span class="day">Monday</span>
-      <span class="date">22</span>
-      <span class="month">January</span>
+      <span class="day">{{ match.matchDate.toDate() | date: "EEEE" }}</span>
+      <span class="date">{{ match.matchDate.toDate() | date: "dd" }}</span>
+      <span class="month">{{ match.matchDate.toDate() | date: "yyyy" }}</span>
     </div>
     <div
       fxLayout="column"
