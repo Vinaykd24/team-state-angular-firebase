@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import * as fromMatchReducer from "./store/match.reducer";
+import * as fromMatchDetailsReducer from "./store/match-details.reducer";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Match } from "../models/match.model";
 import { MatchService } from "./match.service";
+import { MatchDetails } from "../models/match-details.model";
 
 @Component({
   selector: "app-match",
@@ -12,6 +14,7 @@ import { MatchService } from "./match.service";
 })
 export class MatchComponent implements OnInit {
   matches$: Observable<Match[]>;
+  matchDetails$: Observable<MatchDetails[]>;
 
   constructor(
     private store: Store<fromMatchReducer.State>,
@@ -20,10 +23,17 @@ export class MatchComponent implements OnInit {
 
   ngOnInit(): void {
     this.matches$ = this.store.select(fromMatchReducer.getAvailableMatches);
+    this.matchDetails$ = this.store.select(
+      fromMatchDetailsReducer.getAvailableMatchDetails
+    );
     this.fetchMatches();
+    this.fetchMatchDetails();
   }
 
   fetchMatches() {
     this.matchService.getMatches();
+  }
+  fetchMatchDetails() {
+    this.matchService.getMatchDetails();
   }
 }

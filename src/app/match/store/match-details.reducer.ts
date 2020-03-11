@@ -18,7 +18,6 @@ export function matchDetailsReducer(
   state = initialState,
   action: MatchDetailsActions
 ) {
-  debugger;
   switch (action.type) {
     case GET_AVAILABLE_MATCH_DETAILS:
       return {

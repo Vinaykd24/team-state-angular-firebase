@@ -10,6 +10,7 @@ import { map } from "rxjs/operators";
 import { MatchDetails } from "../models/match-details.model";
 import { Store } from "@ngrx/store";
 import { State } from "./store/match.reducer";
+import * as fromMatchDetailsReducer from "./store/match-details.reducer";
 import * as matchActions from "./store/match.actions";
 import * as matchDetailsActions from "./store/match-details.actions";
 
@@ -67,6 +68,14 @@ export class MatchService {
           new matchDetailsActions.GetAvailableMatchDetails(matchDetails)
         );
       });
+  }
+
+  getSingleMatchDetails(id: string) {
+    //Get Single Match Details
+    const matchDetails$ = this.store.select(
+      fromMatchDetailsReducer.getAvailableMatchDetails
+    );
+    matchDetails$.subscribe(data => console.log(data));
   }
 
   newMatch(match: Match) {

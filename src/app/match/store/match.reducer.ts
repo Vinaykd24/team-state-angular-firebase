@@ -13,7 +13,6 @@ const initialState: State = {
 };
 
 export function matchReducer(state = initialState, action: MatchActions) {
-  debugger;
   switch (action.type) {
     case GET_AVAILABLE_MATCHES:
       return {
