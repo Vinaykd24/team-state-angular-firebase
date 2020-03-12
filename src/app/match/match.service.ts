@@ -70,12 +70,22 @@ export class MatchService {
       });
   }
 
-  getSingleMatchDetails(id: string) {
+  getSingleMatchDetails(id: string): Observable<MatchDetails[]> {
     //Get Single Match Details
-    const matchDetails$ = this.store.select(
-      fromMatchDetailsReducer.getAvailableMatchDetails
-    );
-    matchDetails$.subscribe(data => console.log(data));
+    // const matchDetails$ = this.store.select(
+    //   fromMatchDetailsReducer.getAvailableMatchDetails
+    // );
+    // console.log(id);
+    // matchDetails$.subscribe(loadedMatDetlsData => {
+    //   loadedMatDetlsData
+    //     .slice()
+    //     .find(matchDetails => matchDetails.matchId === id);
+    // });
+    return this.afs
+      .collection<MatchDetails>("matchDetails", ref =>
+        ref.where("matchId", "==", id)
+      )
+      .valueChanges();
   }
 
   newMatch(match: Match) {

@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { Match } from "../models/match.model";
 import { MatchService } from "./match.service";
 import { MatchDetails } from "../models/match-details.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-match",
@@ -18,7 +19,8 @@ export class MatchComponent implements OnInit {
 
   constructor(
     private store: Store<fromMatchReducer.State>,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private router: Router
   ) {
     this.fetchMatches();
     this.fetchMatchDetails();
@@ -36,5 +38,9 @@ export class MatchComponent implements OnInit {
   }
   fetchMatchDetails() {
     this.matchService.getMatchDetails();
+  }
+  clickMatchEventHandler(match: Match) {
+    // this.router.navigateByUrl(`/matchDetails/${matchId}`);
+    this.router.navigate(["/matchDetails", match.id], { state: match });
   }
 }

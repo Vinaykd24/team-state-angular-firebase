@@ -1,4 +1,5 @@
 export interface Match {
+  id?: string;
   homeTeamScore: number;
   homeTeamWickets: number;
   homeTeamWon: boolean;

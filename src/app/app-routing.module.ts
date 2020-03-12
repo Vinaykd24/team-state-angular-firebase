@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "add-player", component: AddPlayerComponent },
   { path: "matches", component: MatchComponent },
   {
-    path: "matches/:matchId",
+    path: "matchDetails/:matchId",
     component: MatchDetailsComponent,
     resolve: { matchDetails: MatchDetailsResolver }
   },

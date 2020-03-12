@@ -30,6 +30,9 @@ import { reducers } from "./app.reducer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { UiService } from "./shared/ui.service";
 import { MatchDetailsResolver } from "./match/match-details/match-details.resolver";
+import { HeaderComponent } from "./navigation/header/header.component";
+import { SideNavComponent } from "./navigation/side-nav/side-nav.component";
+import { AuthService } from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { MatchDetailsResolver } from "./match/match-details/match-details.resolv
     AddTournamentComponent,
     AddMatchDetailComponent,
     PlayerStatsComponent,
-    MatchDetailsComponent
+    MatchDetailsComponent,
+    HeaderComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,8 @@ import { MatchDetailsResolver } from "./match/match-details/match-details.resolv
     MatchService,
     TournamentService,
     UiService,
-    MatchDetailsResolver
+    MatchDetailsResolver,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

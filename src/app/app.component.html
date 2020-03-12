@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <p>I'm the side nav</p>
   </mat-sidenav>
@@ -48,6 +48,17 @@
       <div class="container">
         <router-outlet></router-outlet>
       </div>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-side-nav (closeSidenav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <main class="container">
+      <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -4,6 +4,7 @@
   fxHide.sm="true"
   fxHide.xs="true"
   *ngFor="let match of matches$ | async"
+  (click)="clickMatchEventHandler(match)"
 >
   <div
     fxFill
@@ -35,10 +36,10 @@
       >
         <span>
           <strong>
-            TCS WON BY 10 WICKETS
+            {{ match.result }}
           </strong>
         </span>
-        <span>INFOSYS Pune, GROUND</span>
+        <span>{{ match.matchVenue }}</span>
       </div>
     </div>
     <div fxLayout="column" fxFlex fxLayoutAlign="center center">
@@ -46,13 +47,13 @@
         <div fxFlex class="homeTeamScore">
           <p>TCS Pune</p>
           <p>
-            <span>140/2</span>
+            <span>{{ match.homeTeamScore }}/{{ match.homeTeamWickets }}</span>
           </p>
         </div>
         <div>V</div>
         <div fxFlex class="awayTeamScore">
-          <p>Infosys Pune</p>
-          <p>130/9</p>
+          <p>{{ match.opTeam }}</p>
+          <p>{{ match.opTeamScore }}/{{ match.opTeamWickets }}</p>
         </div>
       </div>
     </div>
@@ -72,10 +73,11 @@
   fxShow.xs="true"
   fxHide.md="true"
   fxHide.lg="true"
+  *ngFor="let match of matches$ | async"
 >
   <div fxFlexFill class="matchDetails">
     <div fxFlex="40" fxFlex.xs="70" fxFlexFill class="xs-tourName u-skew">
-      Monday, 10, 2020
+      {{ match.matchDate.toDate() | date: "mediumDate" }}
     </div>
   </div>
   <div
@@ -97,7 +99,7 @@
       fxLayoutAlign="space-between center"
       fxLayoutGap="5px"
     >
-      190/6
+      {{ match.homeTeamScore }}/{{ match.homeTeamWickets }}
     </div>
   </div>
   <div
@@ -112,21 +114,21 @@
       fxLayoutAlign="space-between center"
       fxLayoutGap="5px"
     >
-      INFOSYS PUNE
+      {{ match.opTeam }}
     </div>
     <div
       fxLayout="column"
       fxLayoutAlign="space-between center"
       fxLayoutGap="5px"
     >
-      190/6
+      {{ match.opTeamScore }}/{{ match.opTeamWickets }}
     </div>
   </div>
   <div fxFlexFill class="xs-matchResult">
-    TCS WON BY 10 WICKETS
+    {{ match.result }}
   </div>
 </div>
 
-<section>
+<!-- <section>
   <app-match-details></app-match-details>
-</section>
+</section> -->

@@ -7,10 +7,10 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title fxHide.xs>
-          Add Batting Details
+          Select Match Info
         </mat-panel-title>
         <mat-panel-description>
-          Batting Details
+          Match Details
           <mat-icon>sports_cricket</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -23,6 +23,25 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      [expanded]="step === 1"
+      (opened)="setStep(0)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxHide.xs>
+          Add Batting Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Batting Details
+          <mat-icon>sports_cricket</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
       <mat-form-field appearance="outline">
         <mat-label>Select Player </mat-label>
@@ -107,7 +126,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      [expanded]="step === 1"
+      [expanded]="step === 2"
       (opened)="setStep(1)"
       hideToggle
     >
@@ -120,6 +139,15 @@
           <mat-icon>sports_handball</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Player </mat-label>
+        <mat-select placeholder="Select Player " ngModel name="playerId">
+          <mat-option *ngFor="let player of playerList" [value]="player">
+            {{ player.playerFirstName }} {{ player.playerLastName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Overs</mat-label>
@@ -191,7 +219,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      [expanded]="step === 2"
+      [expanded]="step === 3"
       (opened)="setStep(2)"
       hideToggle
     >
