@@ -33,6 +33,7 @@ import { MatchDetailsResolver } from "./match/match-details/match-details.resolv
 import { HeaderComponent } from "./navigation/header/header.component";
 import { SideNavComponent } from "./navigation/side-nav/side-nav.component";
 import { AuthService } from "./auth/auth.service";
+import { TournamentStatsComponent } from './match/tournament-stats/tournament-stats.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AuthService } from "./auth/auth.service";
     PlayerStatsComponent,
     MatchDetailsComponent,
     HeaderComponent,
-    SideNavComponent
+    SideNavComponent,
+    TournamentStatsComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { MatchService } from "../match.service";
 import { MatchDetails } from "src/app/models/match-details.model";
 import { Observable } from "rxjs";
+import { Match } from "src/app/models/match.model";
 
 @Component({
   selector: "app-match-details",
@@ -10,15 +11,18 @@ import { Observable } from "rxjs";
   styleUrls: ["./match-details.component.css"]
 })
 export class MatchDetailsComponent implements OnInit {
-  // matchDetails$: Observable<MatchDetails[]>;
-  _data: any;
+  matchDetails: MatchDetails[];
+  selectedMatch: Match;
 
   constructor(
     private route: ActivatedRoute,
     private matchService: MatchService
   ) {
-    this.route.data.subscribe(data => console.log(data));
-    console.log(history.state);
+    this.route.data.subscribe(data => {
+      this.matchDetails = data.matchDetails;
+    });
+    this.selectedMatch = history.state;
+    console.log(history.state, this.matchDetails);
   }
 
   ngOnInit(): void {}

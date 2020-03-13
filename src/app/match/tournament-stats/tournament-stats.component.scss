@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+
+.large-card {
+  position: relative;
+  font-family: "Titillium Web", sans-serif;
+  text-transform: uppercase;
+  padding: 1rem;
+  background: linear-gradient(243deg, #082f9f, #143e9f);
+  color: #ffffff;
+  border-radius: 0.3rem;
+  h4 {
+    font-size: 0.85rem;
+    line-height: 1rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+  }
+  p {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.5rem;
+      display: block;
+    }
+  }
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 3rem;
+    color: #fb6010;
+    margin: 0;
+  }
+  img {
+    width: 10rem;
+    height: 9rem;
+    border-radius: 2rem 0rem 2rem;
+  }
+}
+
+.small-card {
+  min-width: 10rem;
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  text-transform: uppercase;
+  padding: 1rem;
+  background: linear-gradient(243deg, #082f9f, #143e9f);
+  color: #ffffff;
+  border-radius: 0.3rem;
+  h4,
+  p {
+    font-size: 0.85rem;
+    line-height: 1rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    span {
+      font-style: italic;
+      font-size: 0.5rem;
+    }
+  }
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 3rem;
+    color: #fb6010;
+    margin: 0;
+  }
+}
