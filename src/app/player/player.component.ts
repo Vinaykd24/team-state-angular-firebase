@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import * as fromPlayerReducer from "../player/store/player.reducer";
 import { State } from "../app.reducer";
 import { TopPlayer } from "../models/top-player.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-player",
@@ -17,7 +18,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private playerService: PlayerService,
-    private store: Store<State>
+    private store: Store<State>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +33,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.plyrSub.forEach(subs => subs.unsubscribe());
+  }
+
+  clickPlayerEventHandler(player: TopPlayer) {
+    this.router.navigate(["/playerDetails", player.player.id], {
+      state: player
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { TopPlayer } from "src/app/models/top-player.model";
 
 export const GET_AVAILABLE_PLAYERS = "[Players] Get Available Players";
+export const GET_SELECTED_PLAYERS = "[Players] Get Selected Player";
 
 export class GetAvailablePlayers implements Action {
   readonly type = GET_AVAILABLE_PLAYERS;
@@ -9,4 +10,10 @@ export class GetAvailablePlayers implements Action {
   constructor(public payload: TopPlayer[]) {}
 }
 
-export type PlayerActions = GetAvailablePlayers;
+export class GetSelectedPlayer implements Action {
+  readonly type = GET_SELECTED_PLAYERS;
+
+  constructor(public payload: string) {}
+}
+
+export type PlayerActions = GetAvailablePlayers | GetSelectedPlayer;

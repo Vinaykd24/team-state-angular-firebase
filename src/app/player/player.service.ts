@@ -107,4 +107,8 @@ export class PlayerService {
         }
       );
   }
+
+  getSinglePlayerDetails(id: string) {
+    this.store.dispatch(new playerActions.GetSelectedPlayer(id));
+  }
 }

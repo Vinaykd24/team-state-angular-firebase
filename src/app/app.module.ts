@@ -33,7 +33,9 @@ import { MatchDetailsResolver } from "./match/match-details/match-details.resolv
 import { HeaderComponent } from "./navigation/header/header.component";
 import { SideNavComponent } from "./navigation/side-nav/side-nav.component";
 import { AuthService } from "./auth/auth.service";
-import { TournamentStatsComponent } from './match/tournament-stats/tournament-stats.component';
+import { TournamentStatsComponent } from "./match/tournament-stats/tournament-stats.component";
+import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
+import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { TournamentStatsComponent } from './match/tournament-stats/tournament-st
     MatchDetailsComponent,
     HeaderComponent,
     SideNavComponent,
-    TournamentStatsComponent
+    TournamentStatsComponent,
+    PlayerDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { TournamentStatsComponent } from './match/tournament-stats/tournament-st
     BrowserAnimationsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AngularFirestoreModule,
     FlexLayoutModule,
     FormsModule,
@@ -74,6 +78,7 @@ import { TournamentStatsComponent } from './match/tournament-stats/tournament-st
     TournamentService,
     UiService,
     MatchDetailsResolver,
+    PlayerDetailsResolver,
     AuthService
   ],
   bootstrap: [AppComponent]

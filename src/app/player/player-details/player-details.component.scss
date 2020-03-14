@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+
+.player-info {
+  font-family: "Titillium Web", sans-serif;
+  img {
+    border-radius: 50%;
+    width: 11rem;
+    height: 10rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+  h4 {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 2rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+    font-style: italic;
+    span {
+      font-weight: 700;
+      font-size: 3rem;
+      line-height: 2.5rem;
+      display: block;
+      color: #fb6010;
+    }
+  }
+  .player-bio-info {
+    text-transform: uppercase;
+    border-top: 1px solid #e2e2e2;
+    padding: 1rem 0;
+    .title {
+      font-size: 0.85rem;
+      line-height: 1.5rem;
+    }
+    .info {
+      font-size: 2rem;
+      line-height: 2rem;
+      font-weight: 700;
+    }
+  }
+}

@@ -11,6 +11,8 @@ import { AddTournamentComponent } from "./tournament/add-tournament/add-tourname
 import { AddMatchDetailComponent } from "./match/add-match-detail/add-match-detail.component";
 import { MatchDetailsComponent } from "./match/match-details/match-details.component";
 import { MatchDetailsResolver } from "./match/match-details/match-details.resolver";
+import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
+import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -22,6 +24,11 @@ const routes: Routes = [
     path: "matchDetails/:matchId",
     component: MatchDetailsComponent,
     resolve: { matchDetails: MatchDetailsResolver }
+  },
+  {
+    path: "playerDetails/:playerId",
+    component: PlayerDetailsComponent,
+    resolve: { matchDetails: PlayerDetailsResolver }
   },
   { path: "add-match", component: AddMatchComponent },
   { path: "add-match-details", component: AddMatchDetailComponent },

@@ -1,13 +1,10 @@
-<div
-  fxLayout
-  fxLayout.lt-sm="column"
-  fxLayoutAlign="space-between center"
-  fxLayoutGap="10px"
->
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
   <div
     fxLayout="column"
     fxLayoutAlign="space-between center"
     class="playerCard"
+    *ngFor="let player of players$ | async"
+    (click)="clickPlayerEventHandler(player)"
   >
     <picture>
       <img
@@ -18,8 +15,8 @@
     </picture>
     <div class="playerTitle">
       <h3>
-        Jason
-        <span>Holder</span>
+        {{ player.player.playerFirstName }}
+        <span>{{ player.player.playerLastName }}</span>
       </h3>
     </div>
     <div
@@ -30,7 +27,7 @@
       fxLayoutAlign="space-between center"
     >
       <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>12</strong>
+        <strong>{{ player.totalMatches }}</strong>
         <span>M</span>
       </div>
       <div
@@ -40,104 +37,14 @@
         fxFill
         fxLayoutAlign="space-between center"
       >
-        <strong>128</strong>
+        <strong>{{ player.totalRuns }}</strong>
         <span>R</span>
       </div>
       <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>11</strong>
-        <span>W</span>
-      </div>
-    </div>
-  </div>
-  <div
-    fxLayout="column"
-    fxLayoutAlign="space-between center"
-    class="playerCard"
-  >
-    <picture>
-      <img
-        class="avatar"
-        src="../../assets/images/vinay.jpg"
-        alt="playerFirstName"
-      />
-    </picture>
-    <div class="playerTitle">
-      <h3>
-        Jason
-        <span>Holder</span>
-      </h3>
-    </div>
-    <div
-      class="scoreWrapper"
-      fxFlex
-      fxFill
-      fxLayout
-      fxLayoutAlign="space-between center"
-    >
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>12</strong>
-        <span>M</span>
-      </div>
-      <div
-        class="divider"
-        fxFlex
-        fxLayout="column"
-        fxFill
-        fxLayoutAlign="space-between center"
-      >
-        <strong>128</strong>
-        <span>R</span>
-      </div>
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>11</strong>
-        <span>W</span>
-      </div>
-    </div>
-  </div>
-  <div
-    fxLayout="column"
-    fxLayoutAlign="space-between center"
-    class="playerCard"
-  >
-    <picture>
-      <img
-        class="avatar"
-        src="../../assets/images/vinay.jpg"
-        alt="playerFirstName"
-      />
-    </picture>
-    <div class="playerTitle">
-      <h3>
-        Jason
-        <span>Holder</span>
-      </h3>
-    </div>
-    <div
-      class="scoreWrapper"
-      fxFlex
-      fxFill
-      fxLayout
-      fxLayoutAlign="space-between center"
-    >
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>12</strong>
-        <span>M</span>
-      </div>
-      <div
-        class="divider"
-        fxFlex
-        fxLayout="column"
-        fxFill
-        fxLayoutAlign="space-between center"
-      >
-        <strong>128</strong>
-        <span>R</span>
-      </div>
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>11</strong>
+        <strong>{{ player.totalWickets }}</strong>
         <span>W</span>
       </div>
     </div>
   </div>
 </div>
-<app-player-stats></app-player-stats>
+<!-- <app-player-details></app-player-details> -->
