@@ -2,6 +2,7 @@
   fxLayout.gt-sm="row"
   fxLayout.lt-md="column"
   fxLayoutAlign="space-between center"
+  class="pt-2 pb-2"
 >
   <div
     fxFlex="50"
@@ -18,7 +19,7 @@
       fxLayoutAlign="space-between center"
     >
       <div fxLayout="column" fxLayoutAlign="center center" class="stats">
-        <div class="record">3/0</div>
+        <div class="record">{{ player.fifties }}/{{ player.centuries }}</div>
         <span class="title">50s/100s</span>
       </div>
     </div>
@@ -35,11 +36,11 @@
           class="stats st-rate"
         >
           <span class="title">Strike Rate</span>
-          <div class="record">132.23</div>
+          <div class="record">{{ getBattingStrikeRate(player) }}</div>
           <div class="icon"></div>
         </div>
         <div fxLayout="column" fxLayoutAlign="center center" class="stats">
-          <div class="record">34.55</div>
+          <div class="record">{{ getBattingAvg(player) }}</div>
           <span class="title">Average</span>
         </div>
       </div>
@@ -53,14 +54,14 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between center">
         <div fxLayout="column" fxLayoutAlign="center center" class="stats">
           <span class="title">Matches Played</span>
-          <div class="record">13</div>
+          <div class="record">{{ player.totalMatches }}</div>
         </div>
         <div
           fxLayout="column"
           fxLayoutAlign="center center"
           class="stats highestScore"
         >
-          <div class="record">34</div>
+          <div class="record">{{ player.bestScore }}</div>
           <span class="title">Highest Score</span>
         </div>
       </div>
@@ -78,7 +79,7 @@
         class="stats runs-scored"
       >
         <div class="icon"></div>
-        <div class="record">143</div>
+        <div class="record">{{ player.totalRuns }}</div>
         <span class="title">Runs Scored</span>
       </div>
     </div>
@@ -103,7 +104,7 @@
         class="stats total-wkts"
       >
         <div class="icon"></div>
-        <div class="record">13</div>
+        <div class="record">{{ player.totalWickets }}</div>
         <span class="title">Total Wickets</span>
       </div>
     </div>
@@ -116,14 +117,14 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between center">
         <div fxLayout="column" fxLayoutAlign="center center" class="stats">
           <span class="title">Innings</span>
-          <div class="record">13</div>
+          <div class="record">{{ player.totalMatches }}</div>
         </div>
         <div
           fxLayout="column"
           fxLayoutAlign="center center"
           class="stats highestScore"
         >
-          <div class="record">3</div>
+          <div class="record">{{ player.totalMaidens }}</div>
           <span class="title">Maidens</span>
         </div>
       </div>
@@ -141,18 +142,18 @@
           class="stats bowl-avg"
         >
           <span class="title">Strike Rate</span>
-          <div class="record">32.23</div>
+          <div class="record">{{ getBowlingStrikeRate(player) }}</div>
           <div class="icon"></div>
         </div>
         <div fxLayout="column" fxLayoutAlign="center center" class="stats">
-          <div class="record">24.55</div>
+          <div class="record">{{ getBowlingAvg(player) }}</div>
           <span class="title">Average</span>
         </div>
       </div>
     </div>
     <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center center">
       <div fxLayout="column" fxLayoutAlign="center center" class="stats">
-        <div class="record">3.10</div>
+        <div class="record">{{ getBowlingEco(player) }}</div>
         <span class="title">Economy</span>
       </div>
     </div>

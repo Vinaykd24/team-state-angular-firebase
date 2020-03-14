@@ -1,4 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="5px">
+<div
+  fxLayout="row"
+  fxLayoutAlign="space-between start"
+  fxLayoutGap="5px"
+  *ngIf="player"
+  class="pt-3 pb-3"
+>
   <div fxFlex fxFlexFill>
     <div
       fxFlex
@@ -20,8 +26,8 @@
         </picture>
         <div fxFlex="60%" fxFlexFill>
           <h4>
-            Vinay
-            <span>Kadam</span>
+            {{ player.player.playerFirstName }}
+            <span>{{ player.player.playerLastName }}</span>
           </h4>
         </div>
       </div>
@@ -35,11 +41,11 @@
         >
           <div fxFlex fxFlexFill>
             <div class="title">ROLE</div>
-            <div class="info">BATSMAN</div>
+            <div class="info">{{ player.player.playerRole }}</div>
           </div>
           <div fxFlex fxFlexFill>
-            <div class="title">ROLE</div>
-            <div class="info">BATSMAN</div>
+            <div class="title">Bats</div>
+            <div class="info">{{ player.player.bat }}</div>
           </div>
         </div>
       </div>
@@ -52,12 +58,15 @@
           fxLayoutGap="5px"
         >
           <div fxFlex fxFlexFill>
-            <div class="title">ROLE</div>
-            <div class="info">BATSMAN</div>
+            <div class="title">Bowls</div>
+            <div class="info">{{ player.player.bowl }}</div>
           </div>
           <div fxFlex fxFlexFill>
-            <div class="title">ROLE</div>
-            <div class="info">BATSMAN</div>
+            <div class="title">Date of Birth</div>
+            <div class="info">
+              <!-- {{ player.player.playerDob.toDate() | date: "mediumDate" }} -->
+              Jan, 1 1990
+            </div>
           </div>
         </div>
       </div>
@@ -88,4 +97,4 @@
     </div>
   </div>
 </div>
-<app-player-stats></app-player-stats>
+<app-player-stats [player]="player"></app-player-stats>
