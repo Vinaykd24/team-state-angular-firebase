@@ -12,6 +12,8 @@ import { Match } from "src/app/models/match.model";
 })
 export class MatchDetailsComponent implements OnInit {
   matchDetails: MatchDetails[];
+  battingDetails: MatchDetails[];
+  bowlingDetails: MatchDetails[];
   selectedMatch: Match;
 
   constructor(
@@ -23,6 +25,8 @@ export class MatchDetailsComponent implements OnInit {
     });
     this.selectedMatch = history.state;
     console.log(history.state, this.matchDetails);
+    this.battingDetails = this.matchDetails.filter(player => player.balls > 0);
+    this.bowlingDetails = this.matchDetails.filter(player => player.overs > 0);
   }
 
   ngOnInit(): void {}

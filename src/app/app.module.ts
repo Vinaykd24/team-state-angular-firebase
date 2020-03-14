@@ -36,6 +36,7 @@ import { AuthService } from "./auth/auth.service";
 import { TournamentStatsComponent } from "./match/tournament-stats/tournament-stats.component";
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
+import { PlayerPerformanceComponent } from './player/player-performance/player-performance.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { PlayerDetailsResolver } from "./player/player-details/player-details.re
     HeaderComponent,
     SideNavComponent,
     TournamentStatsComponent,
-    PlayerDetailsComponent
+    PlayerDetailsComponent,
+    PlayerPerformanceComponent
   ],
   imports: [
     BrowserModule,
