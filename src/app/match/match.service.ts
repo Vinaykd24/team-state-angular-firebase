@@ -50,6 +50,19 @@ export class MatchService {
       });
   }
 
+  getMatchesWithId() {
+    //Get Matches with ID
+    return this.matchesCollection.snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as Match;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+  }
+
   getMatchDetails() {
     //Get Matches with ID
     this.matchDetailsCollection

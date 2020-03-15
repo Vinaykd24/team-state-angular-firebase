@@ -13,4 +13,5 @@ export interface MatchDetails {
   runsGiven?: number;
   sixes?: number;
   wickets?: number;
+  opTeam?: string;
 }

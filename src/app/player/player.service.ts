@@ -15,7 +15,10 @@ import { MatchDetails } from "../models/match-details.model";
 import { Store } from "@ngrx/store";
 import { State } from "./store/player.reducer";
 import * as playerActions from "./store/player.actions";
+import * as matchDetailsActions from "../match/store/match-details.actions";
 import * as fromMatchDetails from "../match/store/match-details.reducer";
+import * as fromMatchReducer from "../match/store/match.reducer";
+import { Match } from "../models/match.model";
 @Injectable()
 export class PlayerService {
   playersCollection: AngularFirestoreCollection<Player>;
@@ -110,5 +113,28 @@ export class PlayerService {
 
   getSinglePlayerDetails(id: string) {
     this.store.dispatch(new playerActions.GetSelectedPlayer(id));
+  }
+
+  getSelectedPlayerPerformance(id: string) {
+    // this.store.dispatch(
+    //   new matchDetailsActions.GetSelectedPlayerPerformance(id)
+    // );
+    return zip(
+      this.matchService.getMatchesWithId(),
+      this.afs
+        .collection<MatchDetails>("matchDetails", ref =>
+          ref.where("playerId", "==", id)
+        )
+        .valueChanges()
+    ).pipe(
+      map(([matches, matchDetails]) => {
+        return matchDetails.map(matDtls => {
+          return {
+            ...matDtls,
+            opTeam: matches.find(match => match.id === matDtls.matchId).opTeam
+          };
+        });
+      })
+    );
   }
 }

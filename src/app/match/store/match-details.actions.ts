@@ -7,6 +7,9 @@ export const GET_AVAILABLE_MATCH_DETAILS =
 export const GET_SINGLE_MATCH_DETAILS =
   "[MatchDetails] Get Single MatchDetails";
 
+export const GET_SELECTED_PLAYER_PERFORMANCE =
+  "[Players] Get Selected Player Performance";
+
 export class GetAvailableMatchDetails implements Action {
   readonly type = GET_AVAILABLE_MATCH_DETAILS;
 
@@ -19,15 +22,13 @@ export class GetSingleMatchDetails implements Action {
   constructor(public payload: MatchDetails[]) {}
 }
 
+export class GetSelectedPlayerPerformance implements Action {
+  readonly type = GET_SELECTED_PLAYER_PERFORMANCE;
+
+  constructor(public payload: string) {}
+}
+
 export type MatchDetailsActions =
   | GetAvailableMatchDetails
-  | GetSingleMatchDetails;
-
-export const loadMatchDetails = createAction(
-  "[MatchDetails Resolver] Load All Match Details"
-);
-
-export const allMatchDetailsLoaded = createAction(
-  "[Load MatchDetails Effect] All Match Details Loaded",
-  props<{ matchDetails: MatchDetails[] }>()
-);
+  | GetSingleMatchDetails
+  | GetSelectedPlayerPerformance;
