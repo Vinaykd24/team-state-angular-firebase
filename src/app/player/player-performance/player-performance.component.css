@@ -1,0 +1,9 @@
+.customWidthClass {
+  flex: 0 0 20%;
+}
+span {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-style: italic;
+  line-height: 1rem;
+}

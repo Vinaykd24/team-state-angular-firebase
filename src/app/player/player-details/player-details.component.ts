@@ -15,21 +15,26 @@ import { MatchDetails } from "src/app/models/match-details.model";
 export class PlayerDetailsComponent implements OnInit {
   player: TopPlayer;
   playerId: string;
-  plearPerformance: MatchDetails[];
+  playerPerformance$: Observable<MatchDetails[]>;
+  playerPerformanceDetails: MatchDetails[];
   _data: any;
   constructor(
     private store: Store<State>,
     private playerService: PlayerService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.store
       .select(fromPlayerReducer.getSelectedPlayer)
       .subscribe(loadedPlayer => {
         this.player = loadedPlayer;
-        this.playerService
-          .getSelectedPlayerPerformance(loadedPlayer.player.id)
-          .subscribe(data => (this.plearPerformance = data));
+        this.playerPerformance$ = this.playerService.getSelectedPlayerPerformance(
+          loadedPlayer.player.id
+        );
       });
+  }
+
+  ngOnInit(): void {
+    this.playerPerformance$.subscribe(
+      data => (this.playerPerformanceDetails = data)
+    );
   }
 }

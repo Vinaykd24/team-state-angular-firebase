@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
@@ -11,7 +11,23 @@ import { MatchDetails } from "src/app/models/match-details.model";
 })
 export class PlayerPerformanceComponent implements OnInit {
   @Input() playerPerformance: MatchDetails[];
+  // @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  displayedColumns = [
+    "opTeam",
+    "runs",
+    "balls",
+    "fours",
+    "sixes",
+    "overs",
+    "maidens",
+    "runsGiven",
+    "wickets"
+  ];
+  dataSource = new MatTableDataSource<MatchDetails>();
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.playerPerformance);
+    this.dataSource.data = this.playerPerformance;
+  }
 }

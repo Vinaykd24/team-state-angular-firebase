@@ -1,1 +1,62 @@
-<p>player-performance works!</p>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="opTeam">
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      [ngClass]="'customWidthClass'"
+      >Opponent Team</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'">
+      <span>VS</span>
+      {{ element.opTeam }}</mat-cell
+    >
+  </ng-container>
+
+  <ng-container matColumnDef="runs">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Runs</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.runs | number }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="balls">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Balls</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.balls | number }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="fours">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>4s</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.fours }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="sixes">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>6s</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.sixes }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="overs">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Overs</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.overs }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="maidens">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Maidens</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.maidens }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="runsGiven">
+    <mat-header-cell *matHeaderCellDef mat-sort-header
+      >Runs Given</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element">{{ element.runsGiven }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="wickets">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Wickets</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.wickets }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<!-- <mat-paginator [pageSize]="5" [pageSizeOptions]="[1, 5, 10, 20]"> -->
+<!-- </mat-paginator> -->

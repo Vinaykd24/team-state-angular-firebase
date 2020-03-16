@@ -98,6 +98,12 @@
   </div>
 </div>
 <app-player-stats [player]="player"></app-player-stats>
-<app-player-performance
-  [playerPerformance]="plearPerformance"
-></app-player-performance>
+<div *ngIf="playerPerformance$ | async">
+  <h3>
+    Career
+    <span>Stats</span>
+  </h3>
+  <app-player-performance
+    [playerPerformance]="playerPerformanceDetails"
+  ></app-player-performance>
+</div>
