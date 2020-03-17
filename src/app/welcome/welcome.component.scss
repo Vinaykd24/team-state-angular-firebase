@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+h3.title {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 2rem;
+  margin: 0.5rem 0;
+}
+.playerCardWrapper {
+  margin: 0;
+  padding: 0;
+  li.topBatsman:first-child {
+    background: linear-gradient(243deg, #fe7500, #e36d19);
+  }
+  li.topBowler:first-child {
+    background: linear-gradient(243deg, #9b35f8, #692f9e);
+  }
+  li:first-child {
+    font-family: "Titillium Web", sans-serif;
+    padding: 1rem;
+    color: #fff;
+    border-radius: 2rem 0.3rem 2rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+    .playerInfo {
+      flex-direction: column !important;
+    }
+    img {
+      width: 11rem;
+      height: 10rem;
+      border-radius: 2rem 0.5rem 2rem;
+      margin: 1rem 0;
+      display: block;
+    }
+    h4 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 2rem;
+      font-family: "Titillium Web", sans-serif;
+      text-align: center;
+      font-style: italic;
+      margin: 0;
+      span {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        font-weight: normal;
+      }
+    }
+    h3 {
+      margin: 0;
+      font-size: 2.9rem;
+      font-weight: 700;
+      line-height: 3rem;
+      font-family: "Titillium Web", sans-serif;
+    }
+  }
+  li {
+    font-family: "Titillium Web", sans-serif;
+    padding: 1rem;
+    background: linear-gradient(243deg, #f9f9f9, #e3e1e0);
+    color: #f48636;
+    border-radius: 2rem 0.3rem 2rem;
+    box-shadow: 0 2px 4px 0 rgba(233, 180, 180, 0.2);
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    border: 1px solid #fdd8be;
+    min-width: 12rem;
+    .playerInfo {
+      flex-direction: row !important;
+      justify-content: space-between !important;
+    }
+    img {
+      width: 8rem;
+      height: 7rem;
+      border-radius: 2rem 0.5rem 2rem;
+      margin: 0.2rem 0;
+    }
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.5rem;
+      font-family: "Titillium Web", sans-serif;
+      text-align: left;
+      font-style: italic;
+      margin: 0 0.5rem 0 0;
+      span {
+        display: block;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: normal;
+      }
+    }
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 2rem;
+      font-family: "Titillium Web", sans-serif;
+    }
+  }
+}

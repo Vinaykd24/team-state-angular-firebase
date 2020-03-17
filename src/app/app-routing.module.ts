@@ -13,11 +13,12 @@ import { MatchDetailsComponent } from "./match/match-details/match-details.compo
 import { MatchDetailsResolver } from "./match/match-details/match-details.resolver";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
+import { WelcomeComponent } from "./welcome/welcome.component";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
-  { path: "", component: PlayerComponent },
+  { path: "", component: WelcomeComponent },
   { path: "players", component: PlayerComponent },
   { path: "add-player", component: AddPlayerComponent },
   { path: "matches", component: MatchComponent },

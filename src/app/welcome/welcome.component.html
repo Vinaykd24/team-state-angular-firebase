@@ -1,0 +1,57 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxLayout="column" fxLayoutAlign="space-between center">
+    <h3 class="title">Top Batsman</h3>
+    <ul class="playerCardWrapper">
+      <li
+        class="playerCard topBatsman"
+        *ngFor="let topBatsman of topBatsmanList"
+      >
+        <div
+          fxFlex
+          fxFlexFill
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="playerInfo"
+        >
+          <picture>
+            <img src="../../assets/images/vinay.jpg" alt="" />
+          </picture>
+          <h4>
+            {{ topBatsman.player.playerFirstName }}
+            <span>{{ topBatsman.player.playerLastName }}</span>
+          </h4>
+          <h3>
+            {{ topBatsman.totalRuns }}
+          </h3>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between center">
+    <h3 class="title">Top Bowler</h3>
+    <ul class="playerCardWrapper">
+      <li class="playerCard topBowler" *ngFor="let topBowler of topBowlerList">
+        <div
+          fxFlex
+          fxFlexFill
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="playerInfo"
+        >
+          <picture>
+            <img src="../../assets/images/vinay.jpg" alt="" />
+          </picture>
+          <h4>
+            {{ topBowler.player.playerFirstName }}
+            <span>{{ topBowler.player.playerLastName }}</span>
+          </h4>
+          <h3>
+            {{ topBowler.totalWickets }}
+          </h3>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<app-tournament-stats></app-tournament-stats>

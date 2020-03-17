@@ -15,9 +15,8 @@ import { MatchDetails } from "../models/match-details.model";
 import { Store } from "@ngrx/store";
 import { State } from "./store/player.reducer";
 import * as playerActions from "./store/player.actions";
-import * as matchDetailsActions from "../match/store/match-details.actions";
+import * as fromPlayerReducer from "./store/player.reducer";
 import * as fromMatchDetails from "../match/store/match-details.reducer";
-import * as fromMatchReducer from "../match/store/match.reducer";
 import { Match } from "../models/match.model";
 @Injectable()
 export class PlayerService {
@@ -54,18 +53,18 @@ export class PlayerService {
     this.playersCollection.add(player);
   }
 
-  getBestScore(playerList: MatchDetails[]): number {
+  getBestScore(playerList: any[]) {
     return (playerList = [...playerList].sort((runs1, runs2) => {
       if (runs1.runs > runs2.runs) return -1;
       if (runs1.runs < runs2.runs) return 1;
-    }))[0].runs;
+    }));
   }
 
-  getBestBowling(playerList: MatchDetails[]): number {
+  getBestBowling(playerList: any[]) {
     return (playerList = [...playerList].sort((wickets1, wickets2) => {
       if (wickets1.wickets > wickets2.wickets) return -1;
       if (wickets1.wickets < wickets2.wickets) return 1;
-    }))[0].wickets;
+    }));
   }
 
   getPlayerMatchDetails() {
@@ -85,8 +84,8 @@ export class PlayerService {
               fifties: objs.filter(player => player.runs >= 50).length || 0,
               centuries: objs.filter(player => player.runs >= 100).length || 0,
               isOut: objs.filter(player => player.isOut).length || 0,
-              bestScore: this.getBestScore(objs) || 0,
-              bestBowling: this.getBestBowling(objs) || 0,
+              bestScore: this.getBestScore(objs)[0].runs || 0,
+              bestBowling: this.getBestBowling(objs)[0].wickets || 0,
               totalMatches: objs.length || 0,
               totalRuns: _.sumBy(objs, "runs") || 0,
               totalBalls: _.sumBy(objs, "balls") || 0,
@@ -136,5 +135,19 @@ export class PlayerService {
         });
       })
     );
+  }
+
+  getTopBatsmanList(playerList: any[]) {
+    return [...playerList].sort((value1, value2) => {
+      if (value1.totalRuns > value2.totalRuns) return -1;
+      if (value1.totalRuns < value2.totalRuns) return 1;
+    });
+  }
+
+  getTopBowlingList(playerList: any[]) {
+    return [...playerList].sort((value1, value2) => {
+      if (value1.totalWickets > value2.totalWickets) return -1;
+      if (value1.totalWickets < value2.totalWickets) return 1;
+    });
   }
 }
