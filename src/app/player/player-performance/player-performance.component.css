@@ -6,4 +6,6 @@ span {
   font-size: 0.75rem;
   font-style: italic;
   line-height: 1rem;
+  display: inline-block;
+  margin-right: 0.3rem;
 }

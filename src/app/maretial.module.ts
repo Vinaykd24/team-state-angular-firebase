@@ -14,6 +14,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { MatTableModule } from "@angular/material/table";
     MatCheckboxModule,
     MatExpansionModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     MatFormFieldModule,
@@ -48,7 +50,8 @@ import { MatTableModule } from "@angular/material/table";
     MatCheckboxModule,
     MatExpansionModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {}
