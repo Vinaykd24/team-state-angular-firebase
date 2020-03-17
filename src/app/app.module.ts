@@ -5,7 +5,7 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "./maretial.module";
 import { SignupComponent } from "./auth/signup/signup.component";
 import { LoginComponent } from "./auth/login/login.component";
@@ -36,7 +36,7 @@ import { AuthService } from "./auth/auth.service";
 import { TournamentStatsComponent } from "./match/tournament-stats/tournament-stats.component";
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
-import { PlayerPerformanceComponent } from './player/player-performance/player-performance.component';
+import { PlayerPerformanceComponent } from "./player/player-performance/player-performance.component";
 
 @NgModule({
   declarations: [
@@ -67,6 +67,7 @@ import { PlayerPerformanceComponent } from './player/player-performance/player-p
     AngularFirestoreModule.enablePersistence(),
     AngularFirestoreModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({

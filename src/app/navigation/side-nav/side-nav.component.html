@@ -23,9 +23,55 @@
     (click)="onClose()"
     *ngIf="isAuth$ | async"
   >
-    <mat-icon>fitness_center</mat-icon>
+    <mat-icon>assignment_ind</mat-icon>
     <span class="nav-caption">Players</span>
   </a>
+  <a
+    mat-list-item
+    routerLink="/matches"
+    (click)="onClose()"
+    *ngIf="isAuth$ | async"
+  >
+    <mat-icon>date_range</mat-icon>
+    <span class="nav-caption">Matches</span>
+  </a>
+  <a
+    mat-list-item
+    routerLink="/add-player"
+    (click)="onClose()"
+    *ngIf="isAuth$ | async"
+  >
+    <mat-icon>person_add</mat-icon>
+    <span class="nav-caption">Add Players</span>
+  </a>
+  <a
+    mat-list-item
+    routerLink="/add-match"
+    (click)="onClose()"
+    *ngIf="isAuth$ | async"
+  >
+    <mat-icon>event</mat-icon>
+    <span class="nav-caption">Add Match</span>
+  </a>
+  <a
+    mat-list-item
+    routerLink="/add-match-details"
+    (click)="onClose()"
+    *ngIf="isAuth$ | async"
+  >
+    <mat-icon>description</mat-icon>
+    <span class="nav-caption">Add Match Details</span>
+  </a>
+  <a
+    mat-list-item
+    routerLink="/tournaments"
+    (click)="onClose()"
+    *ngIf="isAuth$ | async"
+  >
+    <mat-icon>emoji_events</mat-icon>
+    <span class="nav-caption">Tournaments</span>
+  </a>
+
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth$ | async">
       <mat-icon>eject</mat-icon>

@@ -9,32 +9,35 @@
   </div>
   <div fxFlex fxLayout fxLayoutAlign="end">
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li>
+      <li *ngIf="!(isAuth$ | async)">
         <a routerLink="/signup">Signup</a>
       </li>
-      <li>
+      <li *ngIf="!(isAuth$ | async)">
         <a routerLink="/login">Login</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/players">Players</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/matches">Matches</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/tournaments">Tournaments</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/add-player">Add Player</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/add-match">Add Match</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/add-match-details">Add Match Details</a>
       </li>
-      <li>
+      <li *ngIf="isAuth$ | async">
         <a routerLink="/add-tournament">Add Tournament</a>
+      </li>
+      <li *ngIf="isAuth$ | async">
+        <a style="cursor: pointer" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>

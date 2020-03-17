@@ -17,6 +17,7 @@ import { PlayerDetailsComponent } from "./player/player-details/player-details.c
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
+  { path: "", component: PlayerComponent },
   { path: "players", component: PlayerComponent },
   { path: "add-player", component: AddPlayerComponent },
   { path: "matches", component: MatchComponent },
