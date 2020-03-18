@@ -21,6 +21,7 @@
   border-radius: 50%;
   position: relative;
   top: -50px;
+  border: 1px solid #ff8100;
 }
 
 .playerCard .playerTitle {
