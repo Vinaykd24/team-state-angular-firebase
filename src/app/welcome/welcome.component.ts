@@ -24,9 +24,7 @@ export class WelcomeComponent implements OnInit {
     this.fetchPlayers();
   }
 
-  ngOnInit(): void {
-    console.log(this.topBatsmanList);
-  }
+  ngOnInit(): void {}
 
   fetchPlayers() {
     this.playerService.getPlayerMatchDetails();
@@ -36,6 +34,5 @@ export class WelcomeComponent implements OnInit {
       .getTopBatsmanList(list)
       .slice(0, 5);
     this.topBowlerList = this.playerService.getTopBowlingList(list).slice(0, 5);
-    console.log(this.topBatsmanList);
   }
 }

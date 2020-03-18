@@ -109,6 +109,43 @@ export class PlayerService {
         }
       );
   }
+  getTourDetails() {
+    return zip(
+      this.afs.collection<MatchDetails>("matchDetails").valueChanges(),
+      this.afs
+        .collection<MatchDetails>("matchDetails", ref =>
+          ref.orderBy("wickets", "desc")
+        )
+        .valueChanges(),
+      this.afs.collection<Match>("matches").valueChanges()
+    ).pipe(
+      map(([matchDetails, topWkts, matches]) => {
+        const result = _(matchDetails)
+          .groupBy("id")
+          .map((objs, key) => ({
+            topRunsGetter: this.getBestScore(objs)[0],
+            topWktsGetter: topWkts[0],
+            topInng: _.orderBy(matches, ["homeTeamScore"], ["desc"])[0], // Use Lodash to sort array by 'name'
+            fifties: objs.filter(player => player.runs >= 50).length || 0,
+            centuries: objs.filter(player => player.runs >= 100).length || 0,
+            winPercentage: this.calculateWinningPercentage(matches) || 0,
+            totalRuns: _.sumBy(objs, "runs") || 0,
+            totalFours: _.sumBy(objs, "fours") || 0,
+            totalSixes: _.sumBy(objs, "sixes") || 0,
+            totalWickets: _.sumBy(objs, "wickets") || 0
+          }))
+          .value();
+        return result[0];
+      })
+    );
+  }
+
+  calculateWinningPercentage(matches: Match[]): string {
+    const totalMatches = matches.length;
+    const totalWins =
+      matches.filter(match => match.homeTeamWon === true).length || 0;
+    return ((totalWins / totalMatches) * 100).toFixed(2);
+  }
 
   getSinglePlayerDetails(id: string) {
     this.store.dispatch(new playerActions.GetSelectedPlayer(id));

@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center">
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <h3 class="title">Top Batsman</h3>
     <ul class="playerCardWrapper">
@@ -52,6 +52,8 @@
       </li>
     </ul>
   </div>
-</div>
+</div> -->
 
-<app-tournament-stats></app-tournament-stats>
+<div *ngIf="topBatsmanList">
+  <app-tournament-stats></app-tournament-stats>
+</div>
