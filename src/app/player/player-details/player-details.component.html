@@ -3,7 +3,7 @@
   fxLayoutAlign="space-between start"
   fxLayoutGap="5px"
   *ngIf="player"
-  class="pt-3 pb-3"
+  class="pt-3 pb-3 container"
 >
   <div fxFlex fxFlexFill>
     <div
@@ -97,13 +97,15 @@
     </div>
   </div>
 </div>
-<app-player-stats [player]="player"></app-player-stats>
-<div *ngIf="playerPerformance$ | async">
-  <h3>
-    Career
-    <span>Stats</span>
-  </h3>
-  <app-player-performance
-    [playerPerformance]="playerPerformanceDetails"
-  ></app-player-performance>
-</div>
+<section class="container">
+  <app-player-stats [player]="player"></app-player-stats>
+  <div *ngIf="playerPerformance$ | async">
+    <h3>
+      Career
+      <span>Stats</span>
+    </h3>
+    <app-player-performance
+      [playerPerformance]="playerPerformanceDetails"
+    ></app-player-performance>
+  </div>
+</section>

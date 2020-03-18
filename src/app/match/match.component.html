@@ -1,70 +1,71 @@
-<div
-  fxLayout="row"
-  fxFill
-  fxHide.sm="true"
-  fxHide.xs="true"
-  *ngFor="let match of matches$ | async"
-  (click)="clickMatchEventHandler(match)"
->
+<section class="container">
   <div
-    fxFill
-    fxFlex
     fxLayout="row"
-    fxLayoutAlign="none stretch"
-    fxLayoutGap="10px"
-    class="matchWrapper"
+    fxFill
+    fxHide.sm="true"
+    fxHide.xs="true"
+    *ngFor="let match of matches$ | async"
+    (click)="clickMatchEventHandler(match)"
   >
-    <div fxLayout="column" class="matchDate matchDateWrapper" fxFlex="12">
-      <span class="day">{{ match.matchDate.toDate() | date: "EEEE" }}</span>
-      <span class="date">{{ match.matchDate.toDate() | date: "dd" }}</span>
-      <span class="month">{{ match.matchDate.toDate() | date: "yyyy" }}</span>
-    </div>
     <div
-      fxLayout="column"
-      fxLayoutAlign="space-between start"
-      fxFlex="30"
-      class="u-skew matchDetails"
+      fxFill
+      fxFlex
+      fxLayout="row"
+      fxLayoutAlign="none stretch"
+      fxLayoutGap="10px"
+      class="matchWrapper"
     >
-      <div fxLayoutAlign="center start" class="tourName">
-        Tournament Name
+      <div fxLayout="column" class="matchDate matchDateWrapper" fxFlex="12">
+        <span class="day">{{ match.matchDate.toDate() | date: "EEEE" }}</span>
+        <span class="date">{{ match.matchDate.toDate() | date: "dd" }}</span>
+        <span class="month">{{ match.matchDate.toDate() | date: "yyyy" }}</span>
       </div>
       <div
-        fxFlex
         fxLayout="column"
-        fxLayoutAlign="center center"
-        class="matchResult u-unskew"
+        fxLayoutAlign="space-between start"
+        fxFlex="30"
+        class="u-skew matchDetails"
       >
-        <span>
-          <strong>
-            {{ match.result }}
-          </strong>
-        </span>
-        <span>{{ match.matchVenue }}</span>
-      </div>
-    </div>
-    <div fxLayout="column" fxFlex fxLayoutAlign="center center">
-      <div fxLayout="row" fxLayoutAlign="start center" fxFill="100%">
-        <div fxFlex class="homeTeamScore">
-          <p>TCS Pune</p>
-          <p>
-            <span>{{ match.homeTeamScore }}/{{ match.homeTeamWickets }}</span>
-          </p>
+        <div fxLayoutAlign="center start" class="tourName">
+          Tournament Name
         </div>
-        <div>V</div>
-        <div fxFlex class="awayTeamScore">
-          <p>{{ match.opTeam }}</p>
-          <p>{{ match.opTeamScore }}/{{ match.opTeamWickets }}</p>
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="matchResult u-unskew"
+        >
+          <span>
+            <strong>
+              {{ match.result }}
+            </strong>
+          </span>
+          <span>{{ match.matchVenue }}</span>
         </div>
       </div>
-    </div>
-    <div fxFlex="20%" fxLayoutAlign="end center" class="matchCenter">
-      <div class="matchEvent">
-        Score Card
+      <div fxLayout="column" fxFlex fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFill="100%">
+          <div fxFlex class="homeTeamScore">
+            <p>TCS Pune</p>
+            <p>
+              <span>{{ match.homeTeamScore }}/{{ match.homeTeamWickets }}</span>
+            </p>
+          </div>
+          <div>V</div>
+          <div fxFlex class="awayTeamScore">
+            <p>{{ match.opTeam }}</p>
+            <p>{{ match.opTeamScore }}/{{ match.opTeamWickets }}</p>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="20%" fxLayoutAlign="end center" class="matchCenter">
+        <div class="matchEvent">
+          Score Card
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+</section>
 <div
   fxLayout="column"
   fxLayoutAlign="space-between start"

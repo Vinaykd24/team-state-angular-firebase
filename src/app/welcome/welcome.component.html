@@ -54,6 +54,15 @@
   </div>
 </div> -->
 
-<div *ngIf="topBatsmanList">
-  <app-tournament-stats></app-tournament-stats>
-</div>
+<section class="wrapper">
+  <section class="title">
+    <p class="tracking-in-contract-bck">Welcome To TCS Pune Cricket Team</p>
+    <h3>Tournament Stats</h3>
+  </section>
+  <!-- <div class="team-overlay">
+    <i class="team-header-overlay__img"></i>
+  </div> -->
+  <div *ngIf="topBatsmanList" class="container">
+    <app-tournament-stats></app-tournament-stats>
+  </div>
+</section>
