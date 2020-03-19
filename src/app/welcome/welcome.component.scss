@@ -85,6 +85,91 @@
     bottom: -3rem;
   }
 }
+.teamInfo {
+  padding-top: 5rem;
+  article {
+    font-family: "Titillium Web", sans-serif;
+    h3 {
+      font-family: "Titillium Web", sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+}
+.history-tl-container {
+  line-height: 1.3em;
+  font-family: "Titillium Web", sans-serif;
+  width: 50%;
+  margin: auto;
+  display: block;
+  position: relative;
+  .trophyCount {
+    margin: 0 0.5rem;
+    display: inline-block;
+  }
+  mat-icon {
+    font-size: 1.3rem;
+    color: gold;
+  }
+  .aligned-with-icon {
+    position: absolute;
+    margin-left: 2px;
+    line-height: 1.35rem;
+  }
+}
+.history-tl-container ul.tl {
+  margin: 20px 0;
+  padding: 0;
+  display: inline-block;
+}
+.history-tl-container ul.tl li {
+  list-style: none;
+  margin: auto;
+  margin-left: 200px;
+  min-height: 50px;
+  /*background: rgba(255,255,0,0.1);*/
+  border-left: 1px dashed #86d6ff;
+  padding: 0 0 50px 30px;
+  position: relative;
+}
+.history-tl-container ul.tl li:last-child {
+  border-left: 0;
+}
+.history-tl-container ul.tl li::before {
+  position: absolute;
+  left: -10px;
+  top: -5px;
+  content: " ";
+  border: 8px solid rgba(255, 255, 255, 0.74);
+  border-radius: 500%;
+  background: #258cc7;
+  height: 20px;
+  width: 20px;
+  transition: all 500ms ease-in-out;
+}
+.history-tl-container ul.tl li:hover::before {
+  border-color: #258cc7;
+  transition: all 1000ms ease-in-out;
+}
+ul.tl li .item-title {
+  font-weight: 600;
+}
+ul.tl li .item-detail {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+}
+ul.tl li .timestamp {
+  color: #8d8d8d;
+  position: absolute;
+  width: 150px;
+  left: -50%;
+  text-align: right;
+  font-size: 12px;
+}
 h3.title {
   font-family: "Titillium Web", sans-serif;
   font-size: 2rem;
