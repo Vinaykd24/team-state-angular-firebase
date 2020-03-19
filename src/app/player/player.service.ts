@@ -4,6 +4,11 @@ import {
   AngularFirestoreDocument,
   AngularFirestore
 } from "@angular/fire/firestore";
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask
+} from "@angular/fire/storage";
 import { Player } from "../models/player.model";
 import { Observable, combineLatest, zip, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
@@ -26,11 +31,15 @@ export class PlayerService {
   player: Observable<Player>;
   playerMatchDetails$: Observable<TopPlayer[]>;
   private playerSubs: Subscription[] = [];
+  private basePath = "/images";
+  file: File;
+  url = "";
 
   constructor(
     private afs: AngularFirestore,
     private matchService: MatchService,
-    private store: Store<State>
+    private store: Store<State>,
+    private afStorage: AngularFireStorage
   ) {
     this.playersCollection = this.afs.collection("players");
   }
@@ -50,7 +59,41 @@ export class PlayerService {
   }
 
   newPlayer(player: Player) {
-    this.playersCollection.add(player);
+    const filePath = this.afStorage.ref("images");
+    const spaceRef = filePath.child(
+      player.playerFirstName + "_" + player.playerLastName
+    );
+    const path = spaceRef.fullPath;
+    const name = spaceRef.name;
+
+    // Points to 'images'
+    const imagesRef = spaceRef.parent;
+
+    this.playersCollection.add({ ...player, filePath });
+  }
+
+  handleFiles(event) {
+    this.file = event.target.files[0];
+  }
+
+  //method to upload file at firebase storage
+  async uploadFile(event) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      const filePath = `${this.basePath}/${this.file.name}`; //path at which image will be stored in the firebase storage
+      const snap = await this.afStorage.upload(filePath, this.file); //upload task
+      this.getUrl(snap);
+    } else {
+      alert("Please select an image");
+    }
+  }
+
+  private async getUrl(snap: firebase.storage.UploadTaskSnapshot) {
+    debugger;
+    const url = await snap.ref.getDownloadURL();
+    const a = snap.ref.fullPath;
+    this.url = url; //store the URL
+    console.log(this.url, a);
   }
 
   getBestScore(playerList: any[]) {

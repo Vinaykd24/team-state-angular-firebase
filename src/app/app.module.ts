@@ -37,7 +37,9 @@ import { TournamentStatsComponent } from "./match/tournament-stats/tournament-st
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerPerformanceComponent } from "./player/player-performance/player-performance.component";
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from "./welcome/welcome.component";
+import { AngularFireStorageModule } from "@angular/fire/storage";
+import "firebase/storage";
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,

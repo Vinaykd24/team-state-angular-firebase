@@ -5,6 +5,13 @@ import { PlayerService } from "../player.service";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { State } from "../store/player.reducer";
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask
+} from "@angular/fire/storage";
+import { Observable } from "rxjs";
+import { map, finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-add-player",
@@ -12,6 +19,12 @@ import { State } from "../store/player.reducer";
   styleUrls: ["./add-player.component.css"]
 })
 export class AddPlayerComponent implements OnInit {
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+  uploadState: Observable<string>;
+
   playerRoles = [
     { id: "1", value: "Batsman" },
     { id: "2", value: "Bowler" },
@@ -37,7 +50,8 @@ export class AddPlayerComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private router: Router,
-    private store: Store<State>
+    private store: Store<State>,
+    private afStorage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +62,32 @@ export class AddPlayerComponent implements OnInit {
   onSubmit({ value, valid }: { value: Player; valid: boolean }) {
     this.playerService.newPlayer(value);
     this.router.navigate(["/"]);
+  }
+
+  upload(event) {
+    this.playerService.uploadFile(event);
+    // create a random id
+    // const randomId = Math.random()
+    //   .toString(36)
+    //   .substring(2);
+    // // create a reference to the storage bucket location
+    // this.ref = this.afStorage.ref("/images/" + randomId);
+    // // the put method creates an AngularFireUploadTask
+    // // and kicks off the upload
+    // this.task = this.ref.put(event.target.files[0]);
+
+    // // AngularFireUploadTask provides observable
+    // // to get uploadProgress value
+    // // this.uploadProgress = this.task.snapshotChanges()
+    // // .pipe(map(s => (s.bytesTransferred / s.totalBytes) * 100));
+
+    // // observe upload progress
+    // this.uploadProgress = this.task.percentageChanges();
+    // // get notified when the download URL is available
+    // this.task
+    //   .snapshotChanges()
+    //   .pipe(finalize(() => (this.downloadURL = this.ref.getDownloadURL())))
+    //   .subscribe();
+    // this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
   }
 }

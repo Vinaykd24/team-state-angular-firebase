@@ -7,4 +7,5 @@ export interface Player {
   playerRole?: string;
   bat?: string;
   bowl?: string;
+  filePath?: any;
 }
