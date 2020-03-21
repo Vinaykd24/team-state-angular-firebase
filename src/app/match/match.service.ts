@@ -104,4 +104,10 @@ export class MatchService {
   newMatch(match: Match) {
     this.matchesCollection.add(match);
   }
+
+  newMatchDetails(matchDetails: MatchDetails[]) {
+    matchDetails.map(playerDetails => {
+      this.matchDetailsCollection.add(playerDetails);
+    });
+  }
 }

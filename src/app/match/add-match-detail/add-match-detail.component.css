@@ -11,3 +11,13 @@
 .example-headers-align .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
+
+.scoreHeader {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.scoreHeader,
+.scoreEntries {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e2e2e2;
+}
