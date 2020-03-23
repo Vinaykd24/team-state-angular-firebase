@@ -39,7 +39,7 @@ export class AddMatchComponent implements OnInit, OnDestroy {
 
   onSubmit({ value, valid }: { value: Match; valid: boolean }) {
     this.matchService.newMatch(value);
-    this.router.navigate(["/matchDetails"]);
+    this.router.navigate(["/add-match-details"]);
   }
   ngOnDestroy() {
     this.subcription.unsubscribe();

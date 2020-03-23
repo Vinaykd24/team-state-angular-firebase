@@ -22,7 +22,12 @@
         fxLayoutGap="5px"
       >
         <picture>
-          <img src="../../../assets/images/vinay.jpg" alt="" />
+          <img
+            src="../../assets/images/{{
+              player.player.playerFirstName.toLowerCase()
+            }}_{{ player.player.playerLastName.toLowerCase() }}.jpg"
+            alt=""
+          />
         </picture>
         <div fxFlex="60%" fxFlexFill>
           <h4>
@@ -63,9 +68,9 @@
           </div>
           <div fxFlex fxFlexFill>
             <div class="title">Date of Birth</div>
-            <div class="info">
-              <!-- {{ player.player.playerDob.toDate() | date: "mediumDate" }} -->
-              Jan, 1 1990
+            <div class="info" *ngIf="player.player.playerDob">
+              {{ player.player.playerDob.toDate() | date: "mediumDate" }}
+              <!-- Jan, 1 1990 -->
             </div>
           </div>
         </div>
@@ -79,19 +84,66 @@
       fxLayout="column"
       fxLayoutAlign="space-between start"
       fxLayoutGap="5px"
+      *ngIf="player"
+      class="playerInfo"
     >
       <div fxFlex fxFlexFill>
         <h4>
-          Vinay
-          <span>Kadam</span>
+          About
+          <span>{{ player.player.playerFirstName }}</span>
         </h4>
       </div>
       <div fxFlex fxFlexFill>
         <p>
-          A dream like every other young kid in India to represent the country
-          in the gentleman’s game. It is this vigor and fervor for the game of
-          cricket that has helped this extremely talented young boy from Delhi
-          to scale great heights at a very young age.
+          Hi, my name is {{ player.player.playerFirstName }}
+          {{ player.player.playerLastName }}. I was born on
+          {{ player.player.playerDob.toDate() | date: "mediumDate" }}, in
+          {{ player.player.bornIn }}. My cricketing journey began in
+          {{ player.player.bornIn }}. I became a part of the TCS Pune Cricket
+          Family in {{ player.player.joinedTcs }}.
+        </p>
+        <p>
+          <strong>
+            I've represented the following major teams:
+          </strong>
+        </p>
+        <p>
+          {{ player.player.playerdFor }}
+        </p>
+        <p>
+          Here is a little more about me...
+        </p>
+        <p>
+          <strong>
+            Favourite Movie:
+            <span>
+              {{ player.player.favMovie }}
+            </span>
+          </strong>
+        </p>
+        <p>
+          <strong>
+            Favourite Player:
+            <span>
+              {{ player.player.favPlayer }}
+            </span>
+          </strong>
+        </p>
+        <p>
+          <strong>
+            Favourite Holiday Destination:
+            <span>
+              {{ player.player.favDestination }}
+            </span>
+          </strong>
+        </p>
+        <p>
+          <strong>
+            Song/Artist:
+            <span>
+              {{ player.player.favSongArt }}
+            </span>
+          </strong>
         </p>
       </div>
     </div>

@@ -13,45 +13,99 @@
   </ng-container>
 
   <ng-container matColumnDef="runs">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Runs</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.runs | number }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >R</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.runs | number
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="balls">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Balls</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.balls | number }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >B</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.balls | number
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="fours">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>4s</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.fours }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >4s</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.fours
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="sixes">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>6s</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.sixes }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >6s</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.sixes
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="overs">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Overs</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.overs }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >O</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.overs
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="maidens">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Maidens</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.maidens }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >M</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.maidens
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="runsGiven">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Runs Given</mat-header-cell
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >RG</mat-header-cell
     >
-    <mat-cell *matCellDef="let element">{{ element.runsGiven }}</mat-cell>
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.runsGiven
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="wickets">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Wickets</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.wickets }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      layout-align="start center"
+      >W</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element" layout-align="start center">{{
+      element.wickets
+    }}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

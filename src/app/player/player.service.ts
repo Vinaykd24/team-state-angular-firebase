@@ -32,7 +32,9 @@ export class PlayerService {
     private matchService: MatchService,
     private store: Store<State>
   ) {
-    this.playersCollection = this.afs.collection("players");
+    this.playersCollection = this.afs.collection("players", ref =>
+      ref.orderBy("playerFirstName", "desc")
+    );
   }
 
   getPlayers(): Observable<Player[]> {
@@ -68,9 +70,6 @@ export class PlayerService {
   }
 
   getPlayerMatchDetails() {
-    const matchDetails$ = this.store.select(
-      fromMatchDetails.getAvailableMatchDetails
-    );
     zip(
       this.getPlayers(),
       this.afs.collection<MatchDetails>("matchDetails").valueChanges()

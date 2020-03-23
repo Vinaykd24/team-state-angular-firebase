@@ -272,3 +272,204 @@ h3.title {
     }
   }
 }
+
+// .teamWrapper {
+//   background-image: url(../../assets/images/tcs-celebration-1.jpg);
+//   background-repeat: no-repeat;
+//   background-position: 100% 0;
+//   background-size: auto 100%;
+//   margin-bottom: 30px;
+//   position: relative;
+//   .teamSection {
+//     background-position: 0 0;
+//     background-repeat: no-repeat;
+//     background-size: auto 100%;
+//     padding-top: 4.5rem;
+//     position: relative;
+//     z-index: 10;
+//     width: 45%;
+//     color: #fff;
+//     font-family: "Titillium Web", sans-serif;
+//     h3 {
+//       font-family: "Titillium Web", sans-serif;
+//       font-size: 3.2rem;
+//       line-height: 3.2rem;
+//       font-weight: 700;
+//       color: #fff;
+//     }
+//     img {
+//       width: 2rem;
+//     }
+//     h5 {
+//       font-family: "Titillium Web", sans-serif;
+//       font-size: 1.2rem;
+//       font-weight: 700;
+//       line-height: 1.5rem;
+//       padding-bottom: 0.7rem;
+//       margin: 0;
+//     }
+//   }
+//   .teamContainer {
+//     width: 100%;
+//     margin: 0 auto;
+//     padding: 0 1rem;
+//     position: relative;
+//     z-index: 10;
+//   }
+//   .team-header-overlay {
+//     background: #005ea0;
+//     bottom: 0;
+//     -webkit-clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+//     clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     width: 60%;
+//     z-index: 5;
+//     .team-header-overlay__img {
+//       content: "";
+//       display: inline-block;
+//       bottom: 0;
+//       left: 0;
+//       position: absolute;
+//       right: 0;
+//       top: 0;
+//       background-repeat: no-repeat;
+//       background-size: cover;
+//       z-index: 5;
+//       background-image: url(../../assets/images/tcs-celebration-2.jpg);
+//     }
+//   }
+//   .team-header-overlay__img::before {
+//     background: rgba(0, 94, 160, 0.8);
+//     content: "";
+//     display: inline-block;
+//     bottom: 0;
+//     left: 0;
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     z-index: 10;
+//   }
+//   .teamWrapper::after {
+//     background: linear-gradient(#aa9a7f 60%, #857458);
+//     bottom: 0;
+//     content: "";
+//     display: inline-block;
+//     -webkit-clip-path: polygon(0 0, 90.1% 0, 100% 100%, 0 100%);
+//     clip-path: polygon(0 0, 90.1% 0, 100% 100%, 0 100%);
+//     left: 0;
+//     position: absolute;
+//     width: 63%;
+//     top: 0;
+//   }
+// }
+.team-page-header {
+  background-image: url(../../assets/images/tcs-celebration-1.jpg);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: auto 100%;
+  margin-bottom: 30px;
+  position: relative;
+  color: #fff;
+  .teamSection {
+    h3 {
+      font-family: "Titillium Web", sans-serif;
+      font-size: 3.2rem;
+      line-height: 3.2rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    img {
+      width: 15rem;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+    h5 {
+      font-family: "Titillium Web", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.2rem;
+      padding-bottom: 0.7rem;
+      margin: 0;
+      text-transform: uppercase;
+      font-style: italic;
+      span {
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1rem;
+        display: block;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  .teamContainer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 10;
+    padding: 0 2rem;
+    ::before {
+      background: rgba(63, 80, 181, 0.25);
+      content: "";
+      display: inline-block;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+      -webkit-clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+    }
+  }
+  .team-header-overlay {
+    background: #005ea0;
+    bottom: 0;
+    -webkit-clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    z-index: 5;
+    .team-header-overlay__img {
+      content: "";
+      display: inline-block;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: 5;
+      background-image: url(../../assets/images/tcs-celebration-2.jpg);
+    }
+  }
+
+  .teamInfoListWrapper {
+    list-style: none;
+    padding-left: 0;
+    li {
+      position: relative;
+      padding-left: 4rem;
+      ::before {
+        content: "";
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        background-image: url(../../assets/images/trophy.png);
+        background-size: cover;
+        background-position: center;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}

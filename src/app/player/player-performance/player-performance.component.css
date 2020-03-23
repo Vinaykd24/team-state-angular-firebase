@@ -1,5 +1,6 @@
 .customWidthClass {
   flex: 0 0 20%;
+  text-align: left !important;
 }
 span {
   text-transform: uppercase;
@@ -8,4 +9,9 @@ span {
   line-height: 1rem;
   display: inline-block;
   margin-right: 0.3rem;
+  color: #fb6010;
+}
+mat-cell,
+mat-header-cell {
+  text-transform: uppercase;
 }

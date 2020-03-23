@@ -82,6 +82,87 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>FAVOURITE MOVIE</mat-label>
+            <input
+              matInput
+              #favMovieInput="ngModel"
+              ngModel
+              name="favMovie"
+              favMovieInput
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>FAVOURITE Player</mat-label>
+            <input
+              matInput
+              #favPlayerInput="ngModel"
+              ngModel
+              name="favPlayer"
+              favPlayerInput
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>FAVOURITE Song/Artist</mat-label>
+            <input
+              matInput
+              #favSongArtInput="ngModel"
+              ngModel
+              name="favSongArt"
+              favSongArtInput
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>FAVOURITE Holiday Destination</mat-label>
+            <input
+              matInput
+              #favDestinationInput="ngModel"
+              ngModel
+              name="favDestination"
+              favDestinationInput
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>I Playerd For</mat-label>
+            <input
+              matInput
+              #playerdForInput="ngModel"
+              ngModel
+              name="playerdFor"
+              playerdForInput
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>I'm Born In</mat-label>
+            <input
+              matInput
+              #bornInInput="ngModel"
+              ngModel
+              name="bornIn"
+              bornInInput
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Joined Team TCS"
+              [matDatepicker]="joinedPicker"
+              ngModel
+              name="joinedTcs"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="joinedPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #joinedPicker></mat-datepicker>
+          </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>About Player</mat-label>
             <textarea
