@@ -177,6 +177,92 @@
   <app-tournament-stats></app-tournament-stats>
 </section>
 
+<div fxLayout="row" fxLayoutAlign="space-around center" class="container mb-3">
+  <section fxFlex fxFlexFill class="topPlayerList">
+    <h4 class="mb-2">
+      Player
+      <span>
+        Batting Stats
+      </span>
+    </h4>
+    <ul>
+      <li *ngFor="let topBatsman of topBatsmanList">
+        <a
+          [routerLink]="['/playerDetails', topBatsman.player.id]"
+          [state]="topBatsman"
+        >
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <picture>
+              <img
+                src="../../assets/images/{{
+                  topBatsman.player.playerFirstName.toLowerCase()
+                }}_{{ topBatsman.player.playerLastName.toLowerCase() }}.jpg"
+                alt="topBatsman.player.playerFirstName"
+              />
+            </picture>
+            <div>
+              <h4>
+                {{ topBatsman.player.playerFirstName }}
+                <span>{{ topBatsman.player.playerLastName }}</span>
+              </h4>
+            </div>
+            <div>
+              <strong>{{ topBatsman.totalRuns }}</strong>
+            </div>
+            <div>
+              <span class="material-icons">
+                keyboard_arrow_right
+              </span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section fxFlex fxFlexFill class="topPlayerList">
+    <h4 class="mb-2">
+      Player
+      <span>
+        Bowling Stats
+      </span>
+    </h4>
+    <ul>
+      <li *ngFor="let topBowler of topBowlerList">
+        <a
+          [routerLink]="['/playerDetails', topBowler.player.id]"
+          [state]="topBowler"
+        >
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <picture>
+              <img
+                src="../../assets/images/{{
+                  topBowler.player.playerFirstName.toLowerCase()
+                }}_{{ topBowler.player.playerLastName.toLowerCase() }}.jpg"
+                alt="topBowler.player.playerFirstName"
+              />
+            </picture>
+            <div>
+              <h4>
+                {{ topBowler.player.playerFirstName }}
+                <span>{{ topBowler.player.playerLastName }}</span>
+              </h4>
+            </div>
+            <div>
+              <strong>{{ topBowler.totalWickets }}</strong>
+            </div>
+            <div>
+              <span class="material-icons">
+                keyboard_arrow_right
+              </span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
+
 <!-- <section class="teamInfo container">
   <article>
     <h3>

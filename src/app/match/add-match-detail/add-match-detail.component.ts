@@ -64,8 +64,6 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
           )
         )
         .value();
-
-      console.log(result);
       this.tempMatchDetails = result;
     }
   }
@@ -76,6 +74,9 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
 
   onSubmit({ value, valid }: { value: MatchDetails; valid: boolean }) {
     // value.matchId = this._matchId;
+    this.tempMatchDetails = this.tempMatchDetails.filter(
+      player => player.playerId !== undefined
+    );
     console.log(this.tempMatchDetails);
     this.matchService.newMatchDetails(this.tempMatchDetails);
     this.tempMatchDetails = [];

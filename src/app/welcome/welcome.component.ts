@@ -50,6 +50,7 @@ export class WelcomeComponent implements OnInit {
       .getTopBatsmanList(list)
       .slice(0, 5);
     this.topBowlerList = this.playerService.getTopBowlingList(list).slice(0, 5);
+    console.log(this.topBatsmanList, this.topBowlerList);
   }
   fetchMatches() {
     this.matchService.getMatches();

@@ -43,3 +43,14 @@
   font-weight: 600;
   line-height: 1rem;
 }
+
+.matchSummary h4 {
+  font-weight: 700;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-style: italic;
+}
+.matchSummary h4 span {
+  color: #ff8100;
+}
