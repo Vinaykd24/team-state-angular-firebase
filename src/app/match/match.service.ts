@@ -110,4 +110,28 @@ export class MatchService {
       this.matchDetailsCollection.add(playerDetails);
     });
   }
+
+  getMatchesByYear(year: string) {
+    let query: AngularFirestoreCollection;
+    if (year !== "All Years") {
+      let startDate = new Date(year + "-01-01");
+      let endDate = new Date(year + "-12-31");
+      query = this.afs.collection<Match>("matches", ref =>
+        ref.where("matchDate", ">", startDate).where("matchDate", "<", endDate)
+      );
+    } else {
+      query = this.matchesCollection;
+    }
+
+    this.matches = query.snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as Match;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+    return this.matches;
+  }
 }

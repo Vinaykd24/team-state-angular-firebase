@@ -103,7 +103,7 @@
   overflow: hidden;
   padding: 0 1rem;
   border-radius: 0.5rem;
-  margin-top: 1rem;
+  margin: 0.5rem 1rem;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -148,4 +148,24 @@
   padding: 0.65rem 0;
   border-top: 1px solid darkblue;
   margin-top: 0.5rem;
+}
+
+.matchFilter,
+mat-select {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  padding: 1rem 2rem;
+}
+.matchFilter p {
+  margin: 0;
+  padding: 0;
+}
+.noData {
+  background-image: url("../../assets/images/umpire_all.png");
+  background-repeat: no-repeat;
+  background-position: 10px 20px;
+  display: flex;
+  width: 16rem;
+  height: 15rem;
 }

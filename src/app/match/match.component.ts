@@ -16,6 +16,16 @@ import { Router } from "@angular/router";
 export class MatchComponent implements OnInit {
   matches$: Observable<Match[]>;
   matchDetails$: Observable<MatchDetails[]>;
+  yearList = [
+    { id: 1, year: "2020" },
+    { id: 2, year: "2019" },
+    { id: 3, year: "2018" },
+    { id: 4, year: "2017" },
+    { id: 5, year: "2016" },
+    { id: 6, year: "2015" },
+    { id: 7, year: "All Years" }
+  ];
+  selectedYear = "All Years";
 
   constructor(
     private store: Store<fromMatchReducer.State>,
@@ -42,5 +52,10 @@ export class MatchComponent implements OnInit {
   clickMatchEventHandler(match: Match) {
     // this.router.navigateByUrl(`/matchDetails/${matchId}`);
     this.router.navigate(["/matchDetails", match.id], { state: match });
+  }
+
+  onYearSelection() {
+    console.log(this.selectedYear);
+    this.matches$ = this.matchService.getMatchesByYear(this.selectedYear);
   }
 }
