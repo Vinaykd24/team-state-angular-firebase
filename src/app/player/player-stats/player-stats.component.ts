@@ -13,19 +13,47 @@ export class PlayerStatsComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  convertToBalls(overs: any) {
+    overs = overs.toFixed(2);
+    const _over = overs.toString().split(".")[0];
+    const _balls = overs.toString().split(".")[1];
+    return Number(_over) * 6 + Number(_balls);
+  }
+
   getBattingStrikeRate(player: TopPlayer) {
-    return ((player.totalRuns * 100) / player.totalBalls).toFixed(2) || 0;
+    if (player.totalRuns === 0) {
+      return "-";
+    } else {
+      return ((player.totalRuns * 100) / player.totalBalls).toFixed(2) || 0;
+    }
   }
   getBowlingStrikeRate(player: TopPlayer) {
-    return ((player.totalBalls * 6) / player.totalWickets).toFixed(2) || 0;
+    if (player.totalOvers === 0 && player.totalWickets === 0) {
+      return "-";
+    } else {
+      const convertOversToBalls = this.convertToBalls(player.totalOvers);
+      return (convertOversToBalls / player.totalWickets).toFixed(2) || 0;
+    }
   }
   getBattingAvg(player: TopPlayer) {
-    return (player.totalRuns / player.isOut).toFixed(2) || 0;
+    if (player.totalRuns === 0) {
+      return "-";
+    } else {
+      return (player.totalRuns / player.isOut).toFixed(2) || 0;
+    }
   }
   getBowlingAvg(player: TopPlayer) {
-    return (player.totalRunsGiven / player.totalWickets).toFixed(2) || 0;
+    if (player.totalRunsGiven === 0 && player.totalWickets === 0) {
+      return "-";
+    } else {
+      return (player.totalRunsGiven / player.totalWickets).toFixed(2) || 0;
+    }
   }
   getBowlingEco(player: TopPlayer) {
-    return (player.totalRunsGiven / player.totalOvers).toFixed(2) || 0;
+    if (player.totalRunsGiven === 0 && player.totalWickets === 0) {
+      return "-";
+    } else {
+      return (player.totalRunsGiven / player.totalOvers).toFixed(2) || 0;
+    }
   }
 }

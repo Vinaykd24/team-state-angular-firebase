@@ -25,6 +25,7 @@
       fxHide.xs="true"
       *ngFor="let match of matches$ | async"
       (click)="clickMatchEventHandler(match)"
+      [ngClass]="{ isHomeTeamLost: !match.homeTeamWon }"
     >
       <div
         fxFill
@@ -43,7 +44,7 @@
           <span class="day">{{ match.matchDate.toDate() | date: "EEEE" }}</span>
           <span class="date">{{ match.matchDate.toDate() | date: "dd" }}</span>
           <span class="month">{{
-            match.matchDate.toDate() | date: "yyyy"
+            match.matchDate.toDate() | date: "MMM yyyy"
           }}</span>
         </div>
         <div
@@ -53,7 +54,7 @@
           class="u-skew matchDetails"
         >
           <div fxLayoutAlign="center start" class="tourName">
-            Tournament Name
+            {{ match.matchVenue }}, Ground
           </div>
           <div
             fxFlex
