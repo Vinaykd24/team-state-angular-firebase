@@ -1,4 +1,184 @@
 <section *ngIf="data">
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout
+          fxLayoutAlign="space-between start"
+          class="large-card"
+        >
+          <div fxFlex>
+            <h4>HIGHEST SCORE</h4>
+            <p>
+              {{ topBatsman.player.playerFirstName }}
+              <span>{{ topBatsman.player.playerLastName }}</span>
+            </p>
+            <h3>{{ topBatsman.totalRuns }}</h3>
+          </div>
+          <div fxFlex class="m-0">
+            <picture>
+              <img
+                src="../../assets/images/{{
+                  topBatsman.player.playerFirstName.toLowerCase()
+                }}_{{ topBatsman.player.playerLastName.toLowerCase() }}.jpg"
+                alt=""
+              />
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout
+          fxLayoutAlign="space-between start"
+          class="large-card"
+        >
+          <div fxFlex>
+            <h4>HIGHEST Wickets</h4>
+            <p>
+              {{ topBowler.player.playerFirstName }}
+              <span>{{ topBowler.player.playerLastName }}</span>
+            </p>
+            <h3>{{ topBowler.totalWickets }}</h3>
+          </div>
+          <div fxFlex class="m-0">
+            <picture>
+              <img
+                src="../../assets/images/{{
+                  topBowler.player.playerFirstName.toLowerCase()
+                }}_{{ topBowler.player.playerLastName.toLowerCase() }}.jpg"
+                alt=""
+              />
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout
+          fxLayoutAlign="space-between start"
+          class="large-card"
+        >
+          <div fxFlex>
+            <h4>Most Sixes</h4>
+            <p>
+              {{ topSixHitter.player.playerFirstName }}
+              <span>{{ topSixHitter.player.playerLastName }}</span>
+            </p>
+            <h3>{{ topSixHitter.totalSixes }}</h3>
+          </div>
+          <div fxFlex class="m-0">
+            <picture>
+              <img
+                src="../../assets/images/{{
+                  topSixHitter.player.playerFirstName.toLowerCase()
+                }}_{{ topSixHitter.player.playerLastName.toLowerCase() }}.jpg"
+                alt=""
+              />
+            </picture>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1 justify-content-md-center">
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center strech"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>HIGHEST INNING total</h4>
+            <h3>
+              {{ data.topInng.homeTeamScore }}/{{
+                data.topInng.homeTeamWickets
+              }}
+            </h3>
+            <p>
+              <span>VS</span>
+              {{ data.topInng.opTeam }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>Total 50s/100s</h4>
+            <h3>{{ data.fifties }}/{{ data.centuries }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>Win Percentage</h4>
+            <h3>{{ data.winPercentage }}%</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>HIGHEST Runs in Match</h4>
+            <h3>{{ data.topRunsGetter.runs }}</h3>
+            <p>
+              <span>BY</span>
+              {{ data.topRunsGetter.playerFirstName }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>Total Number of sixes</h4>
+            <h3>{{ data.totalSixes }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 mb-1">
+        <div
+          fxFlex
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="small-card"
+        >
+          <div class="p-3">
+            <h4>Total Number of Wickets</h4>
+            <h3>{{ data.totalFours }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section *ngIf="data">
   <div
     fxLayout="row wrap"
     fxLayoutAlign="space-between strech"
@@ -169,4 +349,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

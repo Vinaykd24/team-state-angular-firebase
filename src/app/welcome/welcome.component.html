@@ -1,92 +1,3 @@
-<!-- <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxLayout="column" fxLayoutAlign="space-between center">
-    <h3 class="title">Top Batsman</h3>
-    <ul class="playerCardWrapper">
-      <li
-        class="playerCard topBatsman"
-        *ngFor="let topBatsman of topBatsmanList"
-      >
-        <div
-          fxFlex
-          fxFlexFill
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          class="playerInfo"
-        >
-          <picture>
-            <img src="../../assets/images/vinay.jpg" alt="" />
-          </picture>
-          <h4>
-            {{ topBatsman.player.playerFirstName }}
-            <span>{{ topBatsman.player.playerLastName }}</span>
-          </h4>
-          <h3>
-            {{ topBatsman.totalRuns }}
-          </h3>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="space-between center">
-    <h3 class="title">Top Bowler</h3>
-    <ul class="playerCardWrapper">
-      <li class="playerCard topBowler" *ngFor="let topBowler of topBowlerList">
-        <div
-          fxFlex
-          fxFlexFill
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          class="playerInfo"
-        >
-          <picture>
-            <img src="../../assets/images/vinay.jpg" alt="" />
-          </picture>
-          <h4>
-            {{ topBowler.player.playerFirstName }}
-            <span>{{ topBowler.player.playerLastName }}</span>
-          </h4>
-          <h3>
-            {{ topBowler.totalWickets }}
-          </h3>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div> -->
-
-<!-- <section class="wrapper">
-  <section class="title">
-    <p class="tracking-in-contract-bck">Welcome To TCS Pune Cricket Team</p>
-    <h3>Tournament Stats</h3>
-  </section>
-  <div *ngIf="topBatsmanList" class="container">
-    <app-tournament-stats></app-tournament-stats>
-  </div>
-</section> -->
-<!-- <section class="teamWrapper">
-  <div class="container">
-    <div class="teamSection">
-      <h3>TCS Pune Cricket Team</h3>
-      <div fxLayout fxLayoutAlign="start center" fxLayoutGap="5px">
-        <picture>
-          <img src="../../assets/images/trophy.png" alt="" />
-        </picture>
-        <h5>
-          15 Trophies
-        </h5>
-      </div>
-
-      <p>
-        TCS cricket team Pune have won 23 different titles so far in various IT/
-        Corporate tournaments in the last decade, It includes 15 championship
-        trophies & 8 Runner up trophies.
-      </p>
-    </div>
-  </div>
-  <div class="team-header-overlay">
-    <i class="team-header-overlay__img"></i>
-  </div>
-</section> -->
 <div fxLayout fxLayoutAlign="space-between center" class="team-page-header">
   <div fxFlex="60%" fxFlexFill class="teamContainer">
     <div class="teamSection">
@@ -183,7 +94,94 @@
   <app-tournament-stats></app-tournament-stats>
 </section>
 
-<div fxLayout="row" fxLayoutAlign="center center" class="container mb-3">
+<section class="container">
+  <div class="row justify-content-md-center mb-3">
+    <div class="col-md-6 topPlayerList mb-2">
+      <h4 class="mb-2">
+        Player
+        <span>
+          Batting Stats
+        </span>
+      </h4>
+      <ul>
+        <li *ngFor="let topBatsman of topBatsmanList">
+          <a
+            [routerLink]="['/playerDetails', topBatsman.player.id]"
+            [state]="topBatsman"
+          >
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <picture>
+                <img
+                  src="../../assets/images/{{
+                    topBatsman.player.playerFirstName.toLowerCase()
+                  }}_{{ topBatsman.player.playerLastName.toLowerCase() }}.jpg"
+                  alt="topBatsman.player.playerFirstName"
+                />
+              </picture>
+              <div>
+                <h4>
+                  {{ topBatsman.player.playerFirstName }}
+                  <span>{{ topBatsman.player.playerLastName }}</span>
+                </h4>
+              </div>
+              <div>
+                <strong>{{ topBatsman.totalRuns }}</strong>
+              </div>
+              <div>
+                <span class="material-icons">
+                  keyboard_arrow_right
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 topPlayerList">
+      <h4 class="mb-2">
+        Player
+        <span>
+          Bowling Stats
+        </span>
+      </h4>
+      <ul>
+        <li *ngFor="let topBowler of topBowlerList">
+          <a
+            [routerLink]="['/playerDetails', topBowler.player.id]"
+            [state]="topBowler"
+          >
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <picture>
+                <img
+                  src="../../assets/images/{{
+                    topBowler.player.playerFirstName.toLowerCase()
+                  }}_{{ topBowler.player.playerLastName.toLowerCase() }}.jpg"
+                  alt="topBowler.player.playerFirstName"
+                />
+              </picture>
+              <div>
+                <h4>
+                  {{ topBowler.player.playerFirstName }}
+                  <span>{{ topBowler.player.playerLastName }}</span>
+                </h4>
+              </div>
+              <div>
+                <strong>{{ topBowler.totalWickets }}</strong>
+              </div>
+              <div>
+                <span class="material-icons">
+                  keyboard_arrow_right
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- <div fxLayout="row" fxLayoutAlign="center center" class="container mb-3">
   <section
     fxFlex
     fxFlexFill
@@ -279,7 +277,7 @@
       </li>
     </ul>
   </section>
-</div>
+</div> -->
 
 <!-- <section class="teamInfo container">
   <article>
