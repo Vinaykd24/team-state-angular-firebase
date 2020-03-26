@@ -1,154 +1,112 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="space-between start"
-  fxLayoutGap="5px"
-  *ngIf="player"
-  class="pt-3 pb-3 container"
->
-  <div fxFlex="55%" fxFlexFill>
-    <div
-      fxFlex
-      fxFlexFill
-      fxLayout="column"
-      fxLayoutAlign="space-between start"
-      fxLayoutGap="5px"
-      class="player-info"
-    >
+<section class="container" *ngIf="player">
+  <div class="row">
+    <div class="col-md-7 player-info">
       <div
-        fxFlex
-        fxFlexFill
-        fxLayout="row"
-        fxLayoutAlign="space-between center"
-        fxLayoutGap="5px"
+        class="d-flex flex-row justify-content-between player-bio-info align-items-center"
       >
-        <picture>
+        <picture class="flex-fill">
           <img
             src="../../assets/images/{{
               player.player.playerFirstName.toLowerCase()
             }}_{{ player.player.playerLastName.toLowerCase() }}.jpg"
             alt=""
+            class="img-thumbnail img-fluid"
           />
         </picture>
-        <div fxFlex="60%" fxFlexFill>
-          <h4>
+        <div class="flex-fill">
+          <h3>
             {{ player.player.playerFirstName }}
-            <span>{{ player.player.playerLastName }}</span>
-          </h4>
+            <span class="display-4">{{ player.player.playerLastName }}</span>
+          </h3>
         </div>
       </div>
-      <div fxFlex fxFlexFill class="player-bio-info">
-        <div
-          fxFlex
-          fxFlexFill
-          fxLayout="row"
-          fxLayoutAlign="space-between center"
-          fxLayoutGap="5px"
-        >
-          <div fxFlex fxFlexFill>
-            <div class="title">ROLE</div>
-            <div class="info">{{ player.player.playerRole }}</div>
-          </div>
-          <div fxFlex fxFlexFill>
-            <div class="title">Bats</div>
-            <div class="info">{{ player.player.bat }}</div>
-          </div>
+      <div class="d-flex flex-row justify-content-between player-bio-info">
+        <div class="flex-fill">
+          <div class="h6 mb-0">ROLE</div>
+          <div class="h4 font-weight-bold">{{ player.player.playerRole }}</div>
+        </div>
+        <div class="flex-fill">
+          <div class="h6 mb-0">Bats</div>
+          <div class="h4 font-weight-bold">{{ player.player.bat }}</div>
         </div>
       </div>
-      <div fxFlex fxFlexFill class="player-bio-info">
-        <div
-          fxFlex
-          fxFlexFill
-          fxLayout="row"
-          fxLayoutAlign="space-between center"
-          fxLayoutGap="5px"
-        >
-          <div fxFlex fxFlexFill>
-            <div class="title">Bowls</div>
-            <div class="info">{{ player.player.bowl }}</div>
-          </div>
-          <div fxFlex fxFlexFill>
-            <div class="title">Date of Birth</div>
-            <div class="info" *ngIf="player.player.playerDob">
-              {{ player.player.playerDob.toDate() | date: "mediumDate" }}
-              <!-- Jan, 1 1990 -->
-            </div>
+      <div class="d-flex flex-row justify-content-between player-bio-info">
+        <div class="flex-fill">
+          <div class="h6 mb-0">Bowls</div>
+          <div class="h4 font-weight-bold">{{ player.player.bowl }}</div>
+        </div>
+        <div class="flex-fill">
+          <div class="h6 mb-0">Date of Birth</div>
+          <div class="h4 font-weight-bold" *ngIf="player.player.playerDob">
+            {{ player.player.playerDob.toDate() | date: "mediumDate" }}
+            <!-- Jan, 1 1990 -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div fxFlex fxFlexFill>
-    <div
-      fxFlex
-      fxFlexFill
-      fxLayout="column"
-      fxLayoutAlign="space-between start"
-      fxLayoutGap="5px"
-      *ngIf="player"
-      class="playerInfo"
-    >
-      <div fxFlex fxFlexFill>
+    <div class="col-md-5 playerInfo mt-3">
+      <div class="flex-fill">
         <h4>
           About
           <span>{{ player.player.playerFirstName }}</span>
         </h4>
-      </div>
-      <div fxFlex fxFlexFill>
-        <p>
-          Hi, my name is {{ player.player.playerFirstName }}
-          {{ player.player.playerLastName }}. I was born on
-          {{ player.player.playerDob.toDate() | date: "mediumDate" }}, in
-          {{ player.player.bornIn }}. My cricketing journey began in
-          {{ player.player.bornIn }}. I became a part of the TCS Pune Cricket
-          Family in {{ player.player.joinedTcs }}.
-        </p>
-        <p>
-          <strong>
-            I've represented the following major teams:
-          </strong>
-        </p>
-        <p>
-          {{ player.player.playerdFor }}
-        </p>
-        <p>
-          Here is a little more about me...
-        </p>
-        <p>
-          <strong>
-            Favourite Movie:
-            <span>
-              {{ player.player.favMovie }}
-            </span>
-          </strong>
-        </p>
-        <p>
-          <strong>
-            Favourite Player:
-            <span>
-              {{ player.player.favPlayer }}
-            </span>
-          </strong>
-        </p>
-        <p>
-          <strong>
-            Favourite Holiday Destination:
-            <span>
-              {{ player.player.favDestination }}
-            </span>
-          </strong>
-        </p>
-        <p>
-          <strong>
-            Song/Artist:
-            <span>
-              {{ player.player.favSongArt }}
-            </span>
-          </strong>
-        </p>
+        <div class="flex-fill">
+          <p>
+            Hi, my name is {{ player.player.playerFirstName }}
+            {{ player.player.playerLastName }}. I was born on
+            {{ player.player.playerDob.toDate() | date: "mediumDate" }}, in
+            {{ player.player.bornIn }}. My cricketing journey began in
+            {{ player.player.bornIn }}. I became a part of the TCS Pune Cricket
+            Family in {{ player.player.joinedTcs }}.
+          </p>
+          <p>
+            <strong>
+              I've represented the following major teams:
+            </strong>
+          </p>
+          <p>
+            {{ player.player.playerdFor }}
+          </p>
+          <p>
+            Here is a little more about me...
+          </p>
+          <p>
+            <strong>
+              Favourite Movie:
+              <span>
+                {{ player.player.favMovie }}
+              </span>
+            </strong>
+          </p>
+          <p>
+            <strong>
+              Favourite Player:
+              <span>
+                {{ player.player.favPlayer }}
+              </span>
+            </strong>
+          </p>
+          <p>
+            <strong>
+              Favourite Holiday Destination:
+              <span>
+                {{ player.player.favDestination }}
+              </span>
+            </strong>
+          </p>
+          <p>
+            <strong>
+              Song/Artist:
+              <span>
+                {{ player.player.favSongArt }}
+              </span>
+            </strong>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 <section class="container">
   <app-player-stats [player]="player"></app-player-stats>
   <div *ngIf="playerPerformance$ | async">

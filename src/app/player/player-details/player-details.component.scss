@@ -8,15 +8,16 @@
     height: 10rem;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   }
-  h4 {
+  h3 {
     font-family: "Titillium Web", sans-serif;
-    font-size: 2rem;
-    line-height: 2rem;
+    // font-size: 2rem;
+    // line-height: 2rem;
     text-transform: uppercase;
     font-style: italic;
+    margin: 0;
     span {
       font-weight: 700;
-      font-size: 3rem;
+      // font-size: 3rem;
       line-height: 2.5rem;
       display: block;
       color: #fb6010;
@@ -27,21 +28,21 @@
     border-top: 1px solid #e2e2e2;
     padding: 1rem 0;
     .title {
-      font-size: 0.85rem;
-      line-height: 1.5rem;
+      // font-size: 0.85rem;
+      // line-height: 1.5rem;
     }
     .info {
-      font-size: 2rem;
-      line-height: 2rem;
-      font-weight: 700;
+      // font-size: 2rem;
+      // line-height: 2rem;
+      // font-weight: 700;
     }
   }
 }
 h3 {
   font-family: "Titillium Web", sans-serif;
-  font-weight: 400 !important;
-  font-size: 2.2rem;
-  line-height: 2.2rem;
+  // font-weight: 400 !important;
+  // font-size: 2.2rem;
+  // line-height: 2.2rem;
   span {
     font-weight: 700;
   }

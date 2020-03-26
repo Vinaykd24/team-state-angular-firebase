@@ -1,50 +1,43 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="container">
-  <div
-    fxLayout="column"
-    fxLayoutAlign="space-between center"
-    class="playerCard"
-    *ngFor="let player of players$ | async"
-    (click)="clickPlayerEventHandler(player)"
-  >
-    <picture>
-      <img
-        class="avatar"
-        src="../../assets/images/{{
-          player.player.playerFirstName.toLowerCase()
-        }}_{{ player.player.playerLastName.toLowerCase() }}.jpg"
-        alt="playerFirstName"
-      />
-    </picture>
-    <div class="playerTitle">
-      <h3>
-        {{ player.player.playerFirstName }}
-        <span>{{ player.player.playerLastName }}</span>
-      </h3>
-    </div>
+<div class="container">
+  <div class="row justify-content-md-center">
     <div
-      class="scoreWrapper"
-      fxFlex
-      fxFill
-      fxLayout
-      fxLayoutAlign="space-between center"
+      class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+      *ngFor="let player of players$ | async"
+      (click)="clickPlayerEventHandler(player)"
     >
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>{{ player.totalMatches }}</strong>
-        <span>M</span>
-      </div>
-      <div
-        class="divider"
-        fxFlex
-        fxLayout="column"
-        fxFill
-        fxLayoutAlign="space-between center"
-      >
-        <strong>{{ player.totalRuns }}</strong>
-        <span>R</span>
-      </div>
-      <div fxFlex fxLayout="column" fxFill fxLayoutAlign="space-between center">
-        <strong>{{ player.totalWickets }}</strong>
-        <span>W</span>
+      <div class="card text-center shadow-sm playerCard">
+        <div class="card-body">
+          <img
+            src="../../assets/images/vinay.jpg"
+            alt=""
+            class="img-thumbnail avatar"
+          />
+          <div class="playerTitle">
+            <h3>
+              {{ player.player.playerFirstName }}
+              <span>{{ player.player.playerLastName }}</span>
+            </h3>
+          </div>
+          <strong
+            class="card-text d-block flex-fill mb-3 text-uppercase titillium"
+          >
+            {{ player.player.playerRole }}
+          </strong>
+          <div class="d-flex flex-row justify-content-center scoreWrapper pb-2">
+            <div class="d-flex flex-column flex-fill">
+              <strong>{{ player.totalMatches }}</strong>
+              <span>M</span>
+            </div>
+            <div class="d-flex flex-column flex-fill divider">
+              <strong>{{ player.totalRuns }}</strong>
+              <span>R</span>
+            </div>
+            <div class="d-flex flex-column flex-fill">
+              <strong>{{ player.totalWickets }}</strong>
+              <span>W</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
