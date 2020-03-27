@@ -81,3 +81,14 @@ p {
   margin: 0 auto;
   background: rgba(0, 0, 0, 0.2);
 }
+
+.fixHeight {
+  min-height: 6.5rem;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 959px) {
+  .bowlingStats::before {
+    content: "";
+    display: none;
+  }
+}
