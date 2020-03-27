@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 
@@ -11,12 +11,18 @@ import * as fromRoot from "../app.reducer";
 import * as UI from "../shared/ui.actions";
 import * as Auth from "./store/auth.actions";
 import { PlayerService } from "../player/player.service";
+import {
+  AngularFirestoreDocument,
+  AngularFirestore
+} from "@angular/fire/firestore";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
     private playerService: PlayerService,
     private uiService: UiService,
     private store: Store<fromRoot.State>
@@ -58,6 +64,7 @@ export class AuthService {
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         // this.uiService.loadingStateChanged.next(false);
+        // this.updateUserData(result.user);
         this.store.dispatch(new UI.StopLoading());
       })
       .catch(error => {
@@ -65,6 +72,53 @@ export class AuthService {
         this.store.dispatch(new UI.StopLoading());
         this.uiService.showSnackbar(error.message, null, 3000);
       });
+  }
+
+  private updateUserData(user) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    userRef
+      .valueChanges()
+      .subscribe(data => this.store.dispatch(new Auth.GetUserRole(data.role)));
+    const data: User = {
+      userId: user.uid,
+      email: user.email,
+      role: "subscriber"
+      // roles: {
+      //   subscriber: true
+      // }
+    };
+    return userRef.set(data, { merge: true });
+  }
+
+  ///// Role-based Authorization //////
+
+  canRead(user: User): boolean {
+    const allowed = ["admin", "editor", "subscriber"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canEdit(user: User): boolean {
+    const allowed = ["admin", "editor"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canDelete(user: User): boolean {
+    const allowed = ["admin"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  // determines if user has matching role
+  private checkAuthorization(user: User, allowedRoles: string[]): boolean {
+    if (!user) return false;
+    for (const role of allowedRoles) {
+      if (user.roles[role]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   logout() {

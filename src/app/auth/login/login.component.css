@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+
+.loginWrapper {
+  background-image: url("../../../assets/images/tcs-celebration-2.jpg");
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  background-size: cover;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.loginForm {
+  background: #e2e2e2;
+  /* min-height: 10rem; */
+  padding: 1rem;
+  font-family: "Titillium Web", sans-serif;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-family: "Titillium Web", sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 600;
+  margin: 1rem;
+  text-align: center;
+}
