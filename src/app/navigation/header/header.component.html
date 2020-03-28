@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <div>
+  <div fxHide.lg="true" fxHide.md="true">
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -7,7 +7,7 @@
   <div>
     <a routerLink="/">CRiCzy</a>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="end">
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.sm="true" fxHide.xs="true">
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
       <li *ngIf="!(isAuth$ | async)">
         <a routerLink="/signup">Signup</a>

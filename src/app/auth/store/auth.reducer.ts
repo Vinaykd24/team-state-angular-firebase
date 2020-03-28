@@ -9,12 +9,12 @@ import {
 
 export interface State {
   isAuthenticated: boolean;
-  userRole: string;
+  // userRole: string;
 }
 
 const initialState: State = {
-  isAuthenticated: false,
-  userRole: ""
+  isAuthenticated: false
+  // userRole: ""
 };
 
 export function authReducer(state = initialState, action: AuthActions) {
@@ -27,11 +27,11 @@ export function authReducer(state = initialState, action: AuthActions) {
       return {
         isAuthenticated: false
       };
-    case GET_USER_ROLE:
-      return {
-        ...state,
-        userRole: action.payload
-      };
+    // case GET_USER_ROLE:
+    //   return {
+    //     ...state,
+    //     userRole: action.payload
+    //   };
     default: {
       return state;
     }

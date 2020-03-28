@@ -79,9 +79,9 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    userRef
-      .valueChanges()
-      .subscribe(data => this.store.dispatch(new Auth.GetUserRole(data.role)));
+    // userRef
+    //   .valueChanges()
+    //   .subscribe(data => this.store.dispatch(new Auth.GetUserRole(data.role)));
     const data: User = {
       userId: user.uid,
       email: user.email,
