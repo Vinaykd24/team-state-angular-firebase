@@ -8,8 +8,12 @@
       <div class="card text-center shadow-sm playerCard">
         <div class="card-body">
           <img
-            src="../../assets/images/vinay.jpg"
-            alt=""
+            src="../../assets/images/{{
+              player.player.playerFirstName.toLowerCase()
+            }}_{{ player.player.playerLastName.toLowerCase() }}.jpg"
+            alt="{{ player.player.playerFirstName }} {{
+              player.player.playerLastName
+            }}"
             class="img-thumbnail avatar"
           />
           <div class="playerTitle">
