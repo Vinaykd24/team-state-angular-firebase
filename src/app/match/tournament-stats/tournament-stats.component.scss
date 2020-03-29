@@ -5,7 +5,8 @@
   font-family: "Titillium Web", sans-serif;
   text-transform: uppercase;
   padding: 1rem;
-  background: linear-gradient(243deg, #3f51b5, #143e9f);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3))
+    #140a47;
   color: #ffffff;
   border-radius: 0.3rem;
   h4 {
@@ -47,7 +48,8 @@
   font-family: "Titillium Web", sans-serif;
   text-transform: uppercase;
   padding: 1rem;
-  background: linear-gradient(243deg, #082f9f, #143e9f);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3))
+    #140a47;
   color: #ffffff;
   border-radius: 0.3rem;
   h4,

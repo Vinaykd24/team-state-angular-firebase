@@ -8,6 +8,7 @@
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 1rem;
+  background: #fff;
 }
 .matchWrapper:hover {
   margin-left: -1.6rem;
@@ -86,7 +87,7 @@
   top: 0;
   right: -3rem;
   bottom: 0;
-  background-color: #0a4199;
+  background-color: #140a47;
   transform: skew(-13deg);
   z-index: 0;
 }

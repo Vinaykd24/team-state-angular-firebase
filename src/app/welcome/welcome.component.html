@@ -1,9 +1,15 @@
-<div
+<!-- <div
   fxLayout
   fxLayoutAlign="space-between center"
   class="team-page-header"
   fxHide.sm="true"
   fxHide.xs="true"
+> -->
+<div
+  fxLayout
+  fxLayoutAlign="space-between center"
+  class="team-page-header"
+  fxHide="true"
 >
   <div fxFlex="60%" fxFlexFill class="teamContainer">
     <div class="teamSection">
@@ -87,6 +93,41 @@
   <div fxFlex="40%" fxFlexFill>
     <div class="team-header-overlay">
       <i class="team-header-overlay__img"></i>
+    </div>
+  </div>
+</div>
+
+<!-- <div
+  class="container-fluid"
+  fxHide.md="true"
+  fxHide.lg="true"
+  fxShow.sm="true"
+  fxShow.xs="true"
+> -->
+<div class="container-fluid">
+  <div class="row justify-content-md-center mobileWrapper">
+    <div
+      class="d-flex flex-column justify-content-between flex-fill text-center"
+    >
+      <h1 class="m-3">Welcome to TCS Pune Cricket Team!</h1>
+      <div class="flex-fill">
+        <h4>
+          15 Times Champions
+        </h4>
+        <div class="d-flex flex-fill">
+          <picture class="flex-fill">
+            <img
+              src="../../assets/images/trophy2.png"
+              alt=""
+              ngClass="w-25, img-fluid, p-2"
+              [ngClass.xs]="{ 'w-25': false, 'w-50': true }"
+            />
+          </picture>
+        </div>
+        <h4>
+          8 Times Runners-up
+        </h4>
+      </div>
     </div>
   </div>
 </div>

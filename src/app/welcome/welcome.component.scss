@@ -414,7 +414,7 @@ h3.title {
     z-index: 10;
     padding: 0 2rem;
     ::before {
-      background: rgba(63, 80, 181, 0.25);
+      background: rgba(20, 10, 71, 0.12);
       content: "";
       display: inline-block;
       bottom: 0;
@@ -484,7 +484,7 @@ h3.title {
     text-align: left;
     line-height: 1rem;
     font-style: italic;
-    color: rgba(0, 0, 0, 0.5);
+    color: #b88f4f;
     span {
       font-size: 1.5rem;
       line-height: 1.5rem;
@@ -521,7 +521,7 @@ h3.title {
         font-size: 2rem;
         line-height: 2rem;
         font-weight: 700;
-        color: rgba(0, 0, 0, 0.5);
+        color: #140a47;
       }
       :hover {
         box-shadow: none;
@@ -546,6 +546,33 @@ h3.title {
   font-style: italic;
   color: #f27133;
   span {
-    color: rgba(0, 0, 0, 0.2);
+    color: #b88f4f;
   }
+}
+.mobileWrapper {
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3))
+    #140a47;
+  color: #b88f4f;
+  padding: 1rem;
+  h1,
+  h4 {
+    font-family: "Titillium Web", sans-serif;
+    margin: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    text-align: center;
+  }
+}
+.element {
+  shape-outside: circle(50%);
+  width: 300px;
+  height: 300px;
+  float: left;
+  margin: 30px;
+}
+p {
+  padding-top: 20px;
+  width: 80%;
 }

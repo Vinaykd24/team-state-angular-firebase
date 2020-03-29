@@ -1,4 +1,4 @@
-<section class="container" *ngIf="player">
+<section class="container bg-white" *ngIf="player">
   <div class="row">
     <div class="col-md-7 player-info">
       <div
@@ -107,7 +107,7 @@
     </div>
   </div>
 </section>
-<section class="container">
+<section class="container bg-white">
   <app-player-stats [player]="player"></app-player-stats>
   <div *ngIf="playerPerformance$ | async">
     <h3>

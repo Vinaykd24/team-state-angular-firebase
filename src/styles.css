@@ -18,3 +18,11 @@ body {
   font-size: 1rem;
   line-height: 1rem;
 }
+.mat-toolbar.mat-primary {
+  background: #140a47 !important;
+  color: #fff;
+}
+
+.mat-drawer-container {
+  background-color: #ebe6df;
+}

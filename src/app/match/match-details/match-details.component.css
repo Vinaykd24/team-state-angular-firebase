@@ -2,14 +2,16 @@
 .matchDetails {
   font-family: "Titillium Web", sans-serif;
   text-transform: uppercase;
+  background: #fff;
 }
 .matchDetails .matchResult h4,
 .matchDetails .scoreDetails h3 {
   font-weight: 700;
   font-family: "Titillium Web", sans-serif;
   font-size: 2rem;
-  font-style: italic;
+  /* font-style: italic; */
   line-height: 2rem;
+  color: #140a47;
 }
 
 .matchDetails .scoreDetails {
@@ -50,7 +52,12 @@
   font-size: 2rem;
   text-transform: uppercase;
   font-style: italic;
+  color: #b88f4f;
 }
 .matchSummary h4 span {
   color: #ff8100;
+}
+.score {
+  color: #0000ee;
+  padding: 0.5rem;
 }
