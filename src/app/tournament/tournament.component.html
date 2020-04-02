@@ -1,1 +1,77 @@
-<app-tournament-stats></app-tournament-stats>
+<!-- <app-tournament-stats></app-tournament-stats> -->
+<div class="container bg-white">
+  <div class="flex-column justify-content-between mb-2">
+    <div
+      class="justify-content-center no-gutters row"
+      [ngClass.lg]="{
+        'justify-content-center': false,
+        'justify-content-between': true
+      }"
+    >
+      <div class="border col-xs-12 col-sm-9 col-xl-6 rounded mb-3">
+        <div class="d-flex flex-column align-items-center d-flex flex-column">
+          <h2
+            class="bg-danger mb-0 p-2 text-center text-uppercase text-white w-100"
+          >
+            Tournament Name
+          </h2>
+          <div
+            class="d-flex flex-row"
+            [ngClass.xs]="{
+              'flex-row': false,
+              'flex-column': true,
+              'w-100': true
+            }"
+          >
+            <div
+              class="d-flex flex-column playerDtlsMobile mobileDivider align-items-center"
+              [ngClass.xs]="{
+                mobileDivider: false,
+                mobileDividerHor: true,
+                'mr-0': true,
+                'mb-3': true,
+                'w-100': true
+              }"
+            >
+              <h4 class="mb-2">Highest Runs Getter</h4>
+              <picture class="mb-2">
+                <img
+                  src="../../assets/images/vinay.jpg"
+                  alt=""
+                  class="img-fluid rounded-circle"
+                  style="width: 4rem; height: 4rem;"
+                />
+              </picture>
+              <h3>
+                Player Frist Name
+                <span class="d-block small text-center">Player Last Name</span>
+              </h3>
+            </div>
+            <div
+              class="d-flex flex-column playerDtlsMobile align-items-center"
+              [ngClass.xs]="{
+                'mr-0': true,
+                'mb-3': true,
+                'w-100': true
+              }"
+            >
+              <h4 class="mb-2">Highest Wickets Taker</h4>
+              <picture class="mb-2">
+                <img
+                  src="../../assets/images/vinay.jpg"
+                  alt=""
+                  class="img-fluid rounded-circle"
+                  style="width: 4rem; height: 4rem;"
+                />
+              </picture>
+              <h3>
+                Player Frist Name
+                <span class="d-block small text-center">Player Last Name</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

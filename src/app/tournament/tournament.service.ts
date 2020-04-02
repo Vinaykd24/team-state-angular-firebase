@@ -4,10 +4,20 @@ import {
   AngularFirestoreDocument,
   AngularFirestore
 } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { Observable, zip, combineLatest } from "rxjs";
+import * as _ from "lodash";
 import { Tournament } from "../models/tournament.model";
 import "firebase/firestore";
 import { map } from "rxjs/operators";
+import { MatchService } from "../match/match.service";
+import { Store } from "@ngrx/store";
+import { State } from "../app.reducer";
+import * as fromMatchDetailsReducer from "../match/store/match-details.reducer";
+import * as fromMatchReducer from "../match/store/match.reducer";
+import * as fromPlayerReducer from "../player/store/player.reducer";
+import { MatchDetails } from "../models/match-details.model";
+import { Match } from "../models/match.model";
+import { PlayerService } from "../player/player.service";
 
 @Injectable({
   providedIn: "root"
@@ -18,7 +28,12 @@ export class TournamentService {
   tournaments: Observable<Tournament[]>;
   tournament: Observable<Tournament>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    private matchService: MatchService,
+    private playerService: PlayerService,
+    private store: Store<State>
+  ) {
     this.tournamentsCollection = this.afs.collection("tournaments");
   }
 
@@ -34,6 +49,28 @@ export class TournamentService {
       )
     );
     return this.tournaments;
+  }
+
+  getTournamentDetails(id: string) {
+    return zip(
+      this.store.select(fromMatchReducer.getAvailableMatches),
+      this.store.select(fromMatchDetailsReducer.getAvailableMatchDetails)
+    ).pipe(
+      map(([matches, matchDetails]) => {
+        let loadedMatches = matches
+          .slice()
+          .filter(match => match.tourId === id);
+        return loadedMatches.map(data => {
+          let tourMatches = matchDetails.filter(
+            _data => _data.matchId === data.id
+          );
+          return {
+            ...data,
+            tour: matchDetails.filter(_data => _data.matchId === data.id)
+          };
+        });
+      })
+    );
   }
 
   newTournament(tournament: Tournament) {

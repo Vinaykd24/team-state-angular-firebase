@@ -16,7 +16,8 @@ export class AddTournamentComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit({ value, valid }: { value: Tournament; valid: boolean }) {
+    value.isWon = value.isWon !== true ? false : true;
     this.tournamentService.newTournament(value);
-    this.router.navigate(["/"]);
+    this.router.navigate(["/add-match"]);
   }
 }

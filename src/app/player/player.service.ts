@@ -17,6 +17,7 @@ import { State } from "./store/player.reducer";
 import * as playerActions from "./store/player.actions";
 import * as fromPlayerReducer from "./store/player.reducer";
 import * as fromMatchDetails from "../match/store/match-details.reducer";
+import * as fromMatchReducer from "../match/store/match.reducer";
 import { Match } from "../models/match.model";
 @Injectable()
 export class PlayerService {
@@ -107,6 +108,88 @@ export class PlayerService {
           console.log("Error while loading the players");
         }
       );
+  }
+  getTournamentDetails(id: string) {
+    return zip(
+      this.store.select(fromMatchReducer.getAvailableMatches),
+      this.store.select(fromMatchDetails.getAvailableMatchDetails)
+    ).pipe(
+      map(([matches, matchDetails]) => {
+        let tourMatches = [];
+        let loadedMatches = matches
+          .slice()
+          .filter(match => match.tourId === id);
+        const merge = _.map(loadedMatches, "id");
+        for (let i = 0; i < matchDetails.length; i++) {
+          if (merge.includes(matchDetails[i].matchId)) {
+            tourMatches.push(matchDetails[i]);
+          }
+        }
+        // return tourMatches;
+        const result = _(tourMatches)
+          .groupBy("playerId")
+          .map((objs, key) => ({
+            playerFirstName: objs[0].playerFirstName,
+            playerLastName: objs[0].playerLastName,
+            playerId: objs[0].playerId,
+            fifties: objs.filter(player => player.runs >= 50).length || 0,
+            centuries: objs.filter(player => player.runs >= 100).length || 0,
+            isOut: objs.filter(player => player.isOut).length || 0,
+            bestScore: this.getBestScore(objs)[0].runs || 0,
+            bestBowling: this.getBestBowling(objs)[0].wickets || 0,
+            totalMatches: objs.length || 0,
+            totalRuns: _.sumBy(objs, "runs") || 0,
+            totalBalls: _.sumBy(objs, "balls") || 0,
+            totalFours: _.sumBy(objs, "fours") || 0,
+            totalSixes: _.sumBy(objs, "sixes") || 0,
+            totalOvers: _.sumBy(objs, "overs") || 0,
+            totalMaidens: _.sumBy(objs, "maidens") || 0,
+            totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
+            totalWickets: _.sumBy(objs, "wickets") || 0
+          }))
+          .value();
+        return {
+          players: result,
+          matches: loadedMatches,
+          topRunsGetter: _.orderBy([...result], "totalRuns", "desc"),
+          topWktsGetter: _.orderBy([...result], "totalWickets", "desc"),
+          totalSixes: _.sumBy([...result], "totalSixes") || 0,
+          totalFours: _.sumBy([...result], "totalFours") || 0
+        };
+      })
+    );
+  }
+
+  getPlayerMatchDetailsByTour(id: string) {
+    zip(
+      this.getPlayers(),
+      this.afs.collection<MatchDetails>("matchDetails").valueChanges(),
+      this.store.select(fromMatchReducer.getAvailableMatches)
+    ).pipe(
+      map(([players, matchDetails, matches]) => {
+        const result = _(matchDetails)
+          .groupBy("playerId")
+          .map((objs, key) => ({
+            player: players.find(player => player.id === key),
+            fifties: objs.filter(player => player.runs >= 50).length || 0,
+            centuries: objs.filter(player => player.runs >= 100).length || 0,
+            isOut: objs.filter(player => player.isOut).length || 0,
+            bestScore: this.getBestScore(objs)[0].runs || 0,
+            bestBowling: this.getBestBowling(objs)[0].wickets || 0,
+            totalMatches: objs.length || 0,
+            totalRuns: _.sumBy(objs, "runs") || 0,
+            totalBalls: _.sumBy(objs, "balls") || 0,
+            totalFours: _.sumBy(objs, "fours") || 0,
+            totalSixes: _.sumBy(objs, "sixes") || 0,
+            totalOvers: _.sumBy(objs, "overs") || 0,
+            totalMaidens: _.sumBy(objs, "maidens") || 0,
+            totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
+            totalWickets: _.sumBy(objs, "wickets") || 0
+          }))
+          .value();
+        return result;
+      })
+    );
   }
   getTourDetails() {
     return zip(

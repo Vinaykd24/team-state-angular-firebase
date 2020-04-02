@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+
+.tourName::before,
+.playerDtls::before,
+.mobileDivider::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: -1rem;
+  width: 0.25rem;
+  height: 100%;
+  background: #10044a;
+  transform: skewX(-15deg);
+}
+
+.mobileDividerHor::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -0.5rem;
+  height: 0.25rem;
+  width: 100%;
+  background: #10044a;
+}
+
+.tourName,
+.playerDtls,
+.playerDtlsMobile {
+  padding: 3.75rem 1rem;
+  position: relative;
+  margin-right: 1rem;
+  width: 17rem;
+  text-align: center;
+}
+.playerDtls,
+.playerDtlsMobile {
+  padding: 0.3rem;
+}
+.tourName h1,
+.playerDtls h3,
+.playerDtls h4,
+.playerDtlsMobile h3,
+.playerDtlsMobile h4 {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+.playerDtls h3,
+.playerDtlsMobile h3 {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+}
+.playerDtls h4,
+.playerDtlsMobile h4 {
+  font-size: 1rem;
+  line-height: 1rem;
+}

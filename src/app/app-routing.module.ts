@@ -14,32 +14,52 @@ import { MatchDetailsResolver } from "./match/match-details/match-details.resolv
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
-  { path: "", component: WelcomeComponent },
-  { path: "players", component: PlayerComponent },
-  { path: "add-player", component: AddPlayerComponent },
-  { path: "matches", component: MatchComponent },
+  { path: "", component: WelcomeComponent, canActivate: [AuthGuard] },
+  { path: "players", component: PlayerComponent, canActivate: [AuthGuard] },
+  {
+    path: "add-player",
+    component: AddPlayerComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: "matches", component: MatchComponent, canActivate: [AuthGuard] },
   {
     path: "matchDetails/:matchId",
     component: MatchDetailsComponent,
-    resolve: { matchDetails: MatchDetailsResolver }
+    resolve: { matchDetails: MatchDetailsResolver },
+    canActivate: [AuthGuard]
   },
   {
     path: "playerDetails/:playerId",
     component: PlayerDetailsComponent,
-    resolve: { matchDetails: PlayerDetailsResolver }
+    resolve: { matchDetails: PlayerDetailsResolver },
+    canActivate: [AuthGuard]
   },
-  { path: "add-match", component: AddMatchComponent },
-  { path: "add-match-details", component: AddMatchDetailComponent },
-  { path: "tournaments", component: TournamentComponent },
-  { path: "add-tournament", component: AddTournamentComponent }
+  { path: "add-match", component: AddMatchComponent, canActivate: [AuthGuard] },
+  {
+    path: "add-match-details",
+    component: AddMatchDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "tournaments",
+    component: TournamentComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "add-tournament",
+    component: AddTournamentComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}
