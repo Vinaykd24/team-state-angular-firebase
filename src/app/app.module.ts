@@ -38,6 +38,7 @@ import { PlayerDetailsComponent } from "./player/player-details/player-details.c
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerPerformanceComponent } from "./player/player-performance/player-performance.component";
 import { WelcomeComponent } from './welcome/welcome.component';
+import { TopPlayerListComponent } from './player/top-player-list/top-player-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     TournamentStatsComponent,
     PlayerDetailsComponent,
     PlayerPerformanceComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    TopPlayerListComponent
   ],
   imports: [
     BrowserModule,

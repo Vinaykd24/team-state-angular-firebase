@@ -1,0 +1,44 @@
+<div class="topPlayerList mb-2">
+  <h4 class="mb-2">
+    Player
+    <span *ngIf="statsType === 'batsman'">
+      Batting Stats
+    </span>
+    <span *ngIf="statsType === 'bowler'">
+      Bowling Stats
+    </span>
+  </h4>
+  <ul>
+    <li *ngFor="let topPlayer of topPlayerList">
+      <a
+        [routerLink]="['/playerDetails', topPlayer.player.id]"
+        [state]="topPlayer"
+      >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <picture>
+            <img
+              src="../../assets/images/{{
+                topPlayer.player.playerFirstName.toLowerCase()
+              }}_{{ topPlayer.player.playerLastName.toLowerCase() }}.jpg"
+              alt="topPlayer.player.playerFirstName"
+            />
+          </picture>
+          <div>
+            <h4>
+              {{ topPlayer.player.playerFirstName }}
+              <span>{{ topPlayer.player.playerLastName }}</span>
+            </h4>
+          </div>
+          <div>
+            <strong>{{ topPlayer.totalRuns }}</strong>
+          </div>
+          <div>
+            <span class="material-icons">
+              keyboard_arrow_right
+            </span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

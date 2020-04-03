@@ -143,88 +143,16 @@
 
 <section class="container">
   <div class="row justify-content-md-center mb-3">
-    <div class="col-md-6 col-lg-4 topPlayerList mb-2">
-      <h4 class="mb-2">
-        Player
-        <span>
-          Batting Stats
-        </span>
-      </h4>
-      <ul>
-        <li *ngFor="let topBatsman of topBatsmanList">
-          <a
-            [routerLink]="['/playerDetails', topBatsman.player.id]"
-            [state]="topBatsman"
-          >
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-              <picture>
-                <img
-                  src="../../assets/images/{{
-                    topBatsman.player.playerFirstName.toLowerCase()
-                  }}_{{ topBatsman.player.playerLastName.toLowerCase() }}.jpg"
-                  alt="topBatsman.player.playerFirstName"
-                />
-              </picture>
-              <div>
-                <h4>
-                  {{ topBatsman.player.playerFirstName }}
-                  <span>{{ topBatsman.player.playerLastName }}</span>
-                </h4>
-              </div>
-              <div>
-                <strong>{{ topBatsman.totalRuns }}</strong>
-              </div>
-              <div>
-                <span class="material-icons">
-                  keyboard_arrow_right
-                </span>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-6 col-lg-4 topPlayerList">
-      <h4 class="mb-2">
-        Player
-        <span>
-          Bowling Stats
-        </span>
-      </h4>
-      <ul>
-        <li *ngFor="let topBowler of topBowlerList">
-          <a
-            [routerLink]="['/playerDetails', topBowler.player.id]"
-            [state]="topBowler"
-          >
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-              <picture>
-                <img
-                  src="../../assets/images/{{
-                    topBowler.player.playerFirstName.toLowerCase()
-                  }}_{{ topBowler.player.playerLastName.toLowerCase() }}.jpg"
-                  alt="topBowler.player.playerFirstName"
-                />
-              </picture>
-              <div>
-                <h4>
-                  {{ topBowler.player.playerFirstName }}
-                  <span>{{ topBowler.player.playerLastName }}</span>
-                </h4>
-              </div>
-              <div>
-                <strong>{{ topBowler.totalWickets }}</strong>
-              </div>
-              <div>
-                <span class="material-icons">
-                  keyboard_arrow_right
-                </span>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <app-top-player-list
+      [topPlayerList]="topBatsmanList"
+      [statsType]="'batsman'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
+    <app-top-player-list
+      [topPlayerList]="topBowlerList"
+      [statsType]="'bowler'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
   </div>
 </section>
 
