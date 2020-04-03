@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 tourDetailsWrapper">
+      <h1>{{ tourDetails.tourInfo.tourName }}</h1>
+      <div class="d-flex flex-column align-items-center">
+        <h3>Total Matches</h3>
+        <h2>{{ tourDetails.totalMatches?.length }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="container">
+  <div class="row justify-content-md-center mb-3">
+    <app-top-player-list
+      [topPlayerList]="tourDetails.tourDetails.topRunsGetter"
+      [statsType]="'batsman'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
+    <app-top-player-list
+      [topPlayerList]="tourDetails.tourDetails.topWktsGetter"
+      [statsType]="'bowler'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
+  </div>
+</section>

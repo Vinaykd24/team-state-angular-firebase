@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TournamentService } from "./tournament.service";
 import { PlayerService } from "../player/player.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-tournament",
@@ -11,7 +12,8 @@ export class TournamentComponent implements OnInit {
   tourDetails$: any;
   constructor(
     private tourService: TournamentService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private router: Router
   ) {
     // this.playerService
     //   .getTournamentDetails("ToXyObJXfL0maMnSOIE1")
@@ -20,4 +22,10 @@ export class TournamentComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  clickTourEventHandler(selectedTour: any) {
+    this.router.navigate(["/tourDetails", selectedTour.tourInfo.id], {
+      state: selectedTour
+    });
+  }
 }

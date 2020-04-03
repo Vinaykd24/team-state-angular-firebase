@@ -18,6 +18,8 @@ import * as fromPlayerReducer from "../player/store/player.reducer";
 import { MatchDetails } from "../models/match-details.model";
 import { Match } from "../models/match.model";
 import { PlayerService } from "../player/player.service";
+import { Player } from "../models/player.model";
+import { TopPlayer } from "../models/top-player.model";
 
 @Injectable({
   providedIn: "root"
@@ -51,10 +53,11 @@ export class TournamentService {
     return this.tournaments;
   }
 
-  getTourMatchDetails(playerList: any) {
+  getTourMatchDetails(playerList: any, players): any {
     const result = _(playerList)
       .groupBy("playerId")
       .map((objs, key) => ({
+        player: players.find(player => player.id === key),
         playerFirstName: objs[0].playerFirstName,
         playerLastName: objs[0].playerLastName,
         playerId: objs[0].playerId,
@@ -84,10 +87,11 @@ export class TournamentService {
   getTournamentDetails() {
     return zip(
       this.getTournaments(),
+      this.playerService.getPlayers(),
       this.store.select(fromMatchReducer.getAvailableMatches),
       this.store.select(fromMatchDetailsReducer.getAvailableMatchDetails)
     ).pipe(
-      map(([tournaments, matches, matchDetails]) => {
+      map(([tournaments, allPlayers, matches, matchDetails]) => {
         let transformedTournaments = [];
         _(tournaments)
           .groupBy("id")
@@ -107,7 +111,7 @@ export class TournamentService {
               tourId: tourKey,
               tourInfo: tourObjs[0],
               totalMatches: loadedMatches,
-              tourDetails: this.getTourMatchDetails(tourMatches)
+              tourDetails: this.getTourMatchDetails(tourMatches, allPlayers)
             };
             transformedTournaments.push(result);
           })

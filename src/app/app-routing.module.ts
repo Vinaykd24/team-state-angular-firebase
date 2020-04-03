@@ -15,6 +15,7 @@ import { PlayerDetailsResolver } from "./player/player-details/player-details.re
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AuthGuard } from "./auth/auth.guard";
+import { TourDetailsComponent } from "./tournament/tour-details/tour-details.component";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: "playerDetails/:playerId",
     component: PlayerDetailsComponent,
     resolve: { matchDetails: PlayerDetailsResolver },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "tourDetails/:tourId",
+    component: TourDetailsComponent,
     canActivate: [AuthGuard]
   },
   { path: "add-match", component: AddMatchComponent, canActivate: [AuthGuard] },

@@ -9,7 +9,7 @@
     </span>
   </h4>
   <ul>
-    <li *ngFor="let topPlayer of topPlayerList">
+    <li *ngFor="let topPlayer of topPlayerList | slice: 0:5">
       <a
         [routerLink]="['/playerDetails', topPlayer.player.id]"
         [state]="topPlayer"
