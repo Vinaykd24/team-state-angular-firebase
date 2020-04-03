@@ -8,13 +8,15 @@ import { PlayerService } from "../player/player.service";
   styleUrls: ["./tournament.component.css"]
 })
 export class TournamentComponent implements OnInit {
+  tourDetails$: any;
   constructor(
     private tourService: TournamentService,
     private playerService: PlayerService
   ) {
-    this.playerService
-      .getTournamentDetails("ToXyObJXfL0maMnSOIE1")
-      .subscribe(data => console.log(data));
+    // this.playerService
+    //   .getTournamentDetails("ToXyObJXfL0maMnSOIE1")
+    //   .subscribe(data => console.log(data));
+    this.tourDetails$ = this.tourService.getTournamentDetails();
   }
 
   ngOnInit(): void {}

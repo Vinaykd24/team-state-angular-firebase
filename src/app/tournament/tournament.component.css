@@ -48,6 +48,7 @@
   line-height: 1.5rem;
   text-transform: uppercase;
   margin: 0;
+  color: #140a47;
 }
 .playerDtls h3,
 .playerDtlsMobile h3 {
@@ -58,4 +59,13 @@
 .playerDtlsMobile h4 {
   font-size: 1rem;
   line-height: 1rem;
+}
+
+.playerDtls h3 span,
+.playerDtlsMobile h3 span {
+  color: #b88f4f;
+}
+
+.material-icons {
+  color: #ffa500;
 }
