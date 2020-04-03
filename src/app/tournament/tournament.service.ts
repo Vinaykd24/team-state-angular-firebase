@@ -58,9 +58,6 @@ export class TournamentService {
       .groupBy("playerId")
       .map((objs, key) => ({
         player: players.find(player => player.id === key),
-        playerFirstName: objs[0].playerFirstName,
-        playerLastName: objs[0].playerLastName,
-        playerId: objs[0].playerId,
         fifties: objs.filter(player => player.runs >= 50).length || 0,
         centuries: objs.filter(player => player.runs >= 100).length || 0,
         isOut: objs.filter(player => player.isOut).length || 0,

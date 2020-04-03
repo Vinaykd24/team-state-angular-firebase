@@ -29,8 +29,11 @@
               <span>{{ topPlayer.player.playerLastName }}</span>
             </h4>
           </div>
-          <div>
+          <div *ngIf="statsType === 'batsman'">
             <strong>{{ topPlayer.totalRuns }}</strong>
+          </div>
+          <div *ngIf="statsType === 'bowler'">
+            <strong>{{ topPlayer.totalWickets }}</strong>
           </div>
           <div>
             <span class="material-icons">

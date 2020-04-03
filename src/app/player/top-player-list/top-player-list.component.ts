@@ -7,7 +7,7 @@ import { TopPlayer } from "src/app/models/top-player.model";
   styleUrls: ["./top-player-list.component.scss"]
 })
 export class TopPlayerListComponent implements OnInit {
-  @Input() topPlayerList: TopPlayer;
+  @Input() topPlayerList: TopPlayer | any;
   @Input() statsType: string;
 
   constructor() {}

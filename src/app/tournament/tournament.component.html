@@ -47,10 +47,11 @@
               <picture class="mb-2">
                 <img
                   src="../../assets/images/{{
-                    item.tourDetails.topRunsGetter[0].playerFirstName
+                    item.tourDetails.topRunsGetter[0].player.playerFirstName
                       | lowercase
                   }}_{{
-                    item.tourDetails.topRunsGetter[0].playerLastName | lowercase
+                    item.tourDetails.topRunsGetter[0].player.playerLastName
+                      | lowercase
                   }}.jpg"
                   alt=""
                   class="img-fluid rounded-circle"
@@ -58,9 +59,9 @@
                 />
               </picture>
               <h3>
-                {{ item.tourDetails.topRunsGetter[0].playerFirstName }}
+                {{ item.tourDetails.topRunsGetter[0].player.playerFirstName }}
                 <span class="d-block small text-center">{{
-                  item.tourDetails.topRunsGetter[0].playerLastName
+                  item.tourDetails.topRunsGetter[0].player.playerLastName
                 }}</span>
               </h3>
             </div>
@@ -76,10 +77,11 @@
               <picture class="mb-2">
                 <img
                   src="../../assets/images/{{
-                    item.tourDetails.topWktsGetter[0].playerFirstName
+                    item.tourDetails.topWktsGetter[0].player.playerFirstName
                       | lowercase
                   }}_{{
-                    item.tourDetails.topWktsGetter[0].playerLastName | lowercase
+                    item.tourDetails.topWktsGetter[0].player.playerLastName
+                      | lowercase
                   }}.jpg"
                   alt=""
                   class="img-fluid rounded-circle"
@@ -87,9 +89,9 @@
                 />
               </picture>
               <h3>
-                {{ item.tourDetails.topWktsGetter[0].playerFirstName }}
+                {{ item.tourDetails.topWktsGetter[0].player.playerFirstName }}
                 <span class="d-block small text-center">{{
-                  item.tourDetails.topWktsGetter[0].playerLastName
+                  item.tourDetails.topWktsGetter[0].player.playerLastName
                 }}</span>
               </h3>
             </div>
