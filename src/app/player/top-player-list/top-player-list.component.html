@@ -23,16 +23,16 @@
               alt="topPlayer.player.playerFirstName"
             />
           </picture>
-          <div>
+          <div class="flex-fill pl-3">
             <h4>
               {{ topPlayer.player.playerFirstName }}
               <span>{{ topPlayer.player.playerLastName }}</span>
             </h4>
           </div>
-          <div *ngIf="statsType === 'batsman'">
+          <div *ngIf="statsType === 'batsman'" class="pr-2">
             <strong>{{ topPlayer.totalRuns }}</strong>
           </div>
-          <div *ngIf="statsType === 'bowler'">
+          <div *ngIf="statsType === 'bowler'" class="pr-2">
             <strong>{{ topPlayer.totalWickets }}</strong>
           </div>
           <div>

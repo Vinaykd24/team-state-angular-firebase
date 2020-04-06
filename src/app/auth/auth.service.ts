@@ -13,7 +13,7 @@ import * as Auth from "./store/auth.actions";
 import { PlayerService } from "../player/player.service";
 import {
   AngularFirestoreDocument,
-  AngularFirestore
+  AngularFirestore,
 } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 
@@ -29,14 +29,14 @@ export class AuthService {
   ) {}
 
   initAuthListener() {
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.store.dispatch(new Auth.SetAuthenticated());
         this.router.navigate(["/"]);
       } else {
         // this.playerService.cancelSubscriptions();
         this.store.dispatch(new Auth.SetUnauthenticated());
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/"]);
       }
     });
   }
@@ -46,11 +46,11 @@ export class AuthService {
     this.store.dispatch(new UI.StartLoading());
     this.afAuth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
+      .then((result) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
       })
-      .catch(error => {
+      .catch((error) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
         this.uiService.showSnackbar(error.message, null, 3000);
@@ -62,12 +62,12 @@ export class AuthService {
     this.store.dispatch(new UI.StartLoading());
     this.afAuth
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
+      .then((result) => {
         // this.uiService.loadingStateChanged.next(false);
         // this.updateUserData(result.user);
         this.store.dispatch(new UI.StopLoading());
       })
-      .catch(error => {
+      .catch((error) => {
         // this.uiService.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
         this.uiService.showSnackbar(error.message, null, 3000);
@@ -85,7 +85,7 @@ export class AuthService {
     const data: User = {
       userId: user.uid,
       email: user.email,
-      role: "subscriber"
+      role: "subscriber",
       // roles: {
       //   subscriber: true
       // }

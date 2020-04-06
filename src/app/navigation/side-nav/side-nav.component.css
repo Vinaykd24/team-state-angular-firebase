@@ -11,3 +11,6 @@ a:active {
 mat-icon {
   margin-right: 0.3rem;
 }
+.mat-icon-button {
+  width: 5rem;
+}

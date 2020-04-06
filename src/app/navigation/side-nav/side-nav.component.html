@@ -15,25 +15,19 @@
     *ngIf="!(isAuth$ | async)"
   >
     <mat-icon>input</mat-icon>
-    <span class="nav-caption">Login</span>
+    <span class="nav-caption">Admin Login</span>
   </a>
-  <a
-    mat-list-item
-    routerLink="/players"
-    (click)="onClose()"
-    *ngIf="isAuth$ | async"
-  >
+  <a mat-list-item routerLink="/players" (click)="onClose()">
     <mat-icon>assignment_ind</mat-icon>
     <span class="nav-caption">Players</span>
   </a>
-  <a
-    mat-list-item
-    routerLink="/matches"
-    (click)="onClose()"
-    *ngIf="isAuth$ | async"
-  >
+  <a mat-list-item routerLink="/matches" (click)="onClose()">
     <mat-icon>date_range</mat-icon>
     <span class="nav-caption">Matches</span>
+  </a>
+  <a mat-list-item routerLink="/tournaments" (click)="onClose()">
+    <mat-icon>emoji_events</mat-icon>
+    <span class="nav-caption">Tournaments</span>
   </a>
   <a
     mat-list-item
@@ -61,15 +55,6 @@
   >
     <mat-icon>description</mat-icon>
     <span class="nav-caption">Add Match Details</span>
-  </a>
-  <a
-    mat-list-item
-    routerLink="/tournaments"
-    (click)="onClose()"
-    *ngIf="isAuth$ | async"
-  >
-    <mat-icon>emoji_events</mat-icon>
-    <span class="nav-caption">Tournaments</span>
   </a>
 
   <mat-list-item>

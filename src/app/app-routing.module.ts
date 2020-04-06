@@ -20,52 +20,48 @@ import { TourDetailsComponent } from "./tournament/tour-details/tour-details.com
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
-  { path: "", component: WelcomeComponent, canActivate: [AuthGuard] },
-  { path: "players", component: PlayerComponent, canActivate: [AuthGuard] },
+  { path: "", component: WelcomeComponent },
+  { path: "players", component: PlayerComponent },
   {
     path: "add-player",
     component: AddPlayerComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
-  { path: "matches", component: MatchComponent, canActivate: [AuthGuard] },
+  { path: "matches", component: MatchComponent },
   {
     path: "matchDetails/:matchId",
     component: MatchDetailsComponent,
     resolve: { matchDetails: MatchDetailsResolver },
-    canActivate: [AuthGuard]
   },
   {
     path: "playerDetails/:playerId",
     component: PlayerDetailsComponent,
     resolve: { matchDetails: PlayerDetailsResolver },
-    canActivate: [AuthGuard]
   },
   {
     path: "tourDetails/:tourId",
     component: TourDetailsComponent,
-    canActivate: [AuthGuard]
   },
   { path: "add-match", component: AddMatchComponent, canActivate: [AuthGuard] },
   {
     path: "add-match-details",
     component: AddMatchDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: "tournaments",
     component: TournamentComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: "add-tournament",
     component: AddTournamentComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}
