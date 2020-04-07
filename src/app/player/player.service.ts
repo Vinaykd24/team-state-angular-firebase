@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-  AngularFirestore
+  AngularFirestore,
 } from "@angular/fire/firestore";
 import { Player } from "../models/player.model";
 import { Observable, combineLatest, zip, Subscription } from "rxjs";
@@ -33,7 +33,7 @@ export class PlayerService {
     private matchService: MatchService,
     private store: Store<State>
   ) {
-    this.playersCollection = this.afs.collection("players", ref =>
+    this.playersCollection = this.afs.collection("players", (ref) =>
       ref.orderBy("playerFirstName", "desc")
     );
   }
@@ -41,8 +41,8 @@ export class PlayerService {
   getPlayers(): Observable<Player[]> {
     //Get players with ID
     this.players = this.playersCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
+      map((actions) =>
+        actions.map((a) => {
           const data = a.payload.doc.data() as Player;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -80,10 +80,11 @@ export class PlayerService {
           const result = _(matchDetails)
             .groupBy("playerId")
             .map((objs, key) => ({
-              player: players.find(player => player.id === key),
-              fifties: objs.filter(player => player.runs >= 50).length || 0,
-              centuries: objs.filter(player => player.runs >= 100).length || 0,
-              isOut: objs.filter(player => player.isOut).length || 0,
+              player: players.find((player) => player.id === key),
+              fifties: objs.filter((player) => player.runs >= 50).length || 0,
+              centuries:
+                objs.filter((player) => player.runs >= 100).length || 0,
+              isOut: objs.filter((player) => player.isOut).length || 0,
               bestScore: this.getBestScore(objs)[0].runs || 0,
               bestBowling: this.getBestBowling(objs)[0].wickets || 0,
               totalMatches: objs.length || 0,
@@ -94,7 +95,7 @@ export class PlayerService {
               totalOvers: _.sumBy(objs, "overs") || 0,
               totalMaidens: _.sumBy(objs, "maidens") || 0,
               totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
-              totalWickets: _.sumBy(objs, "wickets") || 0
+              totalWickets: _.sumBy(objs, "wickets") || 0,
             }))
             .value();
           return result;
@@ -104,7 +105,7 @@ export class PlayerService {
         (players: TopPlayer[]) => {
           this.store.dispatch(new playerActions.GetAvailablePlayers(players));
         },
-        error => {
+        (error) => {
           console.log("Error while loading the players");
         }
       );
@@ -118,7 +119,7 @@ export class PlayerService {
         let tourMatches = [];
         let loadedMatches = matches
           .slice()
-          .filter(match => match.tourId === id);
+          .filter((match) => match.tourId === id);
         const merge = _.map(loadedMatches, "id");
         for (let i = 0; i < matchDetails.length; i++) {
           if (merge.includes(matchDetails[i].matchId)) {
@@ -132,9 +133,9 @@ export class PlayerService {
             playerFirstName: objs[0].playerFirstName,
             playerLastName: objs[0].playerLastName,
             playerId: objs[0].playerId,
-            fifties: objs.filter(player => player.runs >= 50).length || 0,
-            centuries: objs.filter(player => player.runs >= 100).length || 0,
-            isOut: objs.filter(player => player.isOut).length || 0,
+            fifties: objs.filter((player) => player.runs >= 50).length || 0,
+            centuries: objs.filter((player) => player.runs >= 100).length || 0,
+            isOut: objs.filter((player) => player.isOut).length || 0,
             bestScore: this.getBestScore(objs)[0].runs || 0,
             bestBowling: this.getBestBowling(objs)[0].wickets || 0,
             totalMatches: objs.length || 0,
@@ -145,7 +146,7 @@ export class PlayerService {
             totalOvers: _.sumBy(objs, "overs") || 0,
             totalMaidens: _.sumBy(objs, "maidens") || 0,
             totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
-            totalWickets: _.sumBy(objs, "wickets") || 0
+            totalWickets: _.sumBy(objs, "wickets") || 0,
           }))
           .value();
         return {
@@ -154,7 +155,7 @@ export class PlayerService {
           topRunsGetter: _.orderBy([...result], "totalRuns", "desc"),
           topWktsGetter: _.orderBy([...result], "totalWickets", "desc"),
           totalSixes: _.sumBy([...result], "totalSixes") || 0,
-          totalFours: _.sumBy([...result], "totalFours") || 0
+          totalFours: _.sumBy([...result], "totalFours") || 0,
         };
       })
     );
@@ -170,10 +171,10 @@ export class PlayerService {
         const result = _(matchDetails)
           .groupBy("playerId")
           .map((objs, key) => ({
-            player: players.find(player => player.id === key),
-            fifties: objs.filter(player => player.runs >= 50).length || 0,
-            centuries: objs.filter(player => player.runs >= 100).length || 0,
-            isOut: objs.filter(player => player.isOut).length || 0,
+            player: players.find((player) => player.id === key),
+            fifties: objs.filter((player) => player.runs >= 50).length || 0,
+            centuries: objs.filter((player) => player.runs >= 100).length || 0,
+            isOut: objs.filter((player) => player.isOut).length || 0,
             bestScore: this.getBestScore(objs)[0].runs || 0,
             bestBowling: this.getBestBowling(objs)[0].wickets || 0,
             totalMatches: objs.length || 0,
@@ -184,7 +185,7 @@ export class PlayerService {
             totalOvers: _.sumBy(objs, "overs") || 0,
             totalMaidens: _.sumBy(objs, "maidens") || 0,
             totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
-            totalWickets: _.sumBy(objs, "wickets") || 0
+            totalWickets: _.sumBy(objs, "wickets") || 0,
           }))
           .value();
         return result;
@@ -195,7 +196,7 @@ export class PlayerService {
     return zip(
       this.afs.collection<MatchDetails>("matchDetails").valueChanges(),
       this.afs
-        .collection<MatchDetails>("matchDetails", ref =>
+        .collection<MatchDetails>("matchDetails", (ref) =>
           ref.orderBy("wickets", "desc")
         )
         .valueChanges(),
@@ -205,16 +206,17 @@ export class PlayerService {
         const result = _(matchDetails)
           .groupBy("id")
           .map((objs, key) => ({
-            topRunsGetter: this.getBestScore(objs)[0],
-            topWktsGetter: topWkts[0],
+            // topRunsGetter: this.getBestScore(objs)[0],
+            topRunsGetter: _.maxBy(objs, "runs"),
+            topWktsGetter: _.maxBy(objs, "wickets"),
             topInng: _.orderBy(matches, ["homeTeamScore"], ["desc"])[0], // Use Lodash to sort array by 'name'
-            fifties: objs.filter(player => player.runs >= 50).length || 0,
-            centuries: objs.filter(player => player.runs >= 100).length || 0,
+            fifties: objs.filter((player) => player.runs >= 50).length || 0,
+            centuries: objs.filter((player) => player.runs >= 100).length || 0,
             winPercentage: this.calculateWinningPercentage(matches) || 0,
             totalRuns: _.sumBy(objs, "runs") || 0,
             totalFours: _.sumBy(objs, "fours") || 0,
             totalSixes: _.sumBy(objs, "sixes") || 0,
-            totalWickets: _.sumBy(objs, "wickets") || 0
+            totalWickets: _.sumBy(objs, "wickets") || 0,
           }))
           .value();
         return result[0];
@@ -225,7 +227,7 @@ export class PlayerService {
   calculateWinningPercentage(matches: Match[]): string {
     const totalMatches = matches.length;
     const totalWins =
-      matches.filter(match => match.homeTeamWon === true).length || 0;
+      matches.filter((match) => match.homeTeamWon === true).length || 0;
     return ((totalWins / totalMatches) * 100).toFixed(2);
   }
 
@@ -240,16 +242,17 @@ export class PlayerService {
     return zip(
       this.matchService.getMatchesWithId(),
       this.afs
-        .collection<MatchDetails>("matchDetails", ref =>
+        .collection<MatchDetails>("matchDetails", (ref) =>
           ref.where("playerId", "==", id)
         )
         .valueChanges()
     ).pipe(
       map(([matches, matchDetails]) => {
-        return matchDetails.map(matDtls => {
+        return matchDetails.map((matDtls) => {
           return {
             ...matDtls,
-            opTeam: matches.find(match => match.id === matDtls.matchId).opTeam
+            opTeam: matches.find((match) => match.id === matDtls.matchId)
+              .opTeam,
           };
         });
       })

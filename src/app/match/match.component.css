@@ -175,3 +175,12 @@ mat-select {
   width: 16rem;
   height: 15rem;
 }
+
+.matchCard {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3))
+    #140a47;
+  color: #fff;
+}
+.score {
+  color: #ffa500;
+}

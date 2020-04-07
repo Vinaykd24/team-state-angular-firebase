@@ -1,19 +1,19 @@
 <section class="container matchFilter">
-  <div fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
-    <p fxFlex="28%" fxFlexFill>
+  <div class="align-items-center row">
+    <div class="col-md-4">
       <strong> Show Me All Matches in {{ selectedYear }}. </strong>
-    </p>
-    <mat-select
-      fxFlex="15%"
-      fxFlexFill
-      placeholder="Select Year"
-      [(ngModel)]="selectedYear"
-      (ngModelChange)="onYearSelection()"
-    >
-      <mat-option *ngFor="let year of yearList" [value]="year.year">
-        {{ year.year }}
-      </mat-option>
-    </mat-select>
+    </div>
+    <div class="col-md-4">
+      <mat-select
+        placeholder="Select Year"
+        [(ngModel)]="selectedYear"
+        (ngModelChange)="onYearSelection()"
+      >
+        <mat-option *ngFor="let year of yearList" [value]="year.year">
+          {{ year.year }}
+        </mat-option>
+      </mat-select>
+    </div>
   </div>
 </section>
 <ng-container *ngIf="(matches$ | async)?.length > 0; else elseTemplate">
@@ -95,69 +95,52 @@
       </div>
     </div>
   </section>
-  <div
-    fxLayout="column"
-    fxLayoutAlign="space-between start"
-    class="xs-matchDetails"
+  <!-- Mobile Only Screen -->
+  <section
+    class="container"
     fxShow.sm="true"
     fxShow.xs="true"
     fxHide.md="true"
     fxHide.lg="true"
-    *ngFor="let match of matches$ | async"
   >
-    <div fxFlexFill class="matchDetails" *ngIf="match.matchDate">
-      <div fxFlex="40" fxFlex.xs="70" fxFlexFill class="xs-tourName u-skew">
-        {{ match.matchDate.toDate() | date: "mediumDate" }}
+    <div class="row">
+      <div class="col-sm-12">
+        <div
+          class="d-flex flex-column flex-fill p-2 matchCard rounded mb-2"
+          *ngFor="let match of matches$ | async"
+          (click)="clickMatchEventHandler(match)"
+        >
+          <div class="d-flex flex-column flex-fill">
+            {{ match.matchDate.toDate() | date: "mediumDate" }}
+          </div>
+          <small class="w-100 mb-2 text-uppercase">{{ match.result }}</small>
+          <div class="flex-fill flex-row d-flex">
+            <h2 class="flex-fill font-italic font-weight-bold titillium mb-0">
+              TCS PUNE
+            </h2>
+            <h2 class="font-italic titillium mb-0 score">
+              {{ match.homeTeamScore }}/{{ match.homeTeamWickets }}
+            </h2>
+          </div>
+          <div class="flex-fill flex-row d-flex">
+            <h2
+              class="flex-fill font-italic font-weight-bold titillium mb-0 text-uppercase"
+            >
+              {{ match.opTeam }}
+            </h2>
+            <h2 class="font-italic titillium mb-0 score">
+              {{ match.opTeamScore }}/{{ match.opTeamWickets }}
+            </h2>
+          </div>
+          <div class="text-center">
+            <span class="material-icons">
+              keyboard_arrow_right
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-    <div
-      fxFlexFill
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="5px"
-      class="xs-scoreDetails"
-    >
-      <div
-        fxLayout="column"
-        fxLayoutAlign="space-between center"
-        fxLayoutGap="5px"
-      >
-        TCS PUNE
-      </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="space-between center"
-        fxLayoutGap="5px"
-      >
-        {{ match.homeTeamScore }}/{{ match.homeTeamWickets }}
-      </div>
-    </div>
-    <div
-      fxFlexFill
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="5px"
-      class="xs-scoreDetails"
-    >
-      <div
-        fxLayout="column"
-        fxLayoutAlign="space-between center"
-        fxLayoutGap="5px"
-      >
-        {{ match.opTeam }}
-      </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="space-between center"
-        fxLayoutGap="5px"
-      >
-        {{ match.opTeamScore }}/{{ match.opTeamWickets }}
-      </div>
-    </div>
-    <div fxFlexFill class="xs-matchResult">
-      {{ match.result }}
-    </div>
-  </div>
+  </section>
 </ng-container>
 <ng-template #elseTemplate>
   <div fxLayout="column" fxLayoutAlign="center center">

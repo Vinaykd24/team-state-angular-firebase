@@ -10,7 +10,7 @@ import * as _ from "lodash";
 @Component({
   selector: "app-tournament-stats",
   templateUrl: "./tournament-stats.component.html",
-  styleUrls: ["./tournament-stats.component.scss"]
+  styleUrls: ["./tournament-stats.component.scss"],
 })
 export class TournamentStatsComponent implements OnInit {
   topBatsman: TopPlayer;
@@ -24,13 +24,15 @@ export class TournamentStatsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select(fromPlayerReducer.getAvailablePlayers).subscribe(data => {
-      this.topBatsman = _.orderBy(data, ["totalRuns"], ["desc"])[0];
-      this.topBowler = _.orderBy(data, ["totalWickets"], ["desc"])[0];
-      this.topSixHitter = _.orderBy(data, ["totalSixes"], ["desc"])[0];
-    });
+    this.store
+      .select(fromPlayerReducer.getAvailablePlayers)
+      .subscribe((data) => {
+        this.topBatsman = _.orderBy(data, ["totalRuns"], ["desc"])[0];
+        this.topBowler = _.orderBy(data, ["totalWickets"], ["desc"])[0];
+        this.topSixHitter = _.orderBy(data, ["totalSixes"], ["desc"])[0];
+      });
     this.fetchPlayers();
-    this.playerService.getTourDetails().subscribe(data => (this.data = data));
+    this.playerService.getTourDetails().subscribe((data) => (this.data = data));
   }
 
   fetchPlayers() {

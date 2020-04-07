@@ -3,7 +3,7 @@ import { Match } from "../models/match.model";
 import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-  AngularFirestore
+  AngularFirestore,
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -15,7 +15,7 @@ import * as matchActions from "./store/match.actions";
 import * as matchDetailsActions from "./store/match-details.actions";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class MatchService {
   matchesCollection: AngularFirestoreCollection<Match>;
@@ -28,17 +28,18 @@ export class MatchService {
   matchDetail: Observable<MatchDetails>;
 
   constructor(private afs: AngularFirestore, private store: Store<State>) {
-    this.matchesCollection = this.afs.collection("matches");
+    this.matchesCollection = this.afs.collection("matches", (ref) =>
+      ref.orderBy("matchDate", "desc")
+    );
     this.matchDetailsCollection = this.afs.collection("matchDetails");
   }
-
   getMatches() {
     //Get Matches with ID
     this.matchesCollection
       .snapshotChanges()
       .pipe(
-        map(actions =>
-          actions.map(a => {
+        map((actions) =>
+          actions.map((a) => {
             const data = a.payload.doc.data() as Match;
             const id = a.payload.doc.id;
             return { id, ...data };
@@ -53,8 +54,8 @@ export class MatchService {
   getMatchesWithId() {
     //Get Matches with ID
     return this.matchesCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
+      map((actions) =>
+        actions.map((a) => {
           const data = a.payload.doc.data() as Match;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -68,8 +69,8 @@ export class MatchService {
     this.matchDetailsCollection
       .snapshotChanges()
       .pipe(
-        map(actions =>
-          actions.map(a => {
+        map((actions) =>
+          actions.map((a) => {
             const data = a.payload.doc.data() as Match;
             const id = a.payload.doc.id;
             return { id, ...data };
@@ -95,7 +96,7 @@ export class MatchService {
     //     .find(matchDetails => matchDetails.matchId === id);
     // });
     return this.afs
-      .collection<MatchDetails>("matchDetails", ref =>
+      .collection<MatchDetails>("matchDetails", (ref) =>
         ref.where("matchId", "==", id)
       )
       .valueChanges();
@@ -106,7 +107,7 @@ export class MatchService {
   }
 
   newMatchDetails(matchDetails: MatchDetails[]) {
-    matchDetails.map(playerDetails => {
+    matchDetails.map((playerDetails) => {
       this.matchDetailsCollection.add(playerDetails);
     });
   }
@@ -116,7 +117,7 @@ export class MatchService {
     if (year !== "All Years") {
       let startDate = new Date(year + "-01-01");
       let endDate = new Date(year + "-12-31");
-      query = this.afs.collection<Match>("matches", ref =>
+      query = this.afs.collection<Match>("matches", (ref) =>
         ref.where("matchDate", ">", startDate).where("matchDate", "<", endDate)
       );
     } else {
@@ -124,8 +125,8 @@ export class MatchService {
     }
 
     this.matches = query.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
+      map((actions) =>
+        actions.map((a) => {
           const data = a.payload.doc.data() as Match;
           const id = a.payload.doc.id;
           return { id, ...data };
