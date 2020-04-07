@@ -58,7 +58,7 @@
             {{ player.player.playerDob.toDate() | date: "mediumDate" }}, in
             {{ player.player.bornIn }}. My cricketing journey began in
             {{ player.player.bornIn }}. I became a part of the TCS Pune Cricket
-            Family in {{ player.player.joinedTcs }}.
+            Family in {{ player.player.joinedTcs | date: "mediumDate" }}.
           </p>
           <p>
             <strong>
