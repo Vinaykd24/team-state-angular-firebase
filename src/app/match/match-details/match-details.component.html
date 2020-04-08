@@ -1,267 +1,98 @@
 <section class="matchDetails container">
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <div fxFlex fxFlexFill fxLayoutAlign="center center" class="matchResult">
-      <h4>{{ selectedMatch.result }}</h4>
-    </div>
-    <div
-      fxLayout="row"
-      fxFlex
-      fxFlexFill
-      fxLayoutAlign="center center"
-      class="scoreDetails"
-    >
-      <div
-        fxFlex
-        fxFlexFill
-        fxLayout="column"
-        fxLayoutAlign="center end"
-        class="mr-2"
-      >
-        <h3>TCS PUNE</h3>
-        <div class="score">
-          {{ selectedMatch.homeTeamScore }}/{{ selectedMatch.homeTeamWickets }}
-        </div>
-      </div>
-      <p>VS</p>
-      <div
-        fxFlex
-        fxFlexFill
-        fxLayout="column"
-        fxLayoutAlign="center start"
-        class="ml-2"
-      >
-        <h3>{{ selectedMatch.opTeam }}</h3>
-        <div class="score">
-          {{ selectedMatch.opTeamScore }}/{{ selectedMatch.opTeamWickets }}
-        </div>
+  <div class="align-items-center justify-content-md-center row">
+    <h5 class="col-12 text-center m-2">{{ selectedMatch.matchVenue }}</h5>
+  </div>
+  <div class="align-items-center justify-content-md-center row">
+    <div class="col col-md-3 font-weight-bold h2 m-0 text-center">
+      <div>TCS PUNE</div>
+      <div class="score">
+        {{ selectedMatch.homeTeamScore }}/{{ selectedMatch.homeTeamWickets }}
       </div>
     </div>
-    <!-- <div
-      fxFlex
-      fxFlexFill
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      class="plrOfTheMatch"
-    >
-      <div>Player of The Match</div>
-      <p>VINAY KADAM</p>
-    </div> -->
+    <div class="col-md-auto text-center">
+      VS
+    </div>
+    <div class="col col-md-3 font-weight-bold h2 m-0 text-center">
+      <div>{{ selectedMatch.opTeam }}</div>
+      <div class="score">
+        {{ selectedMatch.opTeamScore }}/{{ selectedMatch.opTeamWickets }}
+      </div>
+    </div>
+  </div>
+  <div class="align-items-center justify-content-md-center row p-3">
+    <div class="col-12 h2 font-weight-bold text-center matchResult">
+      {{ selectedMatch.result }}
+    </div>
   </div>
 
-  <div
-    fxLayout="column wrap"
-    fxLayoutAlign="space-between start"
-    class="matchSummary"
-  >
-    <h4>
-      Batting
-      <span>Performance</span>
-    </h4>
-    <div
-      fxLayout="column"
-      fxLayoutAlign="space-around start"
-      fxFlex.gt-sm="50%"
-      fxFill
-      class="mb-3"
-    >
-      <div fxLayout="column" fxFlex fxFill fxLayoutAlign="space-between start">
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          fxHide.sm="true"
-          fxHide.xs="true"
-          class="details"
-        >
-          <div fxFlex="30%" fxFill class="playerName">
-            Player Name
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Runs
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Balls
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            4s
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            6s
-          </div>
-        </div>
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          fxHide.md="true"
-          fxHide.lg="true"
-          fxShow.sm="true"
-          fxShow.xs="true"
-          class="details"
-        >
-          <div fxFlex="30%" fxFill class="playerName">
-            Player Name
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">Runs</div>
-          <div fxFlex fxFill fxLayoutAlign="center center">Balls</div>
-          <div fxFlex fxFill fxLayoutAlign="center center">4s</div>
-          <div fxFlex fxFill fxLayoutAlign="center center">6s</div>
-        </div>
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          *ngFor="let matchDetail of battingDetails"
-          class="details"
-        >
-          <div fxFlex="30%" fxFill class="playerName">
-            {{ matchDetail.playerFirstName }}
-            <span>
-              {{ matchDetail.playerLastName }}
-            </span>
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.runs }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.balls }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.fours }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.sixes }}
-          </div>
-        </div>
-      </div>
+  <div class="row matchSummary">
+    <div class="col-lg-6">
+      <h4>
+        Batting
+        <span>Performance</span>
+      </h4>
+      <table class="table">
+        <thead>
+          <tr class="details playerName">
+            <th scope="col">Player Name</th>
+            <th scope="col" class="text-center">R</th>
+            <th scope="col" class="text-center">B</th>
+            <th scope="col" class="text-center">4s</th>
+            <th scope="col" class="text-center">6s</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="details playerName"
+            *ngFor="let matchDetail of battingDetails"
+          >
+            <th scope="row" class="playerName">
+              {{ matchDetail.playerFirstName }}
+              <span>
+                {{ matchDetail.playerLastName }}
+              </span>
+            </th>
+            <td class="text-center">{{ matchDetail.runs }}</td>
+            <td class="text-center">{{ matchDetail.balls }}</td>
+            <td class="text-center">{{ matchDetail.fours }}</td>
+            <td class="text-center">{{ matchDetail.sixes }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <h4>
-      Bowling
-      <span>Performance</span>
-    </h4>
-    <div
-      fxLayout="column"
-      fxLayoutAlign="space-around start"
-      fxFlex.gt-sm="50%"
-      fxFill
-    >
-      <div fxLayout="column" fxFlex fxFill fxLayoutAlign="space-between start">
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          fxHide.sm="true"
-          fxHide.xs="true"
-          class="details"
-        >
-          <div fxFlex="30%" fxFill class="playerName">
-            Player Name
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Overs
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Maidens
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Runs Given
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            Wickets
-          </div>
-        </div>
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          fxHide.md="true"
-          fxHide.lg="true"
-          fxShow.sm="true"
-          fxShow.xs="true"
-          class="details mt-3"
-        >
-          <div fxFlex="30%" class="playerName" fxFill>
-            Player Name
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            O
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            M
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            RG
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center" class="playerName">
-            W
-          </div>
-        </div>
-        <div
-          fxLayout="row"
-          fxFlex
-          fxFill
-          fxLayoutAlign="space-between start"
-          class="details"
-          *ngFor="let matchDetail of bowlingDetails"
-        >
-          <div fxFlex="30%" fxFill class="playerName">
-            {{ matchDetail.playerFirstName }}
-            <span>
-              {{ matchDetail.playerLastName }}
-            </span>
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.overs }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.maidens }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.runsGiven }}
-          </div>
-          <div fxFlex fxFill fxLayoutAlign="center center">
-            {{ matchDetail.wickets }}
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-6">
+      <h4>
+        Bowling
+        <span>Performance</span>
+      </h4>
+      <table class="table">
+        <thead>
+          <tr class="details playerName">
+            <th scope="col">Player Name</th>
+            <th scope="col" class="text-center">O</th>
+            <th scope="col" class="text-center">M</th>
+            <th scope="col" class="text-center">RG</th>
+            <th scope="col" class="text-center">W</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="details playerName"
+            *ngFor="let matchDetail of bowlingDetails"
+          >
+            <th scope="row" class="playerName">
+              {{ matchDetail.playerFirstName }}
+              <span>
+                {{ matchDetail.playerLastName }}
+              </span>
+            </th>
+            <td class="text-center">{{ matchDetail.overs }}</td>
+            <td class="text-center">{{ matchDetail.maidens }}</td>
+            <td class="text-center">{{ matchDetail.runsGiven }}</td>
+            <td class="text-center">{{ matchDetail.wickets }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <!-- <div
-    fxFlex.gt-sm="50"
-    fxFlex.lt-md="100"
-    fxLayout="column"
-    fxLayoutAlign="space-between center"
-  >
-    <div fxFill fxLayout="row" fxLayoutAlign="start center">
-      <h4>Batting Performance</h4>
-    </div>
-    <div
-      fxFill
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="10px"
-    >
-      <div fxLayout="column" fxLayoutAlign="space-between center">
-        Player Name
-      </div>
-      <div fxFlex="10" fxLayout="column" fxLayoutAlign="space-between center">
-        Runs
-      </div>
-      <div fxFlex="10" fxLayout="column" fxLayoutAlign="space-between center">
-        Balls
-      </div>
-      <div fxFlex="10" fxLayout="column" fxLayoutAlign="space-between center">
-        4s
-      </div>
-      <div fxFlex="10" fxLayout="column" fxLayoutAlign="space-between center">
-        6s
-      </div>
-    </div>
-  </div> -->
   </div>
 </section>

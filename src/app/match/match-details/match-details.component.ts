@@ -8,7 +8,7 @@ import { Match } from "src/app/models/match.model";
 @Component({
   selector: "app-match-details",
   templateUrl: "./match-details.component.html",
-  styleUrls: ["./match-details.component.css"]
+  styleUrls: ["./match-details.component.css"],
 })
 export class MatchDetailsComponent implements OnInit {
   matchDetails: MatchDetails[];
@@ -20,13 +20,16 @@ export class MatchDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private matchService: MatchService
   ) {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.matchDetails = data.matchDetails;
     });
     this.selectedMatch = history.state;
-    console.log(history.state, this.matchDetails);
-    this.battingDetails = this.matchDetails.filter(player => player.balls > 0);
-    this.bowlingDetails = this.matchDetails.filter(player => player.overs > 0);
+    this.battingDetails = this.matchDetails.filter(
+      (player) => player.balls > 0
+    );
+    this.bowlingDetails = this.matchDetails.filter(
+      (player) => player.overs > 0
+    );
   }
 
   ngOnInit(): void {}
