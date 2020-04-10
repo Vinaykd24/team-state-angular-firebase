@@ -5,6 +5,14 @@
       <mat-card-content>
         <div fxLayout fxLayout="column">
           <mat-form-field appearance="outline">
+            <mat-label>Select Season</mat-label>
+            <mat-select placeholder="Select Season" ngModel name="season">
+              <mat-option *ngFor="let season of seasons" [value]="season.value">
+                {{ season.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Tournament Name</mat-label>
             <input
               matInput
