@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-player",
   templateUrl: "./player.component.html",
-  styleUrls: ["./player.component.css"]
+  styleUrls: ["./player.component.css"],
 })
 export class PlayerComponent implements OnInit, OnDestroy {
   plyrSub: Subscription[] = [];
@@ -24,20 +24,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.players$ = this.store.select(fromPlayerReducer.getAvailablePlayers);
-    this.fetchPlayers();
+    // this.fetchPlayers();
   }
 
-  fetchPlayers() {
-    this.playerService.getPlayerMatchDetails();
-  }
+  // fetchPlayers() {
+  //   this.playerService.getPlayerMatchDetails();
+  // }
 
   ngOnDestroy(): void {
-    this.plyrSub.forEach(subs => subs.unsubscribe());
+    this.plyrSub.forEach((subs) => subs.unsubscribe());
   }
 
   clickPlayerEventHandler(player: TopPlayer) {
     this.router.navigate(["/playerDetails", player.player.id], {
-      state: player
+      state: player,
     });
   }
 }

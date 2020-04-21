@@ -63,6 +63,10 @@ export class PlayerService {
     }));
   }
 
+  _getBestScore(playerList: any[]) {
+    return _.maxBy(playerList, "runs").runs;
+  }
+
   getBestBowling(playerList: any[]) {
     return (playerList = [...playerList].sort((wickets1, wickets2) => {
       if (wickets1.wickets > wickets2.wickets) return -1;
@@ -70,14 +74,23 @@ export class PlayerService {
     }));
   }
 
-  getPlayerMatchDetails() {
+  getPlayerMatchDetails(year?: number) {
     zip(
       this.getPlayers(),
-      this.afs.collection<MatchDetails>("matchDetails").valueChanges()
+      this.afs.collection<MatchDetails>("matchDetails").valueChanges(),
+      this.matchService.getCurrentSeasonMatches(year)
     )
       .pipe(
-        map(([players, matchDetails]) => {
-          const result = _(matchDetails)
+        map(([players, matchDetails, matches]) => {
+          this.matchService.getSeasonMatches(year);
+          let currentSeasonMatchDetails = [];
+          const merge = _.map(matches, "id");
+          for (let i = 0; i < matchDetails.length; i++) {
+            if (merge.includes(matchDetails[i].matchId)) {
+              currentSeasonMatchDetails.push(matchDetails[i]);
+            }
+          }
+          const result = _(currentSeasonMatchDetails)
             .groupBy("playerId")
             .map((objs, key) => ({
               player: players.find((player) => player.id === key),
@@ -88,6 +101,10 @@ export class PlayerService {
               bestScore: this.getBestScore(objs)[0].runs || 0,
               bestBowling: this.getBestBowling(objs)[0].wickets || 0,
               totalMatches: objs.length || 0,
+              totalInns: objs.filter((player) => player.overs >= 1).length || 0,
+              totalBatInns:
+                objs.filter((player) => player.runs >= 0 || player.balls >= 0)
+                  .length || 0,
               totalRuns: _.sumBy(objs, "runs") || 0,
               totalBalls: _.sumBy(objs, "balls") || 0,
               totalFours: _.sumBy(objs, "fours") || 0,
@@ -103,6 +120,9 @@ export class PlayerService {
       )
       .subscribe(
         (players: TopPlayer[]) => {
+          players.forEach((player) => {
+            player.player.playerDob = player.player.playerDob.toDate();
+          });
           this.store.dispatch(new playerActions.GetAvailablePlayers(players));
         },
         (error) => {
@@ -136,8 +156,12 @@ export class PlayerService {
             fifties: objs.filter((player) => player.runs >= 50).length || 0,
             centuries: objs.filter((player) => player.runs >= 100).length || 0,
             isOut: objs.filter((player) => player.isOut).length || 0,
-            bestScore: this.getBestScore(objs)[0].runs || 0,
+            bestScore: _(objs).maxBy("runs").runs,
             bestBowling: this.getBestBowling(objs)[0].wickets || 0,
+            totalInns: objs.filter((player) => player.overs >= 1).length || 0,
+            totalBatInns:
+              objs.filter((player) => player.runs >= 0 || player.balls >= 0)
+                .length || 0,
             totalMatches: objs.length || 0,
             totalRuns: _.sumBy(objs, "runs") || 0,
             totalBalls: _.sumBy(objs, "balls") || 0,
@@ -178,6 +202,10 @@ export class PlayerService {
             bestScore: this.getBestScore(objs)[0].runs || 0,
             bestBowling: this.getBestBowling(objs)[0].wickets || 0,
             totalMatches: objs.length || 0,
+            totalInns: objs.filter((player) => player.overs >= 1).length || 0,
+            totalBatInns:
+              objs.filter((player) => player.runs >= 0 || player.balls >= 0)
+                .length || 0,
             totalRuns: _.sumBy(objs, "runs") || 0,
             totalBalls: _.sumBy(objs, "balls") || 0,
             totalFours: _.sumBy(objs, "fours") || 0,
@@ -236,11 +264,10 @@ export class PlayerService {
   }
 
   getSelectedPlayerPerformance(id: string) {
-    // this.store.dispatch(
-    //   new matchDetailsActions.GetSelectedPlayerPerformance(id)
-    // );
     return zip(
-      this.matchService.getMatchesWithId(),
+      // this.matchService.getMatchesWithId(),
+      // this.matchService.getCurrentSeasonMatches(),
+      this.store.select(fromMatchReducer.getSelectedSeasonMatches),
       this.afs
         .collection<MatchDetails>("matchDetails", (ref) =>
           ref.where("playerId", "==", id)
@@ -248,7 +275,15 @@ export class PlayerService {
         .valueChanges()
     ).pipe(
       map(([matches, matchDetails]) => {
-        return matchDetails.map((matDtls) => {
+        console.log(matches);
+        let currentSeasonMatchDetails = [];
+        const merge = _.map(matches, "id");
+        for (let i = 0; i < matchDetails.length; i++) {
+          if (merge.includes(matchDetails[i].matchId)) {
+            currentSeasonMatchDetails.push(matchDetails[i]);
+          }
+        }
+        return currentSeasonMatchDetails.map((matDtls) => {
           return {
             ...matDtls,
             opTeam: matches.find((match) => match.id === matDtls.matchId)

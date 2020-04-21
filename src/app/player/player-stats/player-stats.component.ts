@@ -4,7 +4,7 @@ import { TopPlayer } from "src/app/models/top-player.model";
 @Component({
   selector: "app-player-stats",
   templateUrl: "./player-stats.component.html",
-  styleUrls: ["./player-stats.component.css"]
+  styleUrls: ["./player-stats.component.css"],
 })
 export class PlayerStatsComponent implements OnInit {
   @Input() player: TopPlayer;
@@ -28,7 +28,10 @@ export class PlayerStatsComponent implements OnInit {
     }
   }
   getBowlingStrikeRate(player: TopPlayer) {
-    if (player.totalOvers === 0 && player.totalWickets === 0) {
+    if (
+      (player.totalOvers === 0 && player.totalWickets === 0) ||
+      (player.totalOvers > 0 && player.totalWickets === 0)
+    ) {
       return "-";
     } else {
       const convertOversToBalls = this.convertToBalls(player.totalOvers);
@@ -43,7 +46,10 @@ export class PlayerStatsComponent implements OnInit {
     }
   }
   getBowlingAvg(player: TopPlayer) {
-    if (player.totalRunsGiven === 0 && player.totalWickets === 0) {
+    if (
+      (player.totalOvers === 0 && player.totalWickets === 0) ||
+      (player.totalOvers > 0 && player.totalWickets === 0)
+    ) {
       return "-";
     } else {
       return (player.totalRunsGiven / player.totalWickets).toFixed(2) || 0;

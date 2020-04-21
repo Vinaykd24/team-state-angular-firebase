@@ -10,7 +10,7 @@ import { MatchDetails } from "src/app/models/match-details.model";
 @Component({
   selector: "app-player-details",
   templateUrl: "./player-details.component.html",
-  styleUrls: ["./player-details.component.scss"]
+  styleUrls: ["./player-details.component.scss"],
 })
 export class PlayerDetailsComponent implements OnInit {
   player: TopPlayer;
@@ -24,7 +24,7 @@ export class PlayerDetailsComponent implements OnInit {
   ) {
     this.store
       .select(fromPlayerReducer.getSelectedPlayer)
-      .subscribe(loadedPlayer => {
+      .subscribe((loadedPlayer) => {
         this.player = loadedPlayer;
         this.playerPerformance$ = this.playerService.getSelectedPlayerPerformance(
           loadedPlayer.player.id
@@ -34,7 +34,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.playerPerformance$.subscribe(
-      data => (this.playerPerformanceDetails = data)
+      (data) => (this.playerPerformanceDetails = data)
     );
   }
 }

@@ -3,19 +3,25 @@ import { Action, createFeatureSelector, createSelector } from "@ngrx/store";
 import {
   MatchActions,
   GET_AVAILABLE_MATCHES,
-  SELECTED_MATCH
+  GET_SELECTED_SEASON_MATCHES,
+  SELECTED_MATCH,
+  SET_SEASON,
 } from "./match.actions";
 import * as fromRoot from "../../app.reducer";
 import { Match } from "src/app/models/match.model";
 
 export interface State {
   availableMatches: Match[];
+  selectedSeasonMatches: Match[];
   selectedMatch: Match;
+  setSeason: string;
 }
 
 const initialState: State = {
   availableMatches: [],
-  selectedMatch: null
+  selectedSeasonMatches: [],
+  selectedMatch: null,
+  setSeason: null,
 };
 
 export function matchReducer(state = initialState, action: MatchActions) {
@@ -23,14 +29,26 @@ export function matchReducer(state = initialState, action: MatchActions) {
     case GET_AVAILABLE_MATCHES:
       return {
         ...state,
-        availableMatches: action.payload
+        availableMatches: action.payload,
+      };
+    case GET_SELECTED_SEASON_MATCHES:
+      return {
+        ...state,
+        selectedSeasonMatches: action.payload,
       };
     case SELECTED_MATCH:
       return {
         ...state,
         selectedMatch: {
-          ...state.availableMatches.find(match => match.id === action.payload)
-        }
+          ...state.availableMatches.find(
+            (match) => match.id === action.payload
+          ),
+        },
+      };
+    case SET_SEASON:
+      return {
+        ...state,
+        setSeason: action.payload,
       };
     default: {
       return state;
@@ -45,7 +63,17 @@ export const getAvailableMatches = createSelector(
   (state: State) => state.availableMatches
 );
 
+export const getSelectedSeasonMatches = createSelector(
+  getMatchState,
+  (state: State) => state.selectedSeasonMatches
+);
+
 export const getSelectedMatch = createSelector(
   getMatchState,
   (state: State) => state.selectedMatch
+);
+
+export const getSelectedSeason = createSelector(
+  getMatchState,
+  (state: State) => state.setSeason
 );

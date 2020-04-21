@@ -31,11 +31,11 @@ export class TournamentStatsComponent implements OnInit {
         this.topBowler = _.orderBy(data, ["totalWickets"], ["desc"])[0];
         this.topSixHitter = _.orderBy(data, ["totalSixes"], ["desc"])[0];
       });
-    this.fetchPlayers();
+    // this.fetchPlayers();
     this.playerService.getTourDetails().subscribe((data) => (this.data = data));
   }
 
-  fetchPlayers() {
-    this.playerService.getPlayerMatchDetails();
-  }
+  // fetchPlayers() {
+  //   this.playerService.getPlayerMatchDetails();
+  // }
 }

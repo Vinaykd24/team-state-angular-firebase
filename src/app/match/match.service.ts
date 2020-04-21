@@ -135,4 +135,57 @@ export class MatchService {
     );
     return this.matches;
   }
+
+  getCurrentSeasonMatches(year?: any) {
+    let query: AngularFirestoreCollection;
+    // const year = new Date().getFullYear();
+    if (year !== "all") {
+      let startDate = new Date(year - 1 + "-10-01");
+      let endDate = new Date(year + "-06-30");
+      query = this.afs.collection<Match>("matches", (ref) =>
+        ref.where("matchDate", ">", startDate).where("matchDate", "<", endDate)
+      );
+    } else {
+      query = this.matchesCollection;
+    }
+
+    this.matches = query.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Match;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+    return this.matches;
+  }
+  getSeasonMatches(year?: any) {
+    let query: AngularFirestoreCollection;
+    // const year = new Date().getFullYear();
+    if (year !== "all") {
+      let startDate = new Date(year - 1 + "-10-01");
+      let endDate = new Date(year + "-06-30");
+      query = this.afs.collection<Match>("matches", (ref) =>
+        ref.where("matchDate", ">", startDate).where("matchDate", "<", endDate)
+      );
+    } else {
+      query = this.matchesCollection;
+    }
+
+    query
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as Match;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      )
+      .subscribe((matches: Match[]) => {
+        this.store.dispatch(new matchActions.GetSelectedSeasonMatches(matches));
+      });
+  }
 }

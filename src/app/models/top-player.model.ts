@@ -2,9 +2,11 @@ import { Player } from "./player.model";
 
 export interface TopPlayer {
   player?: Player;
-  bestScore?: number;
-  bestBowling?: number;
+  bestScore?: any;
+  bestBowling?: any;
   totalMatches?: number;
+  totalBatInns?: number;
+  totalInns?: number;
   totalRuns?: number;
   totalBalls?: number;
   totalFours?: number;

@@ -39,7 +39,7 @@
         <div class="flex-fill">
           <div class="h6 mb-0">Date of Birth</div>
           <div class="h4 font-weight-bold" *ngIf="player.player.playerDob">
-            {{ player.player.playerDob.toDate() | date: "mediumDate" }}
+            {{ player.player.playerDob | date: "mediumDate" }}
             <!-- Jan, 1 1990 -->
           </div>
         </div>
@@ -55,10 +55,10 @@
           <p>
             Hi, my name is {{ player.player.playerFirstName }}
             {{ player.player.playerLastName }}. I was born on
-            {{ player.player.playerDob.toDate() | date: "mediumDate" }}, in
+            {{ player.player.playerDob | date: "mediumDate" }}, in
             {{ player.player.bornIn }}. My cricketing journey began in
             {{ player.player.bornIn }}. I became a part of the TCS Pune Cricket
-            Family in {{ player.player.joinedTcs | date: "mediumDate" }}.
+            <!-- Family in {{ player.player.joinedTcs | date: "mediumDate" }}. -->
           </p>
           <!-- <p>
             <strong>

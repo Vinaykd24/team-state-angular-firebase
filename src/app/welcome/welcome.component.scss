@@ -576,3 +576,10 @@ p {
   padding-top: 20px;
   width: 80%;
 }
+.list-group-item {
+  background: transparent !important;
+  padding: 0.25rem;
+  .btn-link {
+    color: #b88f4f;
+  }
+}

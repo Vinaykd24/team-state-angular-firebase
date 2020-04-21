@@ -130,13 +130,51 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center mobileWrapper">
+    <div class="overflow-auto">
+      <ul class="list-group list-group-horizontal align-items-center">
+        <li class="list-group-item">
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="selectSeason($event)"
+            value="current"
+          >
+            Current Season
+          </button>
+        </li>
+        <li class="list-group-item">
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="selectSeason($event)"
+            value="2019"
+          >
+            2019-18
+          </button>
+        </li>
+
+        <li class="list-group-item">
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="selectSeason($event)"
+            value="all"
+          >
+            All Records
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 <section class="container mb-3">
   <h3 class="title">
-    <span>
-      TCS Pune Cricket
+    TCS Pune Cricket
+    <span *ngIf="selectedSeason !== null"> {{ selectedSeason }} Stats </span>
+    <span *ngIf="selectedSeason === null">
+      Current Season Stats
     </span>
-    All Season Stats
   </h3>
   <app-tournament-stats></app-tournament-stats>
 </section>
