@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PlayerService } from "src/app/player/player.service";
 import { TopPlayer } from "src/app/models/top-player.model";
 import { Store } from "@ngrx/store";
 import { State } from "src/app/app.reducer";
 import * as fromPlayerReducer from "../../player/store/player.reducer";
+import * as fromMatchReducer from "../../match/store/match.reducer";
+import * as matchActions from "../../match/store/match.actions";
 import { Observable } from "rxjs";
 import * as _ from "lodash";
 
@@ -18,10 +20,19 @@ export class TournamentStatsComponent implements OnInit {
   topSixHitter: TopPlayer;
   data: any;
   players: any;
+  selectedSeason: any = new Date().getFullYear();
   constructor(
     private playerService: PlayerService,
     private store: Store<State>
-  ) {}
+  ) {
+    this.store
+      .select(fromMatchReducer.getSelectedSeason)
+      .subscribe((season) => {
+        if (season !== null) {
+          this.selectedSeason = season;
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.store
@@ -31,8 +42,15 @@ export class TournamentStatsComponent implements OnInit {
         this.topBowler = _.orderBy(data, ["totalWickets"], ["desc"])[0];
         this.topSixHitter = _.orderBy(data, ["totalSixes"], ["desc"])[0];
       });
+    this.store.select(fromMatchReducer.getSelectedMatch);
     // this.fetchPlayers();
-    this.playerService.getTourDetails().subscribe((data) => (this.data = data));
+    this.store
+      .select(fromMatchReducer.getSelectedSeason)
+      .subscribe((season) => {
+        this.playerService
+          .getTourDetails(this.selectedSeason)
+          .subscribe((data) => (this.data = data));
+      });
   }
 
   // fetchPlayers() {

@@ -82,7 +82,7 @@ export class PlayerService {
     )
       .pipe(
         map(([players, matchDetails, matches]) => {
-          this.matchService.getSeasonMatches(year);
+          // this.matchService.getSeasonMatches(year);
           let currentSeasonMatchDetails = [];
           const merge = _.map(matches, "id");
           for (let i = 0; i < matchDetails.length; i++) {
@@ -220,18 +220,20 @@ export class PlayerService {
       })
     );
   }
-  getTourDetails() {
-    return zip(
+  getTourDetails(year: any) {
+    return combineLatest(
       this.afs.collection<MatchDetails>("matchDetails").valueChanges(),
-      this.afs
-        .collection<MatchDetails>("matchDetails", (ref) =>
-          ref.orderBy("wickets", "desc")
-        )
-        .valueChanges(),
-      this.afs.collection<Match>("matches").valueChanges()
+      this.matchService.getCurrentSeasonMatches(year)
     ).pipe(
-      map(([matchDetails, topWkts, matches]) => {
-        const result = _(matchDetails)
+      map(([matchDetails, matches]) => {
+        let currentSeasonMatchDetails = [];
+        const merge = _.map(matches, "id");
+        for (let i = 0; i < matchDetails.length; i++) {
+          if (merge.includes(matchDetails[i].matchId)) {
+            currentSeasonMatchDetails.push(matchDetails[i]);
+          }
+        }
+        const result = _(currentSeasonMatchDetails)
           .groupBy("id")
           .map((objs, key) => ({
             // topRunsGetter: this.getBestScore(objs)[0],
