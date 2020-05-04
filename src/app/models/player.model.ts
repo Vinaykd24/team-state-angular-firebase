@@ -14,4 +14,5 @@ export interface Player {
   favDestination?: string;
   playerdFor?: string;
   bornIn?: string;
+  isCaptain?: boolean;
 }

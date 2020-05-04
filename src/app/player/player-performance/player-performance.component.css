@@ -1,5 +1,5 @@
 .customWidthClass {
-  flex: 0 0 20%;
+  flex: 0 0 35%;
   text-align: left !important;
 }
 span {
@@ -14,4 +14,10 @@ span {
 mat-cell,
 mat-header-cell {
   text-transform: uppercase;
+}
+@media (max-width: 576px) {
+  .customWidthClass {
+    flex: 0 0 50%;
+    font-size: 0.75rem;
+  }
 }

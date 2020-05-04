@@ -123,7 +123,19 @@ export class PlayerService {
           players.forEach((player) => {
             player.player.playerDob = player.player.playerDob.toDate();
           });
-          this.store.dispatch(new playerActions.GetAvailablePlayers(players));
+          players = _.orderBy(
+            players,
+            function (item) {
+              return item.player.playerFirstName;
+            },
+            ["asc"]
+          );
+          let sortedPlayers = _.sortBy(players, function (item) {
+            return item.player.isCaptain ? 0 : 1;
+          });
+          this.store.dispatch(
+            new playerActions.GetAvailablePlayers(sortedPlayers)
+          );
         },
         (error) => {
           console.log("Error while loading the players");

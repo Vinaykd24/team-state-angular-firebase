@@ -3,10 +3,10 @@
     <mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      [ngClass]="'customWidthClass'"
+      [ngClass]="'customWidthClass pl-1'"
       >Opponent Team</mat-header-cell
     >
-    <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'">
+    <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass pl-1'">
       <span>VS</span>
       {{ element.opTeam }}</mat-cell
     >
@@ -41,11 +41,17 @@
       *matHeaderCellDef
       mat-sort-header
       layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
       >4s</mat-header-cell
     >
-    <mat-cell *matCellDef="let element" layout-align="start center">{{
-      element.fours
-    }}</mat-cell>
+    <mat-cell
+      *matCellDef="let element"
+      layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
+      >{{ element.fours }}</mat-cell
+    >
   </ng-container>
 
   <ng-container matColumnDef="sixes">
@@ -53,11 +59,17 @@
       *matHeaderCellDef
       mat-sort-header
       layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
       >6s</mat-header-cell
     >
-    <mat-cell *matCellDef="let element" layout-align="start center">{{
-      element.sixes
-    }}</mat-cell>
+    <mat-cell
+      *matCellDef="let element"
+      layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
+      >{{ element.sixes }}</mat-cell
+    >
   </ng-container>
 
   <ng-container matColumnDef="overs">
@@ -77,11 +89,17 @@
       *matHeaderCellDef
       mat-sort-header
       layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
       >M</mat-header-cell
     >
-    <mat-cell *matCellDef="let element" layout-align="start center">{{
-      element.maidens
-    }}</mat-cell>
+    <mat-cell
+      *matCellDef="let element"
+      layout-align="start center"
+      fxShow.lt-sm="false"
+      fxShow="true"
+      >{{ element.maidens }}</mat-cell
+    >
   </ng-container>
 
   <ng-container matColumnDef="runsGiven">
