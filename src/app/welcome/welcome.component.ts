@@ -44,6 +44,7 @@ export class WelcomeComponent implements OnInit {
     this.fetchMatches();
     this.fetchSeasonMatches();
     this.fetchMatchDetails();
+    console.log(this.selectedSeason);
   }
 
   ngOnInit(): void {

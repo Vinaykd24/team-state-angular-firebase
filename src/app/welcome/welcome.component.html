@@ -171,8 +171,16 @@
 <section class="container mb-3">
   <h3 class="title">
     TCS Pune Cricket
-    <span *ngIf="selectedSeason !== null"> {{ selectedSeason }} Stats </span>
-    <span *ngIf="selectedSeason === null">
+    <span class="d-block" *ngIf="selectedSeason === 2020">
+      2019-20 Season Stats</span
+    >
+    <span class="d-block" *ngIf="selectedSeason === '2019'">
+      2018-19 Season Stats</span
+    >
+    <span class="d-block" *ngIf="selectedSeason === 'all'">
+      All Time Season Stats</span
+    >
+    <span class="d-block" *ngIf="selectedSeason === null">
       Current Season Stats
     </span>
   </h3>
