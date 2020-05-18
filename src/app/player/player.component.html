@@ -6,7 +6,7 @@
       (click)="clickPlayerEventHandler(player)"
     >
       <div class="card text-center shadow-sm playerCard">
-        <div class="card-body">
+        <div class="card-body py-0 px-0 pb-2">
           <img
             src="../../assets/images/{{
               player.player.playerFirstName.toLowerCase()
@@ -15,7 +15,7 @@
               player.player.playerLastName
             }}"
             onerror="this.src='../../assets/images/uknown.jpg'"
-            class="img-thumbnail avatar"
+            class="avatar"
           />
           <div class="playerTitle">
             <h3>
