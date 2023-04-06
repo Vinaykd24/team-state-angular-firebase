@@ -37,9 +37,10 @@ import { TournamentStatsComponent } from "./match/tournament-stats/tournament-st
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerPerformanceComponent } from "./player/player-performance/player-performance.component";
-import { WelcomeComponent } from './welcome/welcome.component';
-import { TopPlayerListComponent } from './player/top-player-list/top-player-list.component';
-import { TourDetailsComponent } from './tournament/tour-details/tour-details.component';
+import { WelcomeComponent } from "./welcome/welcome.component";
+import { TopPlayerListComponent } from "./player/top-player-list/top-player-list.component";
+import { TourDetailsComponent } from "./tournament/tour-details/tour-details.component";
+import { ChartModule } from "angular-highcharts";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { TourDetailsComponent } from './tournament/tour-details/tour-details.com
     PlayerPerformanceComponent,
     WelcomeComponent,
     TopPlayerListComponent,
-    TourDetailsComponent
+    TourDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,11 +76,12 @@ import { TourDetailsComponent } from './tournament/tour-details/tour-details.com
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    ChartModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
-    })
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     PlayerService,
@@ -88,8 +90,8 @@ import { TourDetailsComponent } from './tournament/tour-details/tour-details.com
     UiService,
     MatchDetailsResolver,
     PlayerDetailsResolver,
-    AuthService
+    AuthService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

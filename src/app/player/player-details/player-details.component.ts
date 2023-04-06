@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Chart } from "angular-highcharts";
 import { State } from "../../app.reducer";
 import * as fromPlayerReducer from "../../player/store/player.reducer";
 import { Observable } from "rxjs";
@@ -18,6 +19,7 @@ export class PlayerDetailsComponent implements OnInit {
   playerPerformance$: Observable<MatchDetails[]>;
   playerPerformanceDetails: MatchDetails[];
   _data: any;
+  allWkts = [];
   constructor(
     private store: Store<State>,
     private playerService: PlayerService
@@ -26,15 +28,35 @@ export class PlayerDetailsComponent implements OnInit {
       .select(fromPlayerReducer.getSelectedPlayer)
       .subscribe((loadedPlayer) => {
         this.player = loadedPlayer;
-        this.playerPerformance$ = this.playerService.getSelectedPlayerPerformance(
-          loadedPlayer.player.id
-        );
+        this.playerPerformance$ =
+          this.playerService.getSelectedPlayerPerformance(
+            loadedPlayer.player.id
+          );
       });
   }
 
   ngOnInit(): void {
-    this.playerPerformance$.subscribe(
-      (data) => (this.playerPerformanceDetails = data)
-    );
+    this.playerPerformance$.subscribe((data) => {
+      this.playerPerformanceDetails = data;
+      this.allWkts = data?.map((item) => item.wickets);
+      console.log("Player Details ", this.allWkts);
+    });
   }
+  chart = new Chart({
+    chart: {
+      type: "line",
+    },
+    title: {
+      text: "Linechart",
+    },
+    credits: {
+      enabled: false,
+    },
+    series: [
+      {
+        name: "Line 1",
+        data: this.allWkts,
+      } as any,
+    ],
+  });
 }
