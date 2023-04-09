@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Titillium+Web:300i,400,400i,600,700,700i&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital@0;1&display=swap');
 .playerCard {
   /* width: 15rem; */
-  margin-top: 6.5rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.5rem;
   font-family: "Titillium Web", sans-serif;
   border: 1px solid #e2e2e2;
@@ -85,4 +87,17 @@
 .scoreWrapper .divider {
   border-left: 1px solid gray;
   border-right: 1px solid gray;
+}
+
+.playerRoleTitle {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2.5rem;
+  display: block;
+  font-weight: 700;
+  color: #0090ff;
+  text-transform: uppercase;
+  margin: 0px;
+  text-align: left;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d46e25;
 }

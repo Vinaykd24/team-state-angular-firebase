@@ -40,6 +40,7 @@ import { PlayerPerformanceComponent } from "./player/player-performance/player-p
 import { WelcomeComponent } from './welcome/welcome.component';
 import { TopPlayerListComponent } from './player/top-player-list/top-player-list.component';
 import { TourDetailsComponent } from './tournament/tour-details/tour-details.component';
+import { PlayerCardComponent } from './player/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { TourDetailsComponent } from './tournament/tour-details/tour-details.com
     PlayerPerformanceComponent,
     WelcomeComponent,
     TopPlayerListComponent,
-    TourDetailsComponent
+    TourDetailsComponent,
+    PlayerCardComponent
   ],
   imports: [
     BrowserModule,

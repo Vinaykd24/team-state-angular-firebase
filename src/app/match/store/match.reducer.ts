@@ -6,15 +6,20 @@ import {
   GET_SELECTED_SEASON_MATCHES,
   SELECTED_MATCH,
   SET_SEASON,
+  GET_TEAM_DETAILS,
+  SET_IS_MATCHES_PLAYED,
 } from "./match.actions";
 import * as fromRoot from "../../app.reducer";
 import { Match } from "src/app/models/match.model";
+import { TeamDetail } from "src/app/models/team.model";
 
 export interface State {
   availableMatches: Match[];
   selectedSeasonMatches: Match[];
   selectedMatch: Match;
   setSeason: string;
+  teamDetails: TeamDetail;
+  isMatchesPlayed: boolean;
 }
 
 const initialState: State = {
@@ -22,6 +27,8 @@ const initialState: State = {
   selectedSeasonMatches: [],
   selectedMatch: null,
   setSeason: null,
+  teamDetails: null,
+  isMatchesPlayed: false,
 };
 
 export function matchReducer(state = initialState, action: MatchActions) {
@@ -50,6 +57,16 @@ export function matchReducer(state = initialState, action: MatchActions) {
         ...state,
         setSeason: action.payload,
       };
+    case GET_TEAM_DETAILS:
+      return {
+        ...state,
+        teamDetails: action.payload,
+      };
+    case SET_IS_MATCHES_PLAYED:
+      return {
+        ...state,
+        isMatchesPlayed: action.payload,
+      };
     default: {
       return state;
     }
@@ -76,4 +93,16 @@ export const getSelectedMatch = createSelector(
 export const getSelectedSeason = createSelector(
   getMatchState,
   (state: State) => state.setSeason
+);
+
+export const getIsMatchesPlayed = createSelector(
+  getMatchState,
+  (state: State) => {
+    if (state.availableMatches.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+    state.isMatchesPlayed;
+  }
 );

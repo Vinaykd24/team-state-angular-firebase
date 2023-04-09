@@ -15,6 +15,7 @@ import { MatchDetails } from "../models/match-details.model";
 import { Store } from "@ngrx/store";
 import { State } from "./store/player.reducer";
 import * as playerActions from "./store/player.actions";
+import * as matchActions from "../match/store/match.actions";
 import * as fromPlayerReducer from "./store/player.reducer";
 import * as fromMatchDetails from "../match/store/match-details.reducer";
 import * as fromMatchReducer from "../match/store/match.reducer";
@@ -27,6 +28,7 @@ export class PlayerService {
   player: Observable<Player>;
   playerMatchDetails$: Observable<TopPlayer[]>;
   private playerSubs: Subscription[] = [];
+  hasMatchDetails: boolean;
 
   constructor(
     private afs: AngularFirestore,
@@ -83,6 +85,13 @@ export class PlayerService {
       .pipe(
         map(([players, matchDetails, matches]) => {
           // this.matchService.getSeasonMatches(year);
+          if (matchDetails.length === 0 && matches.length === 0) {
+            this.store.dispatch(new matchActions.setIsMatchesPlayed(false));
+          }
+          if (matchDetails.length === 0 && matches.length === 0) {
+            this.hasMatchDetails = false;
+          }
+          this.store.dispatch(new playerActions.GetAllayers(players));
           let currentSeasonMatchDetails = [];
           const merge = _.map(matches, "id");
           for (let i = 0; i < matchDetails.length; i++) {
@@ -94,6 +103,7 @@ export class PlayerService {
             .groupBy("playerId")
             .map((objs, key) => ({
               player: players.find((player) => player.id === key),
+              isCaptain: players.find((player) => player.id === key).isCaptain,
               fifties: objs.filter((player) => player.runs >= 50).length || 0,
               centuries:
                 objs.filter((player) => player.runs >= 100).length || 0,
@@ -255,6 +265,7 @@ export class PlayerService {
             fifties: objs.filter((player) => player.runs >= 50).length || 0,
             centuries: objs.filter((player) => player.runs >= 100).length || 0,
             winPercentage: this.calculateWinningPercentage(matches) || 0,
+            runDifference: this.calculateRunDifference(matches) || 0,
             totalRuns: _.sumBy(objs, "runs") || 0,
             totalFours: _.sumBy(objs, "fours") || 0,
             totalSixes: _.sumBy(objs, "sixes") || 0,
@@ -271,6 +282,14 @@ export class PlayerService {
     const totalWins =
       matches.filter((match) => match.homeTeamWon === true).length || 0;
     return ((totalWins / totalMatches) * 100).toFixed(2);
+  }
+
+  calculateRunDifference(matches: Match[]): number {
+    const totalMatches = matches.length;
+    const oppTeamTotalScoreAvg = _.sumBy(matches, "opTeamScore") / totalMatches;
+    const homeTeamTotalScoreAvg =
+      _.sumBy(matches, "homeTeamScore") / totalMatches;
+    return +(homeTeamTotalScoreAvg - oppTeamTotalScoreAvg).toFixed(2);
   }
 
   getSinglePlayerDetails(id: string) {
@@ -319,6 +338,59 @@ export class PlayerService {
     return [...playerList].sort((value1, value2) => {
       if (value1.totalWickets > value2.totalWickets) return -1;
       if (value1.totalWickets < value2.totalWickets) return 1;
+    });
+  }
+
+  getTopBowlingAvgList(playerList: any[]) {
+    const topBowlingAvgList = [...playerList].map((item) => {
+      if (
+        (item.totalOvers === 0 && item.totalWickets === 0) ||
+        (item.totalOvers > 0 && item.totalWickets === 0)
+      ) {
+        return { ...item, bowlingAvg: 0 };
+      } else {
+        const calcBowlingAvg = item.totalRunsGiven / item.totalWickets;
+        return { ...item, bowlingAvg: Math.round(calcBowlingAvg) };
+      }
+    });
+    console.log(topBowlingAvgList);
+    const filteredTopBowlingAvgList = [...topBowlingAvgList].filter(
+      (player) => {
+        if (player.totalMatches > 3 && player.bowlingAvg !== 0) {
+          return player;
+        }
+      }
+    );
+
+    console.log(filteredTopBowlingAvgList);
+    return [...filteredTopBowlingAvgList].sort((value1, value2) => {
+      if (value1.bowlingAvg > value2.bowlingAvg) return 1;
+      if (value1.bowlingAvg < value2.bowlingAvg) return -1;
+    });
+  }
+
+  getTopBattingAvgList(playerList: any[]) {
+    const topBattingAvgList = [...playerList].map((item) => {
+      if (item.totalRuns === 0) {
+        return { ...item, battingAvg: 0 };
+      } else {
+        const calcBattingAvg = item.totalRuns / item.isOut;
+        return { ...item, battingAvg: Math.round(calcBattingAvg) };
+      }
+    });
+    console.log(topBattingAvgList);
+    const filteredTopBattingAvgList = [...topBattingAvgList].filter(
+      (player) => {
+        if (player.totalMatches > 3 && player.battingAvg !== 0) {
+          return player;
+        }
+      }
+    );
+
+    console.log(filteredTopBattingAvgList);
+    return [...filteredTopBattingAvgList].sort((value1, value2) => {
+      if (value1.battingAvg > value2.battingAvg) return -1;
+      if (value1.battingAvg < value2.battingAvg) return 1;
     });
   }
 }

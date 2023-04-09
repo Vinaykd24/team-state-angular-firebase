@@ -18,4 +18,6 @@ export interface TopPlayer {
   fifties?: number;
   centuries?: number;
   isOut?: number;
+  bowlingAvg?: number;
+  battingAvg?: number;
 }

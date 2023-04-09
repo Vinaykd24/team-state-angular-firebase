@@ -3,9 +3,12 @@ import { PlayerService } from "./player.service";
 import { Subscription, Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import * as fromPlayerReducer from "../player/store/player.reducer";
+import * as fromMatchDetailsReducer from "../match/store/match-details.reducer";
+import * as fromMatchReducer from "../match/store/match.reducer";
 import { State } from "../app.reducer";
 import { TopPlayer } from "../models/top-player.model";
 import { Router } from "@angular/router";
+import { Player } from "../models/player.model";
 
 @Component({
   selector: "app-player",
@@ -15,6 +18,9 @@ import { Router } from "@angular/router";
 export class PlayerComponent implements OnInit, OnDestroy {
   plyrSub: Subscription[] = [];
   players$: Observable<TopPlayer[]>;
+  allPlayers$: Observable<Player[]>;
+  isMatchesPlayed$: Observable<boolean>;
+  allPlayersGroupByBattingStyle$: any;
 
   constructor(
     private playerService: PlayerService,
@@ -24,6 +30,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.players$ = this.store.select(fromPlayerReducer.getAvailablePlayers);
+    this.allPlayers$ = this.store.select(fromPlayerReducer.getAllPlayers);
+    this.isMatchesPlayed$ = this.store.select(
+      fromMatchReducer.getIsMatchesPlayed
+    );
+    this.allPlayersGroupByBattingStyle$ = this.store.select(
+      fromPlayerReducer.getAllPlayersGroupByBattingStyle
+    );
     // this.fetchPlayers();
   }
 

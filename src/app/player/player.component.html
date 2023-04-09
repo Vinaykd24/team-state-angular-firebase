@@ -1,5 +1,247 @@
 <div class="container">
+  <div class="row" *ngIf="allPlayersGroupByBattingStyle$ | async as playerData">
+    <ng-container
+      *ngIf="!(isMatchesPlayed$ | async); else elseMatchDetailsTemplate"
+    >
+      {{ isMatchesPlayed$ | async }}
+      <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <div class="col-12 px-0 mt-4">
+            <h2 class="playerRoleTitle">Batters</h2>
+          </div>
+          <div class="row justify-content-md-center">
+            <div
+              class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+              *ngFor="let player of playerData.Batsman"
+            >
+              <app-player-card [player]="player"></app-player-card>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-12 px-0 mt-4">
+            <h2 class="playerRoleTitle">All Rounders</h2>
+          </div>
+          <div class="row justify-content-md-center">
+            <div
+              class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+              *ngFor="let player of playerData.allRounder"
+            >
+              <app-player-card [player]="player"></app-player-card>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-12 px-0 mt-4">
+            <h2 class="playerRoleTitle">Bowlers</h2>
+          </div>
+          <div class="row justify-content-md-center">
+            <div
+              class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+              *ngFor="let player of playerData.Bowler"
+            >
+              <app-player-card [player]="player"></app-player-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseMatchDetailsTemplate>
+      <div>Else Block</div>
+    </ng-template>
+  </div>
+</div>
+
+<div class="container">
   <div class="row justify-content-md-center">
+    <!-- <ng-container *ngIf="!(isMatchesPlayed$ | async)">
+      <h2>Batters</h2>
+      <div
+        class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+        *ngFor="let player of (allPlayersGroupByBattingStyle$ | async).Batsman"
+      >
+        <div class="card text-center shadow-sm playerCard">
+          <div class="card-body py-0 px-0 pb-2">
+            <img
+              src="../../assets/images/{{
+                player.playerFirstName.toLowerCase()
+              }}_{{ player.playerLastName.toLowerCase() }}.jpg"
+              alt="{{ player.playerFirstName }} {{ player.playerLastName }}"
+              onerror="this.src='../../assets/images/uknown.jpg'"
+              class="avatar"
+            />
+            <div class="playerTitle">
+              <h3>
+                {{ player.playerFirstName }}
+                <span>{{ player.playerLastName }}</span>
+              </h3>
+            </div>
+            <strong
+              class="card-text d-block flex-fill mb-3 text-uppercase titillium"
+            >
+              {{ playerRole }}
+            </strong>
+            <div
+              class="d-flex flex-row justify-content-center scoreWrapper pb-2"
+            >
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalMatches }}</strong>
+                <span>M</span>
+              </div>
+              <div class="d-flex flex-column flex-fill divider">
+                <strong>{{ player.totalRuns }}</strong>
+                <span>R</span>
+              </div>
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalWickets }}</strong>
+                <span>W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>All Rounder</h2>
+      <div
+        class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+        *ngFor="
+          let player of (allPlayersGroupByBattingStyle$ | async).allRounder
+        "
+      >
+        <div class="card text-center shadow-sm playerCard">
+          <div class="card-body py-0 px-0 pb-2">
+            <img
+              src="../../assets/images/{{
+                player.playerFirstName.toLowerCase()
+              }}_{{ player.playerLastName.toLowerCase() }}.jpg"
+              alt="{{ player.playerFirstName }} {{ player.playerLastName }}"
+              onerror="this.src='../../assets/images/uknown.jpg'"
+              class="avatar"
+            />
+            <div class="playerTitle">
+              <h3>
+                {{ player.playerFirstName }}
+                <span>{{ player.playerLastName }}</span>
+              </h3>
+            </div>
+            <strong
+              class="card-text d-block flex-fill mb-3 text-uppercase titillium"
+            >
+              {{ playerRole }}
+            </strong>
+            <div
+              class="d-flex flex-row justify-content-center scoreWrapper pb-2"
+            >
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalMatches }}</strong>
+                <span>M</span>
+              </div>
+              <div class="d-flex flex-column flex-fill divider">
+                <strong>{{ player.totalRuns }}</strong>
+                <span>R</span>
+              </div>
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalWickets }}</strong>
+                <span>W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Bowlers</h2>
+      <div
+        class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+        *ngFor="let player of (allPlayersGroupByBattingStyle$ | async).Bowler"
+      >
+        <div class="card text-center shadow-sm playerCard">
+          <div class="card-body py-0 px-0 pb-2">
+            <img
+              src="../../assets/images/{{
+                player.playerFirstName.toLowerCase()
+              }}_{{ player.playerLastName.toLowerCase() }}.jpg"
+              alt="{{ player.playerFirstName }} {{ player.playerLastName }}"
+              onerror="this.src='../../assets/images/uknown.jpg'"
+              class="avatar"
+            />
+            <div class="playerTitle">
+              <h3>
+                {{ player.playerFirstName }}
+                <span>{{ player.playerLastName }}</span>
+              </h3>
+            </div>
+            <strong
+              class="card-text d-block flex-fill mb-3 text-uppercase titillium"
+            >
+              {{ playerRole }}
+            </strong>
+            <div
+              class="d-flex flex-row justify-content-center scoreWrapper pb-2"
+            >
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalMatches }}</strong>
+                <span>M</span>
+              </div>
+              <div class="d-flex flex-column flex-fill divider">
+                <strong>{{ player.totalRuns }}</strong>
+                <span>R</span>
+              </div>
+              <div class="d-flex flex-column flex-fill">
+                <strong>{{ player.totalWickets }}</strong>
+                <span>W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <h1>All Players</h1>
+        <div
+          class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
+          *ngFor="let player of allPlayers$ | async"
+        >
+          <div class="card text-center shadow-sm playerCard">
+            <div class="card-body py-0 px-0 pb-2">
+              <img
+                src="../../assets/images/{{
+                  player.playerFirstName.toLowerCase()
+                }}_{{ player.playerLastName.toLowerCase() }}.jpg"
+                alt="{{ player.playerFirstName }} {{ player.playerLastName }}"
+                onerror="this.src='../../assets/images/uknown.jpg'"
+                class="avatar"
+              />
+              <div class="playerTitle">
+                <h3>
+                  {{ player.playerFirstName }}
+                  <span>{{ player.playerLastName }}</span>
+                </h3>
+              </div>
+              <strong
+                class="card-text d-block flex-fill mb-3 text-uppercase titillium"
+              >
+                {{ playerRole }}
+              </strong>
+              <div
+                class="d-flex flex-row justify-content-center scoreWrapper pb-2"
+              >
+                <div class="d-flex flex-column flex-fill">
+                  <strong>{{ player.totalMatches }}</strong>
+                  <span>M</span>
+                </div>
+                <div class="d-flex flex-column flex-fill divider">
+                  <strong>{{ player.totalRuns }}</strong>
+                  <span>R</span>
+                </div>
+                <div class="d-flex flex-column flex-fill">
+                  <strong>{{ player.totalWickets }}</strong>
+                  <span>W</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container> -->
+
     <div
       class="col-md-4 col-lg-3 mr-2 ml-2 mr-sm-0 ml-sm-0"
       *ngFor="let player of players$ | async"

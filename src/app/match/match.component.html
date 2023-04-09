@@ -41,10 +41,12 @@
           fxFlex="12"
           *ngIf="match.matchDate"
         >
-          <span class="day">{{ match.matchDate.toDate() | date: "EEEE" }}</span>
-          <span class="date">{{ match.matchDate.toDate() | date: "dd" }}</span>
+          <span class="day">{{
+            match.matchDate.toDate() | date : "EEEE"
+          }}</span>
+          <span class="date">{{ match.matchDate.toDate() | date : "dd" }}</span>
           <span class="month">{{
-            match.matchDate.toDate() | date: "MMM yyyy"
+            match.matchDate.toDate() | date : "MMM yyyy"
           }}</span>
         </div>
         <div
@@ -73,7 +75,7 @@
         <div fxLayout="column" fxFlex fxLayoutAlign="center center">
           <div fxLayout="row" fxLayoutAlign="start center" fxFill="100%">
             <div fxFlex class="homeTeamScore">
-              <p>TCS Pune</p>
+              <p>Rising Stars</p>
               <p>
                 <span
                   >{{ match.homeTeamScore }}/{{ match.homeTeamWickets }}</span
@@ -88,9 +90,7 @@
           </div>
         </div>
         <div fxFlex="20%" fxLayoutAlign="end center" class="matchCenter">
-          <div class="matchEvent">
-            Score Card
-          </div>
+          <div class="matchEvent">Score Card</div>
         </div>
       </div>
     </div>
@@ -111,12 +111,12 @@
           (click)="clickMatchEventHandler(match)"
         >
           <div class="d-flex flex-column flex-fill">
-            {{ match.matchDate.toDate() | date: "mediumDate" }}
+            {{ match.matchDate.toDate() | date : "mediumDate" }}
           </div>
           <small class="w-100 mb-2 text-uppercase">{{ match.result }}</small>
           <div class="flex-fill flex-row d-flex">
             <h2 class="flex-fill font-italic font-weight-bold titillium mb-0">
-              TCS PUNE
+              Rising Stars
             </h2>
             <h2 class="font-italic titillium mb-0 score">
               {{ match.homeTeamScore }}/{{ match.homeTeamWickets }}
@@ -133,9 +133,7 @@
             </h2>
           </div>
           <div class="text-center">
-            <span class="material-icons">
-              keyboard_arrow_right
-            </span>
+            <span class="material-icons"> keyboard_arrow_right </span>
           </div>
         </div>
       </div>

@@ -4,17 +4,19 @@ import { MatchDetails } from "src/app/models/match-details.model";
 import {
   MatchDetailsActions,
   GET_AVAILABLE_MATCH_DETAILS,
-  GET_SELECTED_PLAYER_PERFORMANCE
+  GET_SELECTED_PLAYER_PERFORMANCE,
 } from "./match-details.actions";
 
 export interface State {
   availableMatchDetails: MatchDetails[];
   selectedPlayerPerformance: MatchDetails[];
+  isMatchesPlayed: boolean;
 }
 
 const initialState: State = {
   availableMatchDetails: [],
-  selectedPlayerPerformance: []
+  selectedPlayerPerformance: [],
+  isMatchesPlayed: false,
 };
 
 export function matchDetailsReducer(
@@ -25,16 +27,16 @@ export function matchDetailsReducer(
     case GET_AVAILABLE_MATCH_DETAILS:
       return {
         ...state,
-        availableMatchDetails: action.payload
+        availableMatchDetails: action.payload,
       };
     case GET_SELECTED_PLAYER_PERFORMANCE:
       return {
         ...state,
         selectedlayer: {
           ...state.availableMatchDetails.filter(
-            matDtls => matDtls.playerId === action.payload
-          )
-        }
+            (matDtls) => matDtls.playerId === action.payload
+          ),
+        },
       };
     default: {
       return state;
@@ -42,9 +44,8 @@ export function matchDetailsReducer(
   }
 }
 
-export const getMatchDetailsState = createFeatureSelector<State>(
-  "matchDetails"
-);
+export const getMatchDetailsState =
+  createFeatureSelector<State>("matchDetails");
 
 export const getAvailableMatchDetails = createSelector(
   getMatchDetailsState,

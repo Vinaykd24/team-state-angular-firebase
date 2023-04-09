@@ -13,6 +13,7 @@ import { State } from "./store/match.reducer";
 import * as fromMatchDetailsReducer from "./store/match-details.reducer";
 import * as matchActions from "./store/match.actions";
 import * as matchDetailsActions from "./store/match-details.actions";
+import { TeamDetail } from "../models/team.model";
 
 @Injectable({
   providedIn: "root",
@@ -26,12 +27,20 @@ export class MatchService {
   matchDetailsDoc: AngularFirestoreDocument<MatchDetails>;
   matchDetails: Observable<MatchDetails[]>;
   matchDetail: Observable<MatchDetails>;
+  teamCollection: AngularFirestoreCollection<TeamDetail>;
+  teamDetailsDoc: AngularFirestoreDocument<TeamDetail>;
+  teamDetails: Observable<TeamDetail>;
 
   constructor(private afs: AngularFirestore, private store: Store<State>) {
     this.matchesCollection = this.afs.collection("matches", (ref) =>
       ref.orderBy("matchDate", "desc")
     );
     this.matchDetailsCollection = this.afs.collection("matchDetails");
+    this.teamCollection = this.afs.collection("teamDetails", (ref) =>
+      ref.orderBy("teamName")
+    );
+    this.teamDetailsDoc = this.afs.doc<TeamDetail>("teamDetails/teamId1");
+    this.teamDetails = this.teamDetailsDoc.valueChanges();
   }
   getMatches() {
     //Get Matches with ID
@@ -49,6 +58,12 @@ export class MatchService {
       .subscribe((matches: Match[]) => {
         this.store.dispatch(new matchActions.GetAvailableMatches(matches));
       });
+  }
+
+  getTeamDetails() {
+    this.teamDetails.subscribe((teamData: TeamDetail) => {
+      this.store.dispatch(new matchActions.GetTeamDetails(teamData));
+    });
   }
 
   getMatchesWithId() {

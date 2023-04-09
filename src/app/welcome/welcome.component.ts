@@ -21,6 +21,8 @@ import { MatchService } from "../match/match.service";
 export class WelcomeComponent implements OnInit {
   topBatsmanList: TopPlayer[];
   topBowlerList: TopPlayer[];
+  topBowlerAvgList: TopPlayer[];
+  topBattingAvgList: TopPlayer[];
   matches$: Observable<Match[]>;
   matchDetails$: Observable<MatchDetails[]>;
   selectedSeason: any = new Date().getFullYear();
@@ -53,6 +55,7 @@ export class WelcomeComponent implements OnInit {
     this.matchDetails$ = this.store.select(
       fromMatchDetailsReducer.getAvailableMatchDetails
     );
+    this.initiateSeason();
   }
 
   fetchPlayers() {
@@ -63,6 +66,12 @@ export class WelcomeComponent implements OnInit {
       .getTopBatsmanList(list)
       .slice(0, 5);
     this.topBowlerList = this.playerService.getTopBowlingList(list).slice(0, 5);
+    this.topBowlerAvgList = this.playerService
+      .getTopBowlingAvgList(list)
+      .slice(0, 5);
+    this.topBattingAvgList = this.playerService
+      .getTopBattingAvgList(list)
+      .slice(0, 5);
   }
   fetchMatches() {
     this.matchService.getMatches();
@@ -72,6 +81,9 @@ export class WelcomeComponent implements OnInit {
   }
   fetchMatchDetails() {
     this.matchService.getMatchDetails();
+  }
+  fetchTeamDetails() {
+    this.matchService.getTeamDetails();
   }
   selectSeason(e: any) {
     if (e.target.value === "current") {
@@ -84,5 +96,15 @@ export class WelcomeComponent implements OnInit {
     this.fetchMatches();
     this.fetchSeasonMatches();
     this.fetchMatchDetails();
+    this.fetchTeamDetails();
+  }
+  initiateSeason() {
+    this.selectedSeason = new Date().getFullYear();
+    this.store.dispatch(new matchActions.SetSeason(this.selectedSeason));
+    this.fetchPlayers();
+    this.fetchMatches();
+    this.fetchSeasonMatches();
+    this.fetchMatchDetails();
+    this.fetchTeamDetails();
   }
 }

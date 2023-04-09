@@ -13,7 +13,7 @@
 >
   <div fxFlex="60%" fxFlexFill class="teamContainer">
     <div class="teamSection">
-      <h3>TCS Pune Cricket Team</h3>
+      <h3>Rising Stars Cricket Team</h3>
       <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-3">
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
           <!-- <picture>
@@ -21,7 +21,7 @@
           </picture> -->
           <div fxFlex fxFlexFill>
             <h5>
-              Cricket season 2019-20:
+              Cricket season 2023:
               <span>
                 Champions of Infosys cup and Runner up in AJM 2020 till now.
               </span>
@@ -50,9 +50,7 @@
             </h5>
             <h5>
               Cricket Season 2015-16:
-              <span>
-                Champion of AJM) cricket tournament.
-              </span>
+              <span> Champion of AJM) cricket tournament. </span>
             </h5>
             <h5>
               Cricket Season 2014-2015:
@@ -63,21 +61,15 @@
             </h5>
             <h5>
               Cricket season - 2013- 14:
-              <span>
-                Champions of Manoj Phadke Memorial league( MPML).
-              </span>
+              <span> Champions of Manoj Phadke Memorial league( MPML). </span>
             </h5>
             <h5>
               Cricket season 2011-12:
-              <span>
-                Runner up in clash of 24 & Ubhe IT cup.
-              </span>
+              <span> Runner up in clash of 24 & Ubhe IT cup. </span>
             </h5>
             <h5>
               Cricket Season - 2010- 11:
-              <span>
-                Runner up in Maharshtra Krida Mandal ( MKM).
-              </span>
+              <span> Runner up in Maharshtra Krida Mandal ( MKM). </span>
             </h5>
           </div>
         </div>
@@ -109,11 +101,8 @@
     <div
       class="d-flex flex-column justify-content-between flex-fill text-center"
     >
-      <h1 class="m-3">Welcome to TCS Pune Cricket Team!</h1>
+      <h1 class="m-3">Welcome to Rising Stars Team!</h1>
       <div class="flex-fill">
-        <h4>
-          15 Times Champions
-        </h4>
         <div class="d-flex flex-fill">
           <picture class="flex-fill">
             <img
@@ -125,14 +114,15 @@
           </picture>
         </div>
         <h4>
-          8 Times Runners-up
+          Like the people says, <i>taste the success once… tongue want more.</i>
         </h4>
       </div>
     </div>
   </div>
   <div class="row justify-content-center mobileWrapper">
-    <div class="overflow-auto">
-      <ul class="list-group list-group-horizontal align-items-center">
+    <div class="overflow-auto py-2">
+      Current Season Performance!
+      <!-- <ul class="list-group list-group-horizontal align-items-center">
         <li class="list-group-item">
           <button
             type="button"
@@ -164,13 +154,13 @@
             All Records
           </button>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </div>
 <section class="container mb-3">
   <h3 class="title">
-    TCS Pune Cricket
+    Rising Stars Cricket
     <span class="d-block" *ngIf="selectedSeason === 2020">
       2019-20 Season Stats</span
     >
@@ -197,6 +187,16 @@
     <app-top-player-list
       [topPlayerList]="topBowlerList"
       [statsType]="'bowler'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
+    <app-top-player-list
+      [topPlayerList]="topBowlerAvgList"
+      [statsType]="'bowlerAvg'"
+      class="col-md-6 col-lg-4"
+    ></app-top-player-list>
+    <app-top-player-list
+      [topPlayerList]="topBattingAvgList"
+      [statsType]="'battingAvg'"
       class="col-md-6 col-lg-4"
     ></app-top-player-list>
   </div>

@@ -9,17 +9,17 @@ import { State } from "../store/player.reducer";
 @Component({
   selector: "app-add-player",
   templateUrl: "./add-player.component.html",
-  styleUrls: ["./add-player.component.css"]
+  styleUrls: ["./add-player.component.css"],
 })
 export class AddPlayerComponent implements OnInit {
   playerRoles = [
     { id: "1", value: "Batsman" },
     { id: "2", value: "Bowler" },
-    { id: "3", value: "All-rounder" }
+    { id: "3", value: "All-rounder" },
   ];
   playerBattingStyles = [
     { id: "1", value: "Right-hand bat" },
-    { id: "2", value: "Left-hand bat" }
+    { id: "2", value: "Left-hand bat" },
   ];
   playerBowlingStyles = [
     { id: "1", value: "Right-arm fast" },
@@ -31,7 +31,7 @@ export class AddPlayerComponent implements OnInit {
     { id: "7", value: "Left-arm medium fast" },
     { id: "8", value: "Slow left-arm orthodox" },
     { id: "9", value: "Left-arm orthodox spin" },
-    { id: "10", value: "-" }
+    { id: "10", value: "-" },
   ];
   maxDate;
   constructor(
@@ -47,6 +47,6 @@ export class AddPlayerComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Player; valid: boolean }) {
     this.playerService.newPlayer(value);
-    this.router.navigate(["/"]);
+    this.router.navigate(["/add-player"]);
   }
 }

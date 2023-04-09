@@ -1,15 +1,13 @@
 <div class="topPlayerList mb-2">
   <h4 class="mb-2">
     Player
-    <span *ngIf="statsType === 'batsman'">
-      Batting Stats
-    </span>
-    <span *ngIf="statsType === 'bowler'">
-      Bowling Stats
-    </span>
+    <span *ngIf="statsType === 'batsman'"> Batting Stats </span>
+    <span *ngIf="statsType === 'bowler'"> Bowling Stats </span>
+    <span *ngIf="statsType === 'bowlerAvg'"> Bowling Avg Stats </span>
+    <span *ngIf="statsType === 'battingAvg'"> Batting Avg Stats </span>
   </h4>
   <ul>
-    <li *ngFor="let topPlayer of topPlayerList | slice: 0:5">
+    <li *ngFor="let topPlayer of topPlayerList | slice : 0 : 5">
       <a
         [routerLink]="['/playerDetails', topPlayer.player.id]"
         [state]="topPlayer"
@@ -36,10 +34,14 @@
           <div *ngIf="statsType === 'bowler'" class="pr-2">
             <strong>{{ topPlayer.totalWickets }}</strong>
           </div>
+          <div *ngIf="statsType === 'bowlerAvg'" class="pr-2">
+            <strong>{{ topPlayer.bowlingAvg }}</strong>
+          </div>
+          <div *ngIf="statsType === 'battingAvg'" class="pr-2">
+            <strong>{{ topPlayer.battingAvg }}</strong>
+          </div>
           <div>
-            <span class="material-icons">
-              keyboard_arrow_right
-            </span>
+            <span class="material-icons"> keyboard_arrow_right </span>
           </div>
         </div>
       </a>
