@@ -69,11 +69,8 @@ export class PlayerService {
     return _.maxBy(playerList, "runs").runs;
   }
 
-  getBestBowling(playerList: any[]) {
-    return (playerList = [...playerList].sort((wickets1, wickets2) => {
-      if (wickets1.wickets > wickets2.wickets) return -1;
-      if (wickets1.wickets < wickets2.wickets) return 1;
-    }));
+  getBestBowling(playerList: any[]): any[] {
+    return playerList.sort((a, b) => b.wickets - a.wickets);
   }
 
   getPlayerMatchDetails(year?: number) {
@@ -278,17 +275,31 @@ export class PlayerService {
   }
 
   calculateWinningPercentage(matches: Match[]): string {
-    const totalMatches = matches.length;
-    const totalWins =
-      matches.filter((match) => match.homeTeamWon === true).length || 0;
-    return ((totalWins / totalMatches) * 100).toFixed(2);
+    let totalMatches = 0;
+    let totalWins = 0;
+    for (const match of matches) {
+      totalMatches++;
+      if (match.homeTeamWon === true) {
+        totalWins++;
+      }
+    }
+    const winningPercentage = (totalWins / totalMatches) * 100;
+    return `${winningPercentage.toFixed()}`;
   }
 
   calculateRunDifference(matches: Match[]): number {
     const totalMatches = matches.length;
-    const oppTeamTotalScoreAvg = _.sumBy(matches, "opTeamScore") / totalMatches;
-    const homeTeamTotalScoreAvg =
-      _.sumBy(matches, "homeTeamScore") / totalMatches;
+    let oppTeamTotalScore = 0;
+    let homeTeamTotalScore = 0;
+
+    for (let i = 0; i < totalMatches; i++) {
+      oppTeamTotalScore += matches[i].opTeamScore;
+      homeTeamTotalScore += matches[i].homeTeamScore;
+    }
+
+    const oppTeamTotalScoreAvg: number = oppTeamTotalScore / totalMatches;
+    const homeTeamTotalScoreAvg: number = homeTeamTotalScore / totalMatches;
+
     return +(homeTeamTotalScoreAvg - oppTeamTotalScoreAvg).toFixed(2);
   }
 
@@ -297,52 +308,38 @@ export class PlayerService {
   }
 
   getSelectedPlayerPerformance(id: string) {
-    return zip(
-      // this.matchService.getMatchesWithId(),
-      // this.matchService.getCurrentSeasonMatches(),
+    return combineLatest([
       this.store.select(fromMatchReducer.getSelectedSeasonMatches),
       this.afs
         .collection<MatchDetails>("matchDetails", (ref) =>
           ref.where("playerId", "==", id)
         )
-        .valueChanges()
-    ).pipe(
+        .valueChanges(),
+    ]).pipe(
       map(([matches, matchDetails]) => {
         console.log(matches);
-        let currentSeasonMatchDetails = [];
-        const merge = _.map(matches, "id");
-        for (let i = 0; i < matchDetails.length; i++) {
-          if (merge.includes(matchDetails[i].matchId)) {
-            currentSeasonMatchDetails.push(matchDetails[i]);
-          }
-        }
-        return currentSeasonMatchDetails.map((matDtls) => {
-          return {
-            ...matDtls,
-            opTeam: matches.find((match) => match.id === matDtls.matchId)
-              .opTeam,
-          };
-        });
+        const merge = matches.map((match) => match.id);
+        const currentSeasonMatchDetails = matchDetails.filter((md) =>
+          merge.includes(md.matchId)
+        );
+        return currentSeasonMatchDetails.map((md) => ({
+          ...md,
+          opTeam: matches.find((m) => m.id === md.matchId)?.opTeam,
+        }));
       })
     );
   }
 
-  getTopBatsmanList(playerList: any[]) {
-    return [...playerList].sort((value1, value2) => {
-      if (value1.totalRuns > value2.totalRuns) return -1;
-      if (value1.totalRuns < value2.totalRuns) return 1;
-    });
+  getTopBatsmanList(playerList: TopPlayer[]) {
+    return playerList.slice().sort((a, b) => b.totalRuns - a.totalRuns);
   }
 
-  getTopBowlingList(playerList: any[]) {
-    return [...playerList].sort((value1, value2) => {
-      if (value1.totalWickets > value2.totalWickets) return -1;
-      if (value1.totalWickets < value2.totalWickets) return 1;
-    });
+  getTopBowlingList(playerList: TopPlayer[]) {
+    return playerList.slice().sort((a, b) => b.totalWickets - a.totalWickets);
   }
 
-  getTopBowlingAvgList(playerList: any[]) {
-    const topBowlingAvgList = [...playerList].map((item) => {
+  getTopBowlingAvgList(playerList: TopPlayer[]) {
+    const topBowlingAvgList = Array.from(playerList, (item) => {
       if (
         (item.totalOvers === 0 && item.totalWickets === 0) ||
         (item.totalOvers > 0 && item.totalWickets === 0)
@@ -353,44 +350,31 @@ export class PlayerService {
         return { ...item, bowlingAvg: Math.round(calcBowlingAvg) };
       }
     });
-    console.log(topBowlingAvgList);
-    const filteredTopBowlingAvgList = [...topBowlingAvgList].filter(
-      (player) => {
-        if (player.totalMatches > 3 && player.bowlingAvg !== 0) {
-          return player;
-        }
-      }
+
+    const filteredTopBowlingAvgList = topBowlingAvgList.filter(
+      (player) => player.totalMatches > 3 && player.bowlingAvg !== 0
     );
 
-    console.log(filteredTopBowlingAvgList);
-    return [...filteredTopBowlingAvgList].sort((value1, value2) => {
+    return Array.from(filteredTopBowlingAvgList).sort((value1, value2) => {
       if (value1.bowlingAvg > value2.bowlingAvg) return 1;
       if (value1.bowlingAvg < value2.bowlingAvg) return -1;
+      return 0;
     });
   }
 
-  getTopBattingAvgList(playerList: any[]) {
-    const topBattingAvgList = [...playerList].map((item) => {
-      if (item.totalRuns === 0) {
-        return { ...item, battingAvg: 0 };
-      } else {
-        const calcBattingAvg = item.totalRuns / item.isOut;
-        return { ...item, battingAvg: Math.round(calcBattingAvg) };
-      }
+  getTopBattingAvgList(playerList: TopPlayer[]): TopPlayer[] {
+    const topBattingAvgList: TopPlayer[] = playerList.map((player) => {
+      const battingAvg =
+        player.isOut === 0 ? 0 : Math.round(player.totalRuns / player.isOut);
+      return { ...player, battingAvg };
     });
-    console.log(topBattingAvgList);
-    const filteredTopBattingAvgList = [...topBattingAvgList].filter(
-      (player) => {
-        if (player.totalMatches > 3 && player.battingAvg !== 0) {
-          return player;
-        }
-      }
+
+    const filteredTopBattingAvgList = topBattingAvgList.filter(
+      (player) => player.totalMatches > 3 && player.battingAvg !== 0
     );
 
-    console.log(filteredTopBattingAvgList);
-    return [...filteredTopBattingAvgList].sort((value1, value2) => {
-      if (value1.battingAvg > value2.battingAvg) return -1;
-      if (value1.battingAvg < value2.battingAvg) return 1;
-    });
+    return filteredTopBattingAvgList.sort(
+      (player1, player2) => player2.battingAvg - player1.battingAvg
+    );
   }
 }

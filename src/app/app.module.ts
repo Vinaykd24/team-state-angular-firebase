@@ -37,10 +37,11 @@ import { TournamentStatsComponent } from "./match/tournament-stats/tournament-st
 import { PlayerDetailsComponent } from "./player/player-details/player-details.component";
 import { PlayerDetailsResolver } from "./player/player-details/player-details.resolver";
 import { PlayerPerformanceComponent } from "./player/player-performance/player-performance.component";
-import { WelcomeComponent } from './welcome/welcome.component';
-import { TopPlayerListComponent } from './player/top-player-list/top-player-list.component';
-import { TourDetailsComponent } from './tournament/tour-details/tour-details.component';
-import { PlayerCardComponent } from './player/player-card/player-card.component';
+import { WelcomeComponent } from "./welcome/welcome.component";
+import { TopPlayerListComponent } from "./player/top-player-list/top-player-list.component";
+import { TourDetailsComponent } from "./tournament/tour-details/tour-details.component";
+import { PlayerCardComponent } from "./player/player-card/player-card.component";
+import { ChartModule } from "angular-highcharts";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { PlayerCardComponent } from './player/player-card/player-card.component'
     WelcomeComponent,
     TopPlayerListComponent,
     TourDetailsComponent,
-    PlayerCardComponent
+    PlayerCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,11 +78,12 @@ import { PlayerCardComponent } from './player/player-card/player-card.component'
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    ChartModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
-    })
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     PlayerService,
@@ -90,8 +92,8 @@ import { PlayerCardComponent } from './player/player-card/player-card.component'
     UiService,
     MatchDetailsResolver,
     PlayerDetailsResolver,
-    AuthService
+    AuthService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

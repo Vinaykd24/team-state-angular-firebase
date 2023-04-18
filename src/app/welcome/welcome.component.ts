@@ -61,7 +61,7 @@ export class WelcomeComponent implements OnInit {
   fetchPlayers() {
     this.playerService.getPlayerMatchDetails(this.selectedSeason);
   }
-  fetchTopBatsman(list: any[]) {
+  fetchTopBatsman(list: TopPlayer[]) {
     this.topBatsmanList = this.playerService
       .getTopBatsmanList(list)
       .slice(0, 5);

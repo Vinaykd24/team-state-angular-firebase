@@ -302,7 +302,9 @@
         >
           <div class="p-3">
             <h4>Run Difference</h4>
-            <h3>{{ data.runDifference }}</h3>
+            <h3 [ngClass]="{ 'text-danger': data.runDifference < 0 }">
+              {{ data.runDifference }}
+            </h3>
           </div>
         </div>
       </div>

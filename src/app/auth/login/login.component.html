@@ -2,14 +2,14 @@
 
 <section class="loginWrapper vh-100">
   <div class="container d-flex h-100">
-    <div class="row justify-content-center align-self-center m-auto loginForm">
-      <div class="d-flex flex-column">
-        <h2>Welcome To Criczy!</h2>
-        <form
-          [formGroup]="loginForm"
-          (ngSubmit)="onSubmit()"
-          class="d-flex flex-column flex-fill justify-content-center"
-        >
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="d-flex flex-column flex-fill justify-content-center"
+    >
+      <div class="justify-content-center align-self-center m-auto loginForm">
+        <div class="d-flex flex-column">
+          <h2>Welcome To Criczy!</h2>
           <mat-form-field>
             <input
               type="email"
@@ -30,20 +30,36 @@
             <mat-hint>Please enter your password.</mat-hint>
             <mat-error>Missing password.</mat-error>
           </mat-form-field>
-          <button
-            *ngIf="!(isLoading$ | async)"
-            type="submit"
-            mat-raised-button
-            color="primary"
-            [disabled]="loginForm.invalid"
-            class="m-4"
-          >
-            Submit
-          </button>
-          <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-        </form>
+          <div class="d-flex flex-column">
+            <button
+              *ngIf="!(isLoading$ | async)"
+              type="submit"
+              mat-flat-button
+              color="accent"
+              [disabled]="loginForm.invalid"
+              class="m-4"
+            >
+              Submit
+            </button>
+            <button
+              *ngIf="!(isLoading$ | async)"
+              mat-flat-button
+              color="primary"
+              class="m-4"
+            >
+              <mat-icon
+                class="align-content-around mb-1 mr-2"
+                aria-hidden="false"
+                aria-label="email icon"
+                >mail</mat-icon
+              >
+              Sign In With Google
+            </button>
+            <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </section>
 

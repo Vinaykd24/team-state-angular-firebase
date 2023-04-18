@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
+import { auth } from "firebase/app";
 
 import { User } from "../models/user.model";
 import { AuthData } from "../models/auth-data.model";
@@ -72,6 +73,13 @@ export class AuthService {
         this.store.dispatch(new UI.StopLoading());
         this.uiService.showSnackbar(error.message, null, 3000);
       });
+  }
+
+  async googleSignin(): Promise<void> {
+    const provider = new auth.GoogleAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
+    const user = credential.user;
+    // Save user details to Firestore collection
   }
 
   private updateUserData(user) {
