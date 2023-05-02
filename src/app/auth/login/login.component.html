@@ -4,7 +4,6 @@
   <div class="container d-flex h-100">
     <form
       [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
       class="d-flex flex-column flex-fill justify-content-center"
     >
       <div class="justify-content-center align-self-center m-auto loginForm">
@@ -36,6 +35,7 @@
               type="submit"
               mat-flat-button
               color="accent"
+              (click)="onSubmit()"
               [disabled]="loginForm.invalid"
               class="m-4"
             >
@@ -46,6 +46,7 @@
               mat-flat-button
               color="primary"
               class="m-4"
+              (click)="singInWithGoogle()"
             >
               <mat-icon
                 class="align-content-around mb-1 mr-2"

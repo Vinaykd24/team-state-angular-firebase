@@ -32,6 +32,9 @@
             Add Tournament
           </button>
           <button mat-menu-item (click)="onAddMatchClick()">Add Match</button>
+          <button mat-menu-item (click)="onAddMatchFixtureClick()">
+            Add Match Fixture
+          </button>
           <button mat-menu-item (click)="onAddMatchDetailsClick()">
             Add Match Details
           </button>
@@ -50,7 +53,7 @@
         <a routerLink="/add-tournament">Add Tournament</a>
       </li> -->
       <li *ngIf="isAuth$ | async">
-        <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        <a style="cursor: pointer" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>

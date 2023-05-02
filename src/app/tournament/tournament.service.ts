@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-  AngularFirestore
+  AngularFirestore,
 } from "@angular/fire/firestore";
 import { Observable, zip, combineLatest } from "rxjs";
 import * as _ from "lodash";
@@ -20,9 +20,10 @@ import { Match } from "../models/match.model";
 import { PlayerService } from "../player/player.service";
 import { Player } from "../models/player.model";
 import { TopPlayer } from "../models/top-player.model";
+import { MatchFixture } from "../models/match-fixture.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class TournamentService {
   tournamentsCollection: AngularFirestoreCollection<Tournament>;
@@ -42,8 +43,8 @@ export class TournamentService {
   getTournaments(): Observable<Tournament[]> {
     //Get tournaments with ID
     this.tournaments = this.tournamentsCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
+      map((actions) =>
+        actions.map((a) => {
           const data = a.payload.doc.data() as Tournament;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -57,10 +58,10 @@ export class TournamentService {
     const result = _(playerList)
       .groupBy("playerId")
       .map((objs, key) => ({
-        player: players.find(player => player.id === key),
-        fifties: objs.filter(player => player.runs >= 50).length || 0,
-        centuries: objs.filter(player => player.runs >= 100).length || 0,
-        isOut: objs.filter(player => player.isOut).length || 0,
+        player: players.find((player) => player.id === key),
+        fifties: objs.filter((player) => player.runs >= 50).length || 0,
+        centuries: objs.filter((player) => player.runs >= 100).length || 0,
+        isOut: objs.filter((player) => player.isOut).length || 0,
         totalMatches: objs.length || 0,
         totalRuns: _.sumBy(objs, "runs") || 0,
         totalBalls: _.sumBy(objs, "balls") || 0,
@@ -69,7 +70,7 @@ export class TournamentService {
         totalOvers: _.sumBy(objs, "overs") || 0,
         totalMaidens: _.sumBy(objs, "maidens") || 0,
         totalRunsGiven: _.sumBy(objs, "runsGiven") || 0,
-        totalWickets: _.sumBy(objs, "wickets") || 0
+        totalWickets: _.sumBy(objs, "wickets") || 0,
       }))
       .value();
     return {
@@ -77,7 +78,7 @@ export class TournamentService {
       topRunsGetter: _.orderBy([...result], "totalRuns", "desc"),
       topWktsGetter: _.orderBy([...result], "totalWickets", "desc"),
       totalSixes: _.sumBy([...result], "totalSixes") || 0,
-      totalFours: _.sumBy([...result], "totalFours") || 0
+      totalFours: _.sumBy([...result], "totalFours") || 0,
     };
   }
 
@@ -97,7 +98,7 @@ export class TournamentService {
 
             let loadedMatches = matches
               .slice()
-              .filter(match => match.tourId === tourKey);
+              .filter((match) => match.tourId === tourKey);
             const merge = _.map(loadedMatches, "id");
             for (let i = 0; i < matchDetails.length; i++) {
               if (merge.includes(matchDetails[i].matchId)) {
@@ -108,7 +109,7 @@ export class TournamentService {
               tourId: tourKey,
               tourInfo: tourObjs[0],
               totalMatches: loadedMatches,
-              tourDetails: this.getTourMatchDetails(tourMatches, allPlayers)
+              tourDetails: this.getTourMatchDetails(tourMatches, allPlayers),
             };
             transformedTournaments.push(result);
           })

@@ -14,12 +14,16 @@ import * as fromMatchDetailsReducer from "./store/match-details.reducer";
 import * as matchActions from "./store/match.actions";
 import * as matchDetailsActions from "./store/match-details.actions";
 import { TeamDetail } from "../models/team.model";
+import { MatchFixture } from "../models/match-fixture.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class MatchService {
   matchesCollection: AngularFirestoreCollection<Match>;
+  fixturesCollection: AngularFirestoreCollection<MatchFixture>;
+  matchFixtureCollection: AngularFirestoreCollection<MatchFixture>;
+  matchFixtures: Observable<MatchFixture[]>;
   matchDoc: AngularFirestoreDocument<Match>;
   matches: Observable<Match[]>;
   match: Observable<Match>;
@@ -33,6 +37,9 @@ export class MatchService {
 
   constructor(private afs: AngularFirestore, private store: Store<State>) {
     this.matchesCollection = this.afs.collection("matches", (ref) =>
+      ref.orderBy("matchDate", "desc")
+    );
+    this.fixturesCollection = this.afs.collection("fixtures", (ref) =>
       ref.orderBy("matchDate", "desc")
     );
     this.matchDetailsCollection = this.afs.collection("matchDetails");
@@ -58,6 +65,20 @@ export class MatchService {
       .subscribe((matches: Match[]) => {
         this.store.dispatch(new matchActions.GetAvailableMatches(matches));
       });
+  }
+
+  getMatchFixtures(): Observable<MatchFixture[]> {
+    //Get tournaments with ID
+    this.matchFixtures = this.fixturesCollection.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as MatchFixture;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+    return this.matchFixtures;
   }
 
   getTeamDetails() {
@@ -119,6 +140,10 @@ export class MatchService {
 
   newMatch(match: Match) {
     this.matchesCollection.add(match);
+  }
+
+  newMatchFixture(matchFixture: MatchFixture): void {
+    this.fixturesCollection.add(matchFixture);
   }
 
   newMatchDetails(matchDetails: MatchDetails[]) {

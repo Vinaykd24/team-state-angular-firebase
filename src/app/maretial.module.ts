@@ -17,6 +17,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { MatMenuModule } from "@angular/material/menu";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    MatButtonToggleModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -58,6 +60,7 @@ import { MatMenuModule } from "@angular/material/menu";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    MatButtonToggleModule,
   ],
 })
 export class MaterialModule {}

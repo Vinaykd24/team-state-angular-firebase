@@ -17,6 +17,7 @@ import {
   AngularFirestore,
 } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
+import * as firebase from "firebase/app";
 
 @Injectable()
 export class AuthService {
@@ -79,10 +80,11 @@ export class AuthService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     const user = credential.user;
+    this.updateUserData(user);
     // Save user details to Firestore collection
   }
 
-  private updateUserData(user) {
+  private updateUserData(user: firebase.User) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
@@ -94,10 +96,12 @@ export class AuthService {
       userId: user.uid,
       email: user.email,
       role: "subscriber",
+      displayName: user.displayName,
       // roles: {
       //   subscriber: true
       // }
     };
+    this.store.dispatch(new Auth.SetUser(data));
     return userRef.set(data, { merge: true });
   }
 

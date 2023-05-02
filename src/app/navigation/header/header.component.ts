@@ -44,6 +44,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("/add-match");
   }
 
+  onAddMatchFixtureClick() {
+    this.router.navigateByUrl("/add-match-fixture");
+  }
+
   onAddMatchDetailsClick() {
     this.router.navigateByUrl("/add-match-details");
   }

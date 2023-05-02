@@ -1,0 +1,11 @@
+<div *ngFor="let match of matchFixtures$ | async">
+  <h2>Rising Stars Vs {{ match.opponentTeamVenue }}</h2>
+  <p>Match Date: {{ match.matchDate.toDate() | date : "dd/MM/yyyy" }}</p>
+  <p>Location: {{ match.matchVenue }}</p>
+  <p>Match Time: {{ match.matchTime }}</p>
+  <!-- <mat-checkbox [(ngModel)]="match.isAvailable">I am available</mat-checkbox> -->
+  <button (click)="submitAvailability(true, match)">Coming</button>
+  <button (click)="submitAvailability(false, match)">Not Coming</button>
+
+  <button (click)="updateAvailability(match)">I'm available</button>
+</div>

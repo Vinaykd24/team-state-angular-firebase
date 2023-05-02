@@ -1,0 +1,122 @@
+<section class="container">
+  <form
+    (ngSubmit)="onSubmit(addMatchFixtureForm)"
+    #addMatchFixtureForm="ngForm"
+  >
+    <mat-card>
+      <mat-card-title>Add Match Fixture Details</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row">
+          <div
+            fxLayout="column"
+            fxFlex
+            fxFlexFill
+            fxLayoutAlign="space-between start"
+            class="pr-3"
+          >
+            <mat-form-field appearance="outline">
+              <mat-label>Select Tournament</mat-label>
+              <mat-select placeholder="Select Tournament" ngModel name="tourId">
+                <mat-option
+                  *ngFor="let tour of tournametList"
+                  [value]="tour.id"
+                >
+                  {{ tour.tourName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Match Date"
+                [matDatepicker]="picker"
+                ngModel
+                name="matchDate"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Opponent Team Name</mat-label>
+              <input
+                matInput
+                #opponentTeamVenueInput="ngModel"
+                ngModel
+                name="opponentTeamVenue"
+                opponentTeamVenueInput
+                required
+              />
+              <mat-error *ngIf="opponentTeamVenueInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Match Venue</mat-label>
+              <input
+                matInput
+                #matchVenueInput="ngModel"
+                ngModel
+                name="matchVenue"
+                matchVenueInput
+                required
+              />
+              <mat-error *ngIf="matchVenueInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Select Match Time</mat-label>
+              <mat-select
+                placeholder="Select Match Time"
+                ngModel
+                required
+                name="matchTime"
+              >
+                <mat-option
+                  *ngFor="let option of optionList"
+                  [value]="option.value"
+                >
+                  {{ option.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- <div
+            fxLayout="column"
+            fxFlex
+            fxFlexFill
+            fxLayoutAlign="space-between end"
+          >
+            <mat-checkbox ngModel name="isAvailable"
+              >Available For Match?</mat-checkbox
+            >
+            <mat-button-toggle-group ngModel name="isAvailable">
+              <mat-button-toggle [value]="true"> Coming </mat-button-toggle>
+              <mat-button-toggle [value]="false">
+                Not Coming
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div> -->
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="addMatchFixtureForm.invalid"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>

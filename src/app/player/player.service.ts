@@ -20,9 +20,11 @@ import * as fromPlayerReducer from "./store/player.reducer";
 import * as fromMatchDetails from "../match/store/match-details.reducer";
 import * as fromMatchReducer from "../match/store/match.reducer";
 import { Match } from "../models/match.model";
+import * as firebase from "firebase";
 @Injectable()
 export class PlayerService {
   playersCollection: AngularFirestoreCollection<Player>;
+  usersCollection: AngularFirestoreCollection<any>;
   playerDoc: AngularFirestoreDocument<Player>;
   players: Observable<Player[]>;
   player: Observable<Player>;
@@ -37,6 +39,9 @@ export class PlayerService {
   ) {
     this.playersCollection = this.afs.collection("players", (ref) =>
       ref.orderBy("playerFirstName", "desc")
+    );
+    this.usersCollection = this.afs.collection("users", (ref) =>
+      ref.orderBy("displayName", "desc")
     );
   }
 
@@ -56,6 +61,10 @@ export class PlayerService {
 
   newPlayer(player: Player) {
     this.playersCollection.add(player);
+  }
+
+  newUser(userDetails: firebase.User): void {
+    this.usersCollection.add(userDetails);
   }
 
   getBestScore(playerList: any[]) {

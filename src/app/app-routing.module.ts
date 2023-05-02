@@ -16,6 +16,7 @@ import { PlayerDetailsComponent } from "./player/player-details/player-details.c
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AuthGuard } from "./auth/auth.guard";
 import { TourDetailsComponent } from "./tournament/tour-details/tour-details.component";
+import { AddMatchFixtureComponent } from "./match/add-match-fixture/add-match-fixture.component";
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: "add-match-details",
     component: AddMatchDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "add-match-fixture",
+    component: AddMatchFixtureComponent,
     canActivate: [AuthGuard],
   },
   {

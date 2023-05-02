@@ -42,6 +42,8 @@ import { TopPlayerListComponent } from "./player/top-player-list/top-player-list
 import { TourDetailsComponent } from "./tournament/tour-details/tour-details.component";
 import { PlayerCardComponent } from "./player/player-card/player-card.component";
 import { ChartModule } from "angular-highcharts";
+import { MatchListComponent } from "./fixtures/calendar.component";
+import { AddMatchFixtureComponent } from "./match/add-match-fixture/add-match-fixture.component";
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { ChartModule } from "angular-highcharts";
     TopPlayerListComponent,
     TourDetailsComponent,
     PlayerCardComponent,
+    MatchListComponent,
+    AddMatchFixtureComponent,
   ],
   imports: [
     BrowserModule,
