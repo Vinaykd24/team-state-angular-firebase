@@ -33,7 +33,17 @@ export class AuthService {
   initAuthListener() {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
+        const data: User = {
+          userId: user.uid,
+          email: user.email,
+          role: "subscriber",
+          displayName: user.displayName,
+          // roles: {
+          //   subscriber: true
+          // }
+        };
         this.store.dispatch(new Auth.SetAuthenticated());
+        this.store.dispatch(new Auth.SetUser(data));
         this.router.navigate(["/"]);
       } else {
         // this.playerService.cancelSubscriptions();
