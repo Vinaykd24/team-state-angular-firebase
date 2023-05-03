@@ -33,3 +33,10 @@ h2 {
   margin: 1rem;
   text-align: center;
 }
+
+.center-button {
+  display: block;
+  margin: 0 auto;
+  height: 3rem;
+  width: 30rem;
+}

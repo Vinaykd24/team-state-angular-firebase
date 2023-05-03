@@ -1,8 +1,8 @@
 <section></section>
 
-<section class="loginWrapper vh-100">
-  <div class="container d-flex h-100">
-    <form
+<section class="justify-content-center pt-5 row vh-100">
+  <!-- <div class="container d-flex h-100">
+     <form
       [formGroup]="loginForm"
       class="d-flex flex-column flex-fill justify-content-center"
     >
@@ -61,7 +61,22 @@
         </div>
       </div>
     </form>
-  </div>
+  </div> -->
+  <button
+    *ngIf="!(isLoading$ | async)"
+    mat-flat-button
+    color="primary"
+    class="m-4 center-button"
+    (click)="singInWithGoogle()"
+  >
+    <mat-icon
+      class="align-content-around mb-1 mr-2"
+      aria-hidden="false"
+      aria-label="email icon"
+      >mail</mat-icon
+    >
+    Sign In With Google
+  </button>
 </section>
 
 <!-- <ol>

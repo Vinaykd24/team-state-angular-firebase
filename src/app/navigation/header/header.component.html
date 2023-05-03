@@ -9,11 +9,11 @@
   </div>
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.sm="true" fxHide.xs="true">
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li *ngIf="!(isAuth$ | async)">
+      <!-- <li *ngIf="!(isAuth$ | async)">
         <a routerLink="/signup">Signup</a>
-      </li>
+      </li> -->
       <li *ngIf="!(isAuth$ | async)">
-        <a routerLink="/login">Admin Login</a>
+        <a routerLink="/login">Login</a>
       </li>
       <li>
         <a routerLink="/players">Players</a>
