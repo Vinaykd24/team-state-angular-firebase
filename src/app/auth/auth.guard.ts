@@ -3,23 +3,37 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  CanLoad,
-  Route
+  Router,
 } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { take } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 import * as fromRoot from "../app.reducer";
+import * as fromAuthState from "../auth/store/auth.reducer";
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
-  constructor(private store: Store<fromRoot.State>) {}
+export class AuthGuard implements CanActivate {
+  constructor(
+    private store: Store<fromAuthState.State>,
+    private router: Router
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.store.select(fromRoot.getIsAuth).pipe(take(1));
-  }
+    return this.store.select(fromAuthState.getUser).pipe(
+      map((user) => {
+        if (user) {
+          // Check if the user is authenticated and has the required role
+          if (user.role === "admin") {
+            return true;
+          }
+        }
 
-  canLoad(route: Route) {
-    return this.store.select(fromRoot.getIsAuth).pipe(take(1));
+        // If the user is not authenticated or does not have the required role, redirect to the login page
+        this.router.navigate(["/"]);
+        return false;
+      })
+    );
+
+    // return this.store.select(fromAuthState.getIsAuth).pipe(take(1));
   }
 }

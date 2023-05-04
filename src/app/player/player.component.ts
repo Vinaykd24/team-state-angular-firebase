@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import * as fromPlayerReducer from "../player/store/player.reducer";
 import * as fromMatchDetailsReducer from "../match/store/match-details.reducer";
 import * as fromMatchReducer from "../match/store/match.reducer";
+import * as fromAuthReducer from "../auth/store/auth.reducer";
 import { State } from "../app.reducer";
 import { TopPlayer } from "../models/top-player.model";
 import { Router } from "@angular/router";
@@ -21,6 +22,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   allPlayers$: Observable<Player[]>;
   isMatchesPlayed$: Observable<boolean>;
   allPlayersGroupByBattingStyle$: any;
+  isAdmin$: Observable<boolean>;
 
   constructor(
     private playerService: PlayerService,
@@ -37,6 +39,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.allPlayersGroupByBattingStyle$ = this.store.select(
       fromPlayerReducer.getAllPlayersGroupByBattingStyle
     );
+    this.isAdmin$ = this.store.select(fromAuthReducer.getIsAdmin);
     // this.fetchPlayers();
   }
 

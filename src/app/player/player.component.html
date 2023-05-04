@@ -258,6 +258,9 @@
             }}"
             onerror="this.src='../../assets/images/uknown.jpg'"
             class="avatar"
+            [ngClass]="{
+              'bg-warning': player.player.isPartTime && (isAdmin$ | async)
+            }"
           />
           <div class="playerTitle">
             <h3>

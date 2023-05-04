@@ -9,6 +9,7 @@ import { User } from "../models/user.model";
 import { AuthData } from "../models/auth-data.model";
 import { UiService } from "../shared/ui.service";
 import * as fromRoot from "../app.reducer";
+import * as fromAuthReducer from "../auth/store/auth.reducer";
 import * as UI from "../shared/ui.actions";
 import * as Auth from "./store/auth.actions";
 import { PlayerService } from "../player/player.service";
@@ -18,9 +19,12 @@ import {
 } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 import * as firebase from "firebase/app";
+import { AdminUserList } from "../models/admin-users.model";
 
 @Injectable()
 export class AuthService {
+  user: firebase.User;
+  allowedUsers = ["vinay.kadam24@gmail.com", "mayanksae@gmail.com"];
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -33,17 +37,14 @@ export class AuthService {
   initAuthListener() {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        const data: User = {
+        const userData: User = {
           userId: user.uid,
           email: user.email,
-          role: "subscriber",
+          role: this.defineRole(user.email),
           displayName: user.displayName,
-          // roles: {
-          //   subscriber: true
-          // }
         };
         this.store.dispatch(new Auth.SetAuthenticated());
-        this.store.dispatch(new Auth.SetUser(data));
+        this.store.dispatch(new Auth.SetUser(userData));
         this.router.navigate(["/"]);
       } else {
         // this.playerService.cancelSubscriptions();
@@ -94,25 +95,27 @@ export class AuthService {
     // Save user details to Firestore collection
   }
 
-  private updateUserData(user: firebase.User) {
-    // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+  private async updateUserData(user: firebase.User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
-    // userRef
-    //   .valueChanges()
-    //   .subscribe(data => this.store.dispatch(new Auth.GetUserRole(data.role)));
-    const data: User = {
-      userId: user.uid,
-      email: user.email,
-      role: "subscriber",
-      displayName: user.displayName,
-      // roles: {
-      //   subscriber: true
-      // }
-    };
-    this.store.dispatch(new Auth.SetUser(data));
-    return userRef.set(data, { merge: true });
+
+    const snapshot = await userRef.get().toPromise();
+    if (!snapshot.exists) {
+      const userData: User = {
+        userId: user.uid,
+        email: user.email,
+        role: this.defineRole(user.email),
+        displayName: user.displayName,
+      };
+      await userRef.set(userData, { merge: true });
+      this.store.dispatch(new Auth.SetUser(userData));
+    }
+  }
+  defineRole(email: string): string {
+    const isAdmin = this.allowedUsers.some((userEmail) => userEmail === email);
+    this.store.dispatch(new Auth.SetIsAdmin(isAdmin));
+    return isAdmin ? "admin" : "subscriber";
   }
 
   ///// Role-based Authorization //////
