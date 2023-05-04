@@ -60,7 +60,7 @@
     mat-list-item
     routerLink="/login"
     (click)="onClose()"
-    *ngIf="!(isAdmin$ | async)"
+    *ngIf="!(isAdmin$ | async) && !(isAuth$ | async)"
   >
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Login</span>
