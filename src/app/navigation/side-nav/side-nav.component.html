@@ -15,7 +15,7 @@
     mat-list-item
     routerLink="/add-player"
     (click)="onClose()"
-    *ngIf="isAuth$ | async"
+    *ngIf="isAdmin$ | async"
   >
     <mat-icon>person_add</mat-icon>
     <span class="nav-caption">Add Players</span>
@@ -24,7 +24,7 @@
     mat-list-item
     routerLink="/add-tournament"
     (click)="onClose()"
-    *ngIf="isAuth$ | async"
+    *ngIf="isAdmin$ | async"
   >
     <mat-icon>emoji_events</mat-icon>
     <span class="nav-caption">Add Tournament</span>
@@ -33,7 +33,7 @@
     mat-list-item
     routerLink="/add-match"
     (click)="onClose()"
-    *ngIf="isAuth$ | async"
+    *ngIf="isAdmin$ | async"
   >
     <mat-icon>event</mat-icon>
     <span class="nav-caption">Add Match</span>
@@ -42,7 +42,7 @@
     mat-list-item
     routerLink="/add-match-details"
     (click)="onClose()"
-    *ngIf="isAuth$ | async"
+    *ngIf="isAdmin$ | async"
   >
     <mat-icon>description</mat-icon>
     <span class="nav-caption">Add Match Details</span>
@@ -51,7 +51,7 @@
     mat-list-item
     routerLink="/signup"
     (click)="onClose()"
-    *ngIf="!(isAuth$ | async)"
+    *ngIf="!(isAdmin$ | async)"
   >
     <mat-icon>face</mat-icon>
     <span class="nav-caption">Signup</span>
@@ -60,7 +60,7 @@
     mat-list-item
     routerLink="/login"
     (click)="onClose()"
-    *ngIf="!(isAuth$ | async)"
+    *ngIf="!(isAdmin$ | async)"
   >
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Admin Login</span>

@@ -2,7 +2,7 @@ import {
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
-  createSelector
+  createSelector,
 } from "@ngrx/store";
 
 import * as fromAuth from "./auth/store/auth.reducer";
@@ -24,7 +24,7 @@ export const reducers: ActionReducerMap<State> = {
   auth: fromAuth.authReducer,
   players: fromPlayer.playerReducer,
   matches: fromMatch.matchReducer,
-  matchDetails: fromMatchDetails.matchDetailsReducer
+  matchDetails: fromMatchDetails.matchDetailsReducer,
 };
 
 export const getUiState = createFeatureSelector<fromUi.State>("ui");
@@ -32,3 +32,7 @@ export const getIsLoading = createSelector(getUiState, fromUi.getIsLoading);
 
 export const getAuthState = createFeatureSelector<fromAuth.State>("auth");
 export const getIsAuth = createSelector(getAuthState, fromAuth.getIsAuth);
+export const getIsAdminRoot = createSelector(
+  getAuthState,
+  fromAuth.getAuthState
+);

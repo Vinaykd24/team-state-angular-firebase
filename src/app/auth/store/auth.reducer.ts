@@ -61,7 +61,7 @@ export function authReducer(state = initialState, action: AuthActions) {
 export const getAuthState = createFeatureSelector<State>("auth");
 
 export const getIsAuth = (state: State) => state.isAuthenticated;
-// export const getIsAdmin = (state: State) => state.isAdmin;
+export const getIsAdminState = (state: State) => state.isAdmin;
 
 export const getUser = createSelector(
   getAuthState,

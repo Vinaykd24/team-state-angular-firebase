@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
+import * as fromAuthReducer from "../../auth/store/auth.reducer";
 import { AuthService } from "src/app/auth/auth.service";
 import { Router } from "@angular/router";
 
@@ -13,6 +14,7 @@ import { Router } from "@angular/router";
 export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   isAuth$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isAuth$ = this.store.select(fromRoot.getIsAuth);
+    this.isAdmin$ = this.store.select(fromAuthReducer.getIsAdmin);
   }
 
   onToggleSidenav() {

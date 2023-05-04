@@ -24,7 +24,7 @@
       <li>
         <a routerLink="/tournaments">Tournaments</a>
       </li>
-      <li *ngIf="isAuth$ | async">
+      <li *ngIf="isAdmin$ | async">
         <button mat-button [matMenuTriggerFor]="menu">Admin Menu</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onAddPlayerClick()">Add Player</button>
