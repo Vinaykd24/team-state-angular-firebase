@@ -24,7 +24,7 @@ import { AdminUserList } from "../models/admin-users.model";
 @Injectable()
 export class AuthService {
   user: firebase.User;
-  allowedUsers = ["vinay.kadam241@gmail.com", "mayanksae@gmail.com"];
+  allowedUsers = ["vinay.kadam24@gmail.com", "mayanksae@gmail.com"];
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
