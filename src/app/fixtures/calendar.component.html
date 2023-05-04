@@ -7,33 +7,57 @@
     class="mat-elevation-z8"
   >
     <ng-container matColumnDef="matchDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Match Date</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
       <td mat-cell *matCellDef="let match">
-        {{ match.matchDate.toDate() | date : "fullDate" }}
+        <span class="font-italic">
+          {{ match.matchDate.toDate() | date : "EE, MM dd" }}
+        </span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="opponentTeamVenue">
-      <th mat-header-cell *matHeaderCellDef>Opponent Team</th>
+      <th mat-header-cell *matHeaderCellDef>VS Team</th>
       <td mat-cell *matCellDef="let match">{{ match.opponentTeamVenue }}</td>
     </ng-container>
 
     <ng-container matColumnDef="matchVenue">
-      <th mat-header-cell *matHeaderCellDef>Match Venue</th>
+      <th mat-header-cell *matHeaderCellDef>Venue</th>
       <td mat-cell *matCellDef="let match">{{ match.matchVenue }}</td>
     </ng-container>
 
     <ng-container matColumnDef="matchTime">
-      <th mat-header-cell *matHeaderCellDef>Match Time</th>
+      <th mat-header-cell *matHeaderCellDef>Time</th>
       <td mat-cell *matCellDef="let match">{{ match.matchTime }}</td>
     </ng-container>
 
     <ng-container matColumnDef="availability">
-      <th mat-header-cell *matHeaderCellDef>Match Availability</th>
+      <th mat-header-cell *matHeaderCellDef>Available</th>
       <td mat-cell *matCellDef="let match">
-        <button *ngIf="user" mat-button (click)="updateAvailability(match)">
-          I'm available
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="I am available for the game"
+          class="text-success"
+          *ngIf="user"
+          mat-button
+          (click)="updateAvailability(match, true)"
+        >
+          <mat-icon>check</mat-icon>
         </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="I am not available for the game"
+          class="ml-1 d-inline-block text-danger"
+          *ngIf="user"
+          mat-button
+          (click)="updateAvailability(match, false)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- <button *ngIf="user" mat-button (click)="updateAvailability(match)">
+          I'm available
+        </button> -->
       </td>
     </ng-container>
 

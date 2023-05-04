@@ -40,7 +40,10 @@ export class MatchService {
       ref.orderBy("matchDate", "desc")
     );
     this.fixturesCollection = this.afs.collection("fixtures", (ref) =>
-      ref.orderBy("matchDate", "desc")
+      ref
+        .where("matchDate", ">=", new Date())
+        .orderBy("matchDate", "asc")
+        .limit(2)
     );
     this.matchDetailsCollection = this.afs.collection("matchDetails");
     this.teamCollection = this.afs.collection("teamDetails", (ref) =>

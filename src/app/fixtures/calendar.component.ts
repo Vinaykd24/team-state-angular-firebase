@@ -127,7 +127,8 @@ export class MatchListComponent implements OnInit {
   ngOnInit(): void {
     this.matchFixtures$ = this.matchService.getMatchFixtures();
     this.matchService.getMatchFixtures().subscribe((matchFixtures) => {
-      this.dataSource = new MatTableDataSource(matchFixtures);
+      const updatedList = this.transformMatchData(matchFixtures);
+      this.dataSource = new MatTableDataSource(updatedList);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -135,19 +136,42 @@ export class MatchListComponent implements OnInit {
       .select(fromAuthhReducer.getUser)
       .subscribe((user) => (this.user = user));
   }
+  transformMatchData(matchFixtures: MatchFixture[]): Array<MatchFixture> {
+    const a = matchFixtures.map((match) => {
+      if (match.matchTime === "afternoon") {
+        return { ...match, matchTime: "12:00 PM" };
+      } else if (match.matchTime === "morning") {
+        return { ...match, matchTime: "7:00 AM" };
+      } else {
+        return match;
+      }
+    });
+    return a;
+  }
 
-  updateAvailability(matchFixture: MatchFixture): void {
+  updateAvailability(matchFixture: MatchFixture, isAvailable: boolean): void {
     const matchId = matchFixture.id; // Replace with the actual match ID
     // const playerId = 'your_player_id_here'; // Replace with the actual player ID
     if (this.user) {
-      this.firestore
-        .collection<MatchFixture>("fixtures")
-        .doc(matchId)
-        .update({
-          playersAvailable: firebase.firestore.FieldValue.arrayUnion(
-            this.user.displayName
-          ),
-        });
+      if (isAvailable) {
+        this.firestore
+          .collection<MatchFixture>("fixtures")
+          .doc(matchId)
+          .update({
+            playersAvailable: firebase.firestore.FieldValue.arrayUnion(
+              this.user.displayName
+            ),
+          });
+      } else if (!isAvailable) {
+        this.firestore
+          .collection<MatchFixture>("fixtures")
+          .doc(matchId)
+          .update({
+            playersAvailable: firebase.firestore.FieldValue.arrayRemove(
+              this.user.displayName
+            ),
+          });
+      }
     }
   }
 

@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "teamstats-5b227": {
-      "hosting": {
-        "team-stats-angular-firebase": [
-          "teamstats-5b227"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "teamstats-5b227"
+    "default": "stars-forever-457cf"
   }
 }
