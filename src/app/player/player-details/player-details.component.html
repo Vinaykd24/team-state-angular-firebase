@@ -36,13 +36,12 @@
           <div class="h6 mb-0">Bowls</div>
           <div class="h4 font-weight-bold">{{ player.player.bowl }}</div>
         </div>
-        <div class="flex-fill">
+        <!-- <div class="flex-fill">
           <div class="h6 mb-0">Date of Birth</div>
           <div class="h4 font-weight-bold" *ngIf="player.player.playerDob">
             {{ player.player.playerDob | date : "mediumDate" }}
-            <!-- Jan, 1 1990 -->
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-md-5 playerInfo mt-3">
@@ -51,77 +50,30 @@
           About
           <span>{{ player.player.playerFirstName }}</span>
         </h4>
-        <div class="flex-fill">
-          <p>
-            Hi, my name is {{ player.player.playerFirstName }}
-            {{ player.player.playerLastName }}. I was born on
-            {{ player.player.playerDob | date : "mediumDate" }}, in
-            {{ player.player.bornIn }}. My cricketing journey began in
-            {{ player.player.bornIn }}. I became a part of the Rising Stars
-            Cricket
-            <!-- Family in {{ player.player.joinedTcs | date: "mediumDate" }}. -->
-          </p>
-          <!-- <p>
-            <strong>
-              I've represented the following major teams:
-            </strong>
-          </p>
-          <p>
-            {{ player.player.playerdFor }}
-          </p>
-          <p>
-            Here is a little more about me...
-          </p>
-          <p>
-            <strong>
-              Favourite Movie:
-              <span>
-                {{ player.player.favMovie }}
-              </span>
-            </strong>
-          </p>
-          <p>
-            <strong>
-              Favourite Player:
-              <span>
-                {{ player.player.favPlayer }}
-              </span>
-            </strong>
-          </p>
-          <p>
-            <strong>
-              Favourite Holiday Destination:
-              <span>
-                {{ player.player.favDestination }}
-              </span>
-            </strong>
-          </p>
-          <p>
-            <strong>
-              Song/Artist:
-              <span>
-                {{ player.player.favSongArt }}
-              </span>
-            </strong>
-          </p> -->
-        </div>
       </div>
     </div>
   </div>
+  <mat-tab-group headerPosition="top">
+    <mat-tab label="Current Stats">
+      <app-player-stats [player]="player"></app-player-stats
+    ></mat-tab>
+    <mat-tab label="Detailed Stats">
+      <div *ngIf="playerPerformance$ | async">
+        <h3>
+          Career
+          <span>Stats</span>
+        </h3>
+        <div class="col d-block d-sm-none">
+          <small
+            >Note: Best view table on <strong>Landscape Mode.</strong></small
+          >
+        </div>
+        <app-player-performance
+          [playerPerformance]="playerPerformanceDetails"
+          [player]="player"
+        ></app-player-performance>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </section>
-<section class="container bg-white">
-  <app-player-stats [player]="player"></app-player-stats>
-  <div *ngIf="playerPerformance$ | async">
-    <h3>
-      Career
-      <span>Stats</span>
-    </h3>
-    <div class="col d-block d-sm-none">
-      <small>Note: Best view table on <strong>Landscape Mode.</strong></small>
-    </div>
-    <app-player-performance
-      [playerPerformance]="playerPerformanceDetails"
-      [player]="player"
-    ></app-player-performance>
-  </div>
-</section>
+<!-- <section class="container bg-white"></section> -->

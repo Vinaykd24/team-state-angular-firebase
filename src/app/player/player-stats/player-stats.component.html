@@ -1,5 +1,10 @@
 <section fxShow fxHide.gt-sm>
-  <div class="row battingStats">
+  <div
+    class="row battingStats"
+    [ngClass.xs]="{
+      'no-gutters': true
+    }"
+  >
     <div
       class="border-bottom d-flex flex-fill flex-row justify-content-between m-2 pb-2"
     >

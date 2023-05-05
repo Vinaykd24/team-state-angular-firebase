@@ -583,3 +583,7 @@ p {
     color: #b88f4f;
   }
 }
+
+:host::ng-deep .mat-tab-labels {
+  text-transform: uppercase;
+}

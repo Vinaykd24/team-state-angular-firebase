@@ -1,3 +1,4 @@
+<div *ngIf="chart" [chart]="chart"></div>
 <mat-table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="opTeam">
     <mat-header-cell
@@ -132,4 +133,3 @@
 
 <mat-paginator [pageSize]="5" [pageSizeOptions]="[1, 5, 10, 20]">
 </mat-paginator>
-<div *ngIf="chart" [chart]="chart"></div>

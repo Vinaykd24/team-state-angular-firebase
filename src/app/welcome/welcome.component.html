@@ -119,44 +119,6 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-center mobileWrapper">
-    <div class="overflow-auto py-2">
-      Current Season Performance!
-      <!-- <ul class="list-group list-group-horizontal align-items-center">
-        <li class="list-group-item">
-          <button
-            type="button"
-            class="btn btn-link"
-            (click)="selectSeason($event)"
-            value="current"
-          >
-            Current Season
-          </button>
-        </li>
-        <li class="list-group-item">
-          <button
-            type="button"
-            class="btn btn-link"
-            (click)="selectSeason($event)"
-            value="2019"
-          >
-            2018-19
-          </button>
-        </li>
-
-        <li class="list-group-item">
-          <button
-            type="button"
-            class="btn btn-link"
-            (click)="selectSeason($event)"
-            value="all"
-          >
-            All Records
-          </button>
-        </li>
-      </ul> -->
-    </div>
-  </div>
 </div>
 <section class="container mb-3">
   <h3 class="title">
@@ -174,35 +136,45 @@
       Current Season Stats
     </span>
   </h3>
-  <section class="py-3">
-    <app-match-list></app-match-list>
-  </section>
-  <app-tournament-stats></app-tournament-stats>
-</section>
-
-<section class="container">
-  <div class="row justify-content-md-center mb-3">
-    <app-top-player-list
-      [topPlayerList]="topBatsmanList"
-      [statsType]="'batsman'"
-      class="col-md-6 col-lg-4"
-    ></app-top-player-list>
-    <app-top-player-list
-      [topPlayerList]="topBowlerList"
-      [statsType]="'bowler'"
-      class="col-md-6 col-lg-4"
-    ></app-top-player-list>
-    <app-top-player-list
-      [topPlayerList]="topBowlerAvgList"
-      [statsType]="'bowlerAvg'"
-      class="col-md-6 col-lg-4"
-    ></app-top-player-list>
-    <app-top-player-list
-      [topPlayerList]="topBattingAvgList"
-      [statsType]="'battingAvg'"
-      class="col-md-6 col-lg-4"
-    ></app-top-player-list>
-  </div>
+  <mat-tab-group headerPosition="top">
+    <mat-tab label="Availability">
+      <section class="py-2">
+        <app-match-list></app-match-list>
+      </section>
+    </mat-tab>
+    <mat-tab label="Team Stats">
+      <div class="row justify-content-center mobileWrapper mb-3">
+        <div class="overflow-auto py-2">Current Season Performance!</div>
+      </div>
+      <app-tournament-stats></app-tournament-stats
+    ></mat-tab>
+    <mat-tab label="Individual Performance">
+      <section class="container py-2">
+        <div class="row justify-content-md-center mb-3">
+          <app-top-player-list
+            [topPlayerList]="topBatsmanList"
+            [statsType]="'batsman'"
+            class="col-md-6 col-lg-4"
+          ></app-top-player-list>
+          <app-top-player-list
+            [topPlayerList]="topBowlerList"
+            [statsType]="'bowler'"
+            class="col-md-6 col-lg-4"
+          ></app-top-player-list>
+          <app-top-player-list
+            [topPlayerList]="topBowlerAvgList"
+            [statsType]="'bowlerAvg'"
+            class="col-md-6 col-lg-4"
+          ></app-top-player-list>
+          <app-top-player-list
+            [topPlayerList]="topBattingAvgList"
+            [statsType]="'battingAvg'"
+            class="col-md-6 col-lg-4"
+          ></app-top-player-list>
+        </div>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
 </section>
 
 <!-- <div fxLayout="row" fxLayoutAlign="center center" class="container mb-3">

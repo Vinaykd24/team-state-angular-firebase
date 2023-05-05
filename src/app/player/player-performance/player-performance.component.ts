@@ -37,7 +37,6 @@ export class PlayerPerformanceComponent implements OnInit, AfterViewInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    console.log(this.playerPerformance);
     this.dataSource.data = this.playerPerformance;
   }
   ngAfterViewInit() {
