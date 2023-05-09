@@ -11,9 +11,7 @@
           hideToggle
         >
           <mat-expansion-panel-header>
-            <mat-panel-title fxHide.xs>
-              Add Batting Details
-            </mat-panel-title>
+            <mat-panel-title fxHide.xs> Add Batting Details </mat-panel-title>
             <mat-panel-description>
               Batting Details
               <mat-icon>sports_cricket</mat-icon>
@@ -31,7 +29,7 @@
             >
               <mat-option *ngFor="let match of matchtesList" [value]="match.id">
                 {{ match.opTeam | titlecase }}
-                {{ match.matchDate.toDate() | date: "mediumDate" }}
+                {{ match.matchDate.toDate() | date : "mediumDate" }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -138,9 +136,7 @@
           hideToggle
         >
           <mat-expansion-panel-header>
-            <mat-panel-title fxHide.xs>
-              Add Bowling Details
-            </mat-panel-title>
+            <mat-panel-title fxHide.xs> Add Bowling Details </mat-panel-title>
             <mat-panel-description>
               Bowling Details
               <mat-icon>sports_handball</mat-icon>
@@ -189,6 +185,22 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
+            <mat-label>Dots</mat-label>
+            <input
+              matInput
+              #dotsInput="ngModel"
+              ngModel
+              type="number"
+              name="dots"
+              dotsInput
+              required
+            />
+            <mat-error *ngIf="dotsInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
             <mat-label>Runs Given</mat-label>
             <input
               matInput
@@ -218,6 +230,36 @@
               >Field must not be empty.</mat-error
             >
           </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Wides</mat-label>
+            <input
+              matInput
+              #widesInput="ngModel"
+              ngModel
+              type="number"
+              name="wides"
+              widesInput
+              required
+            />
+            <mat-error *ngIf="widesInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>No Balls</mat-label>
+            <input
+              matInput
+              #noBallsInput="ngModel"
+              ngModel
+              type="number"
+              name="noBalls"
+              noBallsInput
+              required
+            />
+            <mat-error *ngIf="noBallsInput.hasError('required')"
+              >Field must not be empty.</mat-error
+            >
+          </mat-form-field>
 
           <mat-action-row>
             <button
@@ -244,9 +286,7 @@
         hideToggle
       >
         <mat-expansion-panel-header>
-          <mat-panel-title fxHide.xs>
-            Verify Score Sheet
-          </mat-panel-title>
+          <mat-panel-title fxHide.xs> Verify Score Sheet </mat-panel-title>
           <mat-panel-description>
             Match Score Details
             <mat-icon>event_note</mat-icon>
@@ -259,33 +299,15 @@
           fxLayoutGap="5px"
           class="scoreHeader"
         >
-          <div fxFlex="20%" fxFlexFill>
-            Player Name
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            R
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            B
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            4s
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            6s
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            O
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            M
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            RG
-          </div>
-          <div fxFlex fxFlexFill fxLayoutAlign="center center">
-            W
-          </div>
+          <div fxFlex="20%" fxFlexFill>Player Name</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">R</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">B</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">4s</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">6s</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">O</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">M</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">RG</div>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">W</div>
         </div>
         <div
           fxLayout="row"

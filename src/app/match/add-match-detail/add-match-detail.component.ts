@@ -3,19 +3,19 @@ import { PlayerService } from "src/app/player/player.service";
 import { MatchService } from "../match.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Match } from "src/app/models/match.model";
-import { Player } from "src/app/models/player.model";
+import { Match } from "../../models/match.model";
+import { Player } from "../../models/player.model";
 import { Store } from "@ngrx/store";
-import { State } from "src/app/app.reducer";
+import { State } from "../../app.reducer";
 import * as fromMatchReducer from "../store/match.reducer";
-import { MatchDetails } from "src/app/models/match-details.model";
+import { MatchDetails } from "../../models/match-details.model";
 import { NgForm } from "@angular/forms";
 import * as _ from "lodash";
 
 @Component({
   selector: "app-add-match-detail",
   templateUrl: "./add-match-detail.component.html",
-  styleUrls: ["./add-match-detail.component.css"]
+  styleUrls: ["./add-match-detail.component.css"],
 })
 export class AddMatchDetailComponent implements OnInit, OnDestroy {
   private subcription: Subscription = new Subscription();
@@ -34,7 +34,7 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
     this.subcription.add(
       this.playerService
         .getPlayers()
-        .subscribe(players => (this.playerList = players))
+        .subscribe((players) => (this.playerList = players))
     );
     // this.subcription.add(
     //   this.matchService
@@ -43,7 +43,7 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
     // );
     this.store
       .select(fromMatchReducer.getAvailableMatches)
-      .subscribe(matches => (this.matchtesList = matches));
+      .subscribe((matches) => (this.matchtesList = matches));
   }
 
   ngOnInit(): void {}
@@ -58,7 +58,7 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
     if (this.step === 2) {
       const result = _(this.tempMatchDetails)
         .groupBy("playerId")
-        .map(g =>
+        .map((g) =>
           _.mergeWith({}, ...g, (obj, src) =>
             _.isArray(obj) ? obj.concat(src) : undefined
           )
@@ -75,7 +75,7 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
   onSubmit({ value, valid }: { value: MatchDetails; valid: boolean }) {
     // value.matchId = this._matchId;
     this.tempMatchDetails = this.tempMatchDetails.filter(
-      player => player.playerId !== undefined
+      (player) => player.playerId !== undefined
     );
     console.log(this.tempMatchDetails);
     this.matchService.newMatchDetails(this.tempMatchDetails);
@@ -109,8 +109,11 @@ export class AddMatchDetailComponent implements OnInit, OnDestroy {
     bowlingData.playerId = bowlingForm.value.playerId.id;
     bowlingData.overs = bowlingForm.value.overs;
     bowlingData.maidens = bowlingForm.value.maidens;
+    bowlingData.dots = bowlingForm.value.dots;
     bowlingData.runsGiven = bowlingForm.value.runsGiven;
     bowlingData.wickets = bowlingForm.value.wickets;
+    bowlingData.wides = bowlingForm.value.wides;
+    bowlingData.noBalls = bowlingForm.value.noBalls;
     // this.matchService.newMatchDetails(value);
     // this.router.navigate(["/matchDetails"]);
     this.tempMatchDetails.push(bowlingData);

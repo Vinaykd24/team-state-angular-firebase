@@ -4,6 +4,7 @@ export interface MatchDetails {
   fours?: number;
   isOut?: boolean;
   maidens?: number;
+  dots?: number;
   matchId?: string;
   overs?: number;
   playerFirstName?: string;
@@ -13,5 +14,7 @@ export interface MatchDetails {
   runsGiven?: number;
   sixes?: number;
   wickets?: number;
+  wides?: number;
+  noBalls?: number;
   opTeam?: string;
 }
