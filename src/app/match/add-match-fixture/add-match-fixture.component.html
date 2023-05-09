@@ -73,6 +73,21 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
+              <mat-label>Match Venue Map Link</mat-label>
+              <input
+                matInput
+                #matchVenueLinkInput="ngModel"
+                ngModel
+                name="matchVenueLink"
+                matchVenueLinkInput
+                required
+              />
+              <mat-error *ngIf="matchVenueLinkInput.hasError('required')"
+                >Field must not be empty.</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
               <mat-label>Select Match Time</mat-label>
               <mat-select
                 placeholder="Select Match Time"

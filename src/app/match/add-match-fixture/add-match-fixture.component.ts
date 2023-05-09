@@ -54,6 +54,7 @@ export class AddMatchFixtureComponent implements OnInit, OnDestroy {
     this.matchService.newMatchFixture(value);
     value.matchDate = "";
     value.matchVenue = "";
+    value.matchVenueLink = "";
     value.opTeam = "";
     value.tourId = "";
     // this.router.navigate(["/add-match-details"]);

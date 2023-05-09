@@ -17,7 +17,11 @@
 
     <ng-container matColumnDef="matchVenue">
       <th mat-header-cell *matHeaderCellDef>Venue</th>
-      <td mat-cell *matCellDef="let match">{{ match.matchVenue }}</td>
+      <td mat-cell *matCellDef="let match">
+        <a [href]="match.matchVenueLink" target="_blank">
+          {{ match.matchVenue }}
+        </a>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="matchTime">

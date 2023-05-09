@@ -4,6 +4,7 @@ export interface MatchFixture {
   matchDate: string;
   opTeam: string;
   matchVenue: string;
+  matchVenueLink?: string;
   matchTime?: string;
   players?: Array<PlayerList>;
 }
