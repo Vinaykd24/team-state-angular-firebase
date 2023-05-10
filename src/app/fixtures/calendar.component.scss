@@ -64,3 +64,9 @@ tr.example-element-row:not(.example-expanded-row):active {
   text-align: center;
   background: #f27133;;
 }
+
+.listWrapper {
+  li {
+    text-transform: uppercase;
+  }
+}

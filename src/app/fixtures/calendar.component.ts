@@ -98,6 +98,9 @@ export class MatchListComponent implements OnInit {
             playersAvailable: firebase.firestore.FieldValue.arrayUnion(
               this.user.displayName
             ),
+            playersUnavailable: firebase.firestore.FieldValue.arrayRemove(
+              this.user.displayName
+            ),
           });
       } else if (!isAvailable) {
         this.firestore
@@ -105,6 +108,9 @@ export class MatchListComponent implements OnInit {
           .doc(matchId)
           .update({
             playersAvailable: firebase.firestore.FieldValue.arrayRemove(
+              this.user.displayName
+            ),
+            playersUnavailable: firebase.firestore.FieldValue.arrayUnion(
               this.user.displayName
             ),
           });

@@ -11,7 +11,7 @@
     </ng-container>
 
     <ng-container matColumnDef="opponentTeamVenue">
-      <th mat-header-cell *matHeaderCellDef>VS Team</th>
+      <th mat-header-cell *matHeaderCellDef>VS</th>
       <td mat-cell *matCellDef="let match">{{ match.opponentTeamVenue }}</td>
     </ng-container>
 
@@ -71,9 +71,24 @@
           "
         >
           <div class="example-element-description">
-            <h2>Players Available for the Match</h2>
-            <ol>
-              <li *ngFor="let item of element.playersAvailable">{{ item }}</li>
+            <h2 class="text-success text-uppercase titillium">
+              Players Available for the Match
+            </h2>
+            <ol class="listWrapper">
+              <li *ngFor="let item of element.playersAvailable">
+                {{ item }}
+              </li>
+            </ol>
+            <h2 class="text-danger text-uppercase titillium">
+              Players Unavailable for the Match
+            </h2>
+            <ol class="listWrapper">
+              <li
+                *ngFor="let item of element.playersUnavailable"
+                class="text-capitalize"
+              >
+                {{ item }}
+              </li>
             </ol>
           </div>
         </div>
