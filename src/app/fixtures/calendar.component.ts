@@ -55,6 +55,7 @@ export class MatchListComponent implements OnInit {
     "matchTime",
     "availability",
   ];
+  isAdmin$: Observable<boolean>;
   constructor(
     private matchService: MatchService,
     private firestore: AngularFirestore,
@@ -63,6 +64,7 @@ export class MatchListComponent implements OnInit {
 
   ngOnInit(): void {
     this.matchFixtures$ = this.matchService.getMatchFixtures();
+    this.isAdmin$ = this.store.select(fromAuthhReducer.getIsAdmin);
     this.matchService.getMatchFixtures().subscribe((matchFixtures) => {
       const updatedList = this.transformMatchData(matchFixtures);
 
@@ -116,6 +118,12 @@ export class MatchListComponent implements OnInit {
           });
       }
     }
+  }
+
+  disableAvilabilityCheck(matchId) {
+    this.firestore.collection<MatchFixture>("fixtures").doc(matchId).update({
+      disableAvilabilityCheck: true,
+    });
   }
 
   toDateTime(timestamp: firebase.firestore.Timestamp): Date {

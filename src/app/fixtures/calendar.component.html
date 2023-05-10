@@ -37,7 +37,7 @@
           color="primary"
           aria-label="I am available for the game"
           class="text-success"
-          *ngIf="user"
+          *ngIf="user && !match.disableAvilabilityCheck"
           mat-button
           (click)="updateAvailability(match, true)"
         >
@@ -48,11 +48,22 @@
           color="primary"
           aria-label="I am not available for the game"
           class="ml-1 d-inline-block text-danger"
-          *ngIf="user"
+          *ngIf="user && !match.disableAvilabilityCheck"
           mat-button
           (click)="updateAvailability(match, false)"
         >
           <mat-icon>close</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="I am not available for the game"
+          class="ml-1 d-inline-block text-danger"
+          *ngIf="isAdmin$ | async"
+          mat-button
+          (click)="disableAvilabilityCheck(match.id)"
+        >
+          <mat-icon>person_add_disabled</mat-icon>
         </button>
       </td>
     </ng-container>
