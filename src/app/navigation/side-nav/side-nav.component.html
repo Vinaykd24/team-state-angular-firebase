@@ -31,6 +31,15 @@
   </a>
   <a
     mat-list-item
+    routerLink="/add-match-fixture"
+    (click)="onClose()"
+    *ngIf="isAdmin$ | async"
+  >
+    <mat-icon>date_range</mat-icon>
+    <span class="nav-caption">Add Match Fixure</span>
+  </a>
+  <a
+    mat-list-item
     routerLink="/add-match"
     (click)="onClose()"
     *ngIf="isAdmin$ | async"

@@ -56,6 +56,10 @@ export class MatchListComponent implements OnInit {
     "availability",
   ];
   isAdmin$: Observable<boolean>;
+  isAdmin = false;
+  selectedPlayerList = [];
+  matchData: MatchFixture;
+  isPlayingXiDecleared = false;
   constructor(
     private matchService: MatchService,
     private firestore: AngularFirestore,
@@ -70,10 +74,15 @@ export class MatchListComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource(updatedList);
       this.dataSource.sort = this.sort;
+      this.matchData = updatedList[0];
+      this.isPlayingXiDecleared = this.matchData.isPlayingXiReleased;
     });
     this.store
       .select(fromAuthhReducer.getUser)
       .subscribe((user) => (this.user = user));
+    this.store
+      .select(fromAuthhReducer.getIsAdmin)
+      .subscribe((data) => (this.isAdmin = data));
   }
   transformMatchData(matchFixtures: MatchFixture[]): Array<MatchFixture> {
     const a = matchFixtures.map((match) => {
@@ -120,10 +129,55 @@ export class MatchListComponent implements OnInit {
     }
   }
 
+  selectPlayingXi(
+    matchFixture: MatchFixture,
+    playerName: string,
+    isSelected: boolean
+  ): void {
+    event.preventDefault();
+    const matchId = matchFixture.id; // Replace with the actual match ID
+    // const playerId = 'your_player_id_here'; // Replace with the actual player ID
+    if (this.isAdmin) {
+      if (isSelected) {
+        this.firestore
+          .collection<MatchFixture>("fixtures")
+          .doc(matchId)
+          .update({
+            selectedPlayers:
+              firebase.firestore.FieldValue.arrayUnion(playerName),
+            droppedPlayers:
+              firebase.firestore.FieldValue.arrayRemove(playerName),
+          });
+      } else if (!isSelected) {
+        this.firestore
+          .collection<MatchFixture>("fixtures")
+          .doc(matchId)
+          .update({
+            selectedPlayers:
+              firebase.firestore.FieldValue.arrayRemove(playerName),
+            droppedPlayers:
+              firebase.firestore.FieldValue.arrayUnion(playerName),
+          });
+      }
+    }
+  }
+
   disableAvilabilityCheck(matchId) {
     this.firestore.collection<MatchFixture>("fixtures").doc(matchId).update({
       disableAvilabilityCheck: true,
     });
+  }
+
+  releasePlayingXi(matchId) {
+    this.firestore.collection<MatchFixture>("fixtures").doc(matchId).update({
+      isPlayingXiReleased: true,
+    });
+  }
+
+  selectInTeam(playerName): Array<string> {
+    this.selectedPlayerList.push(playerName);
+    console.log(this.selectedPlayerList);
+    return this.selectedPlayerList;
   }
 
   toDateTime(timestamp: firebase.firestore.Timestamp): Date {

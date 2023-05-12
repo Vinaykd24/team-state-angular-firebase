@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h2 class="p-2 mb-0 title">Upcoming Match Fixtures</h2>
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
     <ng-container matColumnDef="matchDate">
@@ -68,7 +68,6 @@
       </td>
     </ng-container>
 
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
       <td
         mat-cell
@@ -82,25 +81,64 @@
           "
         >
           <div class="example-element-description">
-            <h2 class="text-success text-uppercase titillium">
-              Players Available for the Match
-            </h2>
-            <ol class="listWrapper">
-              <li *ngFor="let item of element.playersAvailable">
-                {{ item }}
-              </li>
-            </ol>
-            <h2 class="text-danger text-uppercase titillium">
-              Players Unavailable for the Match
-            </h2>
-            <ol class="listWrapper">
-              <li
-                *ngFor="let item of element.playersUnavailable"
-                class="text-capitalize"
-              >
-                {{ item }}
-              </li>
-            </ol>
+            <section *ngIf="isAdmin$ | async">
+              <h2 class="text-success text-uppercase titillium">
+                Players Available
+              </h2>
+              <ol class="listWrapper">
+                <li *ngFor="let item of element.playersAvailable">
+                  <div class="d-flex flex-row align-items-center">
+                    <div>{{ item }}</div>
+                    <div>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        aria-label="I am available for the game"
+                        class="text-success"
+                        (click)="selectPlayingXi($event, element, item, true)"
+                        mat-button
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        aria-label="I am available for the game"
+                        class="text-danger"
+                        (click)="selectPlayingXi($event, element, item, false)"
+                        mat-button
+                      >
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+              <h2 class="text-danger text-uppercase titillium">
+                Players Unavailable
+              </h2>
+              <ol class="listWrapper">
+                <li
+                  *ngFor="let item of element.playersUnavailable"
+                  class="text-capitalize"
+                >
+                  {{ item }}
+                </li>
+              </ol>
+            </section>
+            <section>
+              <h2 class="text-success text-uppercase titillium">Playing XI</h2>
+              <ol class="listWrapper">
+                <li
+                  *ngFor="let item of element.selectedPlayers"
+                  class="text-capitalize"
+                >
+                  {{ item }}
+                </li>
+              </ol>
+            </section>
           </div>
         </div>
       </td>
@@ -120,4 +158,138 @@
       class="example-detail-row"
     ></tr>
   </table>
-</div>
+</div> -->
+<h2 class="p-2 mb-0 title rounded mb-2">Upcoming Match Fixtures</h2>
+<section class="container bg-white sectionWrapper" *ngIf="matchData">
+  <div
+    class="align-items-center border-bottom justify-content-between py-2 rounded-top row text-center text-uppercase text-white matchHeaderWrapper"
+  >
+    <div class="col-4">Rising Stars</div>
+    <div class="col-1">VS</div>
+    <div class="col-5">{{ matchData.opponentTeamVenue }}</div>
+  </div>
+  <div class="justify-content-center row text-center text-uppercase pb-2">
+    <div class="col-12 h6 py-2 mb-0">
+      <span class="d-inline-block day_match"> </span>
+      <span class="d-inline-block mr-2">
+        {{ matchData.matchDate.toDate() | date : "EE, MMM dd" }}
+      </span>
+      <span class="subway-item">
+        {{ matchData.matchTime }}
+      </span>
+    </div>
+    <div class="col-12">
+      <a [href]="matchData.matchVenueLink" target="_blank">
+        {{ matchData.matchVenue }}
+      </a>
+    </div>
+    <div class="col-12 py-2">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="mr-2 text-uppercase"
+        *ngIf="user && !matchData.disableAvilabilityCheck"
+        (click)="updateAvailability(matchData, true)"
+      >
+        Available
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        class="text-uppercase"
+        *ngIf="user && !matchData.disableAvilabilityCheck"
+        (click)="updateAvailability(matchData, false)"
+      >
+        Unavailabe
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        class="ml-2 text-uppercase"
+        *ngIf="isAdmin$ | async"
+        (click)="disableAvilabilityCheck(matchData.id)"
+      >
+        Frezz!
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="ml-2 text-uppercase"
+        *ngIf="isAdmin$ | async"
+        (click)="releasePlayingXi(matchData.id)"
+      >
+        Release Playing XI
+      </button>
+    </div>
+  </div>
+  <div
+    class="justify-content-center row text-uppercase"
+    *ngIf="!isPlayingXiDecleared"
+  >
+    <div class="col-12">
+      <h3 class="font-weight-bold mb-0 font-italic text-success">
+        Availabe Players
+      </h3>
+      <ol class="pl-4">
+        <li *ngFor="let item of matchData.playersAvailable">
+          <div
+            class="d-flex flex-row align-items-center"
+            *ngIf="isAdmin$ | async"
+          >
+            <div>{{ item }}</div>
+            <div>
+              <button
+                mat-icon-button
+                color="primary"
+                aria-label="I am available for the game"
+                class="text-success"
+                (click)="selectPlayingXi(matchData, item, true)"
+                mat-button
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button
+                mat-icon-button
+                color="primary"
+                aria-label="I am available for the game"
+                class="text-danger"
+                (click)="selectPlayingXi(matchData, item, false)"
+                mat-button
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </div>
+          <ng-container *ngIf="!(isAdmin$ | async)">
+            {{ item }}
+          </ng-container>
+        </li>
+      </ol>
+    </div>
+    <div class="col-12">
+      <h3 class="font-weight-bold mb-0 font-italic text-danger">
+        Unavailabe Players
+      </h3>
+      <ol class="pl-4">
+        <li *ngFor="let item of matchData.playersUnavailable">
+          {{ item }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div
+    class="justify-content-center row text-uppercase"
+    *ngIf="isPlayingXiDecleared"
+  >
+    <div class="col-12">
+      <h3 class="font-weight-bold mb-0 font-italic text-success">Players XI</h3>
+      <ol class="pl-4">
+        <li *ngFor="let item of matchData.selectedPlayers">
+          {{ item }}
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>

@@ -70,3 +70,33 @@ tr.example-element-row:not(.example-expanded-row):active {
     text-transform: uppercase;
   }
 }
+
+.subway-item::before{
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 8.5px;
+  background-color: #f27133;
+  margin-right: 2px;
+}
+.day_match, .night_match {
+  background: url('../../assets/images/day_match.png');
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding: 0.5rem;
+  margin-right: 3px;
+}
+
+.night_match {
+  background: url('../../assets/images/night_match.png');
+}
+
+.sectionWrapper {
+  border-radius: 1rem;
+}
+
+.matchHeaderWrapper {
+  background-color: #140a45;
+}

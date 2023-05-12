@@ -49,9 +49,10 @@ export class AddMatchFixtureComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   onSubmit({ value, valid }: { value: MatchFixture; valid: boolean }) {
-    console.log(value);
+    const updatedValue = { ...value, isPlayingXiReleased: false };
+    // console.log("original value", value, "new value", test);
 
-    this.matchService.newMatchFixture(value);
+    this.matchService.newMatchFixture(updatedValue);
     value.matchDate = "";
     value.matchVenue = "";
     value.matchVenueLink = "";
