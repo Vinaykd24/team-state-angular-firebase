@@ -170,7 +170,11 @@
   </div>
   <div class="justify-content-center row text-center text-uppercase pb-2">
     <div class="col-12 h6 py-2 mb-0">
-      <span class="d-inline-block day_match"> </span>
+      <span
+        class="d-inline-block"
+        [ngClass]="matchData.isDayNightMatch ? 'night_match' : 'day_match'"
+      >
+      </span>
       <span class="d-inline-block mr-2">
         {{ matchData.matchDate.toDate() | date : "EE, MMM dd" }}
       </span>
@@ -217,6 +221,9 @@
         class="ml-2 text-uppercase"
         *ngIf="isAdmin$ | async"
         (click)="releasePlayingXi(matchData.id)"
+        [ngClass.xs]="{
+          'mt-2': true
+        }"
       >
         Release Playing XI
       </button>
@@ -292,4 +299,122 @@
       </ol>
     </div>
   </div>
+  <span class="badge">Nike Run</span>
 </section>
+
+<!-- form.component.html -->
+<form [formGroup]="questionForm" (ngSubmit)="submitForm()">
+  <h2>Create Question</h2>
+  <div>
+    <label>Title:</label>
+    <input type="text" formControlName="title" required />
+  </div>
+  <div>
+    <label>Tool Tip Text:</label>
+    <input type="text" formControlName="toolTipText" />
+  </div>
+  <div>
+    <label>Question Category:</label>
+    <select formControlName="category">
+      <option value="business">Business</option>
+      <option value="client">Client</option>
+    </select>
+  </div>
+  <div>
+    <label>Answer Type:</label>
+    <select formControlName="answerType">
+      <option value="text">Text</option>
+      <option value="number">Number</option>
+      <option value="checkbox">Checkbox</option>
+      <option value="radio">Radio</option>
+    </select>
+  </div>
+  <div>
+    <label>Can Upload Documents?</label>
+    <input type="checkbox" formControlName="canUploadDocuments" />
+  </div>
+  <button type="button" (click)="addQuestion()">Add Question</button>
+</form>
+
+<!-- <div>
+  <h2>Filtered Questions</h2>
+  <div *ngFor="let question of filteredQuestions">
+    <p>{{ question.title }}</p>
+    <p>{{ question.toolTipText }}</p>
+    <p>{{ question.category }}</p>
+    <p>{{ question.answerType }}</p>
+    <p>{{ question.canUploadDocuments }}</p>
+    <button (click)="editQuestion(question)">Edit</button>
+    <button (click)="deleteQuestion(question)">Delete</button>
+  </div>
+</div> -->
+
+<div *ngIf="filteredBusinessQuestions.length > 0">
+  <h2>Business Questions</h2>
+  <div *ngFor="let question of filteredBusinessQuestions">
+    <!-- Display business question details -->
+    <p>{{ question.title }}</p>
+    <p>{{ question.toolTipText }}</p>
+    <p>{{ question.category }}</p>
+    <p>{{ question.answerType }}</p>
+    <p>{{ question.canUploadDocuments }}</p>
+    <button (click)="editQuestion(question)">Edit</button>
+    <button (click)="deleteQuestion(question)">Delete</button>
+  </div>
+</div>
+
+<div *ngIf="filteredClientQuestions.length > 0">
+  <h2>Client Questions</h2>
+  <div *ngFor="let question of filteredClientQuestions">
+    <!-- Display client question details -->
+    <p>{{ question.title }}</p>
+    <p>{{ question.toolTipText }}</p>
+    <p>{{ question.category }}</p>
+    <p>{{ question.answerType }}</p>
+    <p>{{ question.canUploadDocuments }}</p>
+    <button (click)="editQuestion(question)">Edit</button>
+    <button (click)="deleteQuestion(question)">Delete</button>
+  </div>
+</div>
+
+<footer>
+  <button type="button" (click)="saveForm()">Save</button>
+  <button type="submit">Submit</button>
+</footer>
+
+<!-- Edit Question Modal -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2>Edit Question</h2>
+    <div>
+      <label>Title:</label>
+      <input type="text" formControlName="title" required />
+    </div>
+    <div>
+      <label>Tool Tip Text:</label>
+      <input type="text" formControlName="toolTipText" />
+    </div>
+    <div>
+      <label>Question Category:</label>
+      <select formControlName="category">
+        <option value="business">Business</option>
+        <option value="client">Client</option>
+      </select>
+    </div>
+    <div>
+      <label>Answer Type:</label>
+      <select formControlName="answerType">
+        <option value="text">Text</option>
+        <option value="number">Number</option>
+        <option value="checkbox">Checkbox</option>
+        <option value="radio">Radio</option>
+      </select>
+    </div>
+    <div>
+      <label>Can Upload Documents?</label>
+      <input type="checkbox" formControlName="canUploadDocuments" />
+    </div>
+    <button type="button" (click)="updateQuestion()">Update</button>
+    <button type="button" (click)="closeModal()">Close</button>
+  </div>
+</div>

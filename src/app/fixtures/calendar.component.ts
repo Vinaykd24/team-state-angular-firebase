@@ -19,6 +19,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-match-list",
@@ -60,10 +61,21 @@ export class MatchListComponent implements OnInit {
   selectedPlayerList = [];
   matchData: MatchFixture;
   isPlayingXiDecleared = false;
+
+  questionForm: FormGroup;
+  questions: any[] = [];
+  filteredQuestions: any[] = [];
+  showModal: boolean = false;
+  currentQuestion: any;
+
+  formQuestions: any[] = []; // Array to store added questions with additional information
+  filteredBusinessQuestions: any[] = []; // Array to store added questions with additional information
+  filteredClientQuestions: any[] = []; // Array to store added questions with additional information
   constructor(
     private matchService: MatchService,
     private firestore: AngularFirestore,
-    private store: Store<fromAuthhReducer.State>
+    private store: Store<fromAuthhReducer.State>,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +95,14 @@ export class MatchListComponent implements OnInit {
     this.store
       .select(fromAuthhReducer.getIsAdmin)
       .subscribe((data) => (this.isAdmin = data));
+
+    this.questionForm = this.formBuilder.group({
+      title: ["", Validators.required],
+      toolTipText: [""],
+      category: ["business"],
+      answerType: ["text"],
+      canUploadDocuments: [false],
+    });
   }
   transformMatchData(matchFixtures: MatchFixture[]): Array<MatchFixture> {
     const a = matchFixtures.map((match) => {
@@ -90,6 +110,8 @@ export class MatchListComponent implements OnInit {
         return { ...match, matchTime: "12:00 PM" };
       } else if (match.matchTime === "morning") {
         return { ...match, matchTime: "7:00 AM" };
+      } else if (match.matchTime === "evening") {
+        return { ...match, matchTime: "5:00 PM", isDayNightMatch: true };
       } else {
         return match;
       }
@@ -182,5 +204,69 @@ export class MatchListComponent implements OnInit {
 
   toDateTime(timestamp: firebase.firestore.Timestamp): Date {
     return timestamp.toDate();
+  }
+
+  addQuestion(): void {
+    if (this.questionForm.valid) {
+      const newQuestion = this.questionForm.value;
+      this.questions.push(newQuestion);
+      this.filterQuestions();
+      this.questionForm.reset();
+    }
+  }
+
+  editQuestion(question: any): void {
+    this.currentQuestion = question;
+    this.questionForm.patchValue(question);
+    this.showModal = true;
+  }
+
+  updateQuestion(): void {
+    if (this.questionForm.valid && this.currentQuestion) {
+      const updatedQuestion = this.questionForm.value;
+      const index = this.questions.indexOf(this.currentQuestion);
+      if (index > -1) {
+        this.questions[index] = updatedQuestion;
+        this.filterQuestions();
+        this.closeModal();
+      }
+    }
+  }
+
+  deleteQuestion(question: any): void {
+    const index = this.questions.indexOf(question);
+    if (index > -1) {
+      this.questions.splice(index, 1);
+      this.filterQuestions();
+    }
+  }
+
+  saveForm(): void {
+    const formInfo = {
+      formQuestions: this.questions,
+      createdDate: new Date().toISOString(),
+      // Add other relevant information as needed
+    };
+    this.formQuestions.push(formInfo);
+    console.log("Form saved!");
+  }
+
+  submitForm(): void {
+    console.log("Form submitted!");
+  }
+
+  filterQuestions(): void {
+    this.filteredBusinessQuestions = this.questions.filter(
+      (question) => question.category === "business"
+    );
+    this.filteredClientQuestions = this.questions.filter(
+      (question) => question.category === "client"
+    );
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.currentQuestion = null;
+    this.questionForm.reset();
   }
 }

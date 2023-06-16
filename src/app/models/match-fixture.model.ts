@@ -13,6 +13,7 @@ export interface MatchFixture {
   matchTime?: string;
   disableAvilabilityCheck?: boolean;
   isPlayingXiReleased?: boolean;
+  isDayNightMatch?: boolean;
   players?: Array<PlayerList>;
 }
 

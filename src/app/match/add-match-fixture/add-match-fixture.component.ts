@@ -27,6 +27,10 @@ export class AddMatchFixtureComponent implements OnInit, OnDestroy {
       name: "Afternoo Game",
       value: "afternoon",
     },
+    {
+      name: "Evening Game",
+      value: "evening",
+    },
   ];
   constructor(
     private tournamentService: TournamentService,
