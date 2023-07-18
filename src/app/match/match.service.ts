@@ -181,16 +181,7 @@ export class MatchService {
 
   getCurrentSeasonMatches(year?: any) {
     let query: AngularFirestoreCollection;
-    // const year = new Date().getFullYear();
-    if (year !== "all") {
-      let startDate = new Date(year - 1 + "-10-01");
-      let endDate = new Date(year + "-06-30");
-      query = this.afs.collection<Match>("matches", (ref) =>
-        ref.where("matchDate", ">", startDate).where("matchDate", "<", endDate)
-      );
-    } else {
-      query = this.matchesCollection;
-    }
+    query = this.matchesCollection;
 
     this.matches = query.snapshotChanges().pipe(
       map((actions) =>
